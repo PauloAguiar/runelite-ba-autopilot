@@ -69,7 +69,6 @@ are also in the plugin's configuration (the cog next to BA Autopilot in the plug
 | Healer: heal teammates below | When a teammate is low enough for a vial heal |
 | Retreat below HP | When you are sent to safety |
 | Horn left-clicks the call | Makes the right `Tell-` option the horn's left-click |
-| No Attack on penance off-role | Removes the Attack option on Penance for the Collector, Defender and Healer (it only costs points) |
 | Colour egg names and spots | Colours egg names in menus by egg colour, grey when it is the wrong colour now |
 | Display options | Compact overlay, target highlight, hint arrow, walking route, inventory outlines, wave info, live numbers, call notification, colours |
 
