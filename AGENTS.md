@@ -24,6 +24,10 @@ for the layout, recordings and tools.
   pages) and data in `src/main/resources` where possible.
 - No `java.lang.reflect` in `src/main`, no third-party runtime dependencies, and the repository
   builds on its own: UI kit components are copied into `ui/kit`, not pulled from another project.
+- No file I/O in `src/main` (`java.io.File`, `java.nio.file`, `RuneLite.RUNELITE_DIR`): the hub
+  holds such plugins for extra review. Read bundled resources; file tools belong in `src/test`
+  (the editable tutorial layout is `dev/TutorialLayoutFile`). If data must be saved, use the
+  plugin's `getPluginDirectory()` Filepath API.
 - The plugin guides; it never clicks, types or automates input. Menu changes are limited to the
   existing three (horn left-click, off-role Attack removed, the step's dispenser/vial option as
   left-click). Don't add menu reordering or deprioritising: egg reordering was removed for review.

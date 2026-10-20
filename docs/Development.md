@@ -26,9 +26,39 @@ ui/kit/   The FreeArcanes UI kit components the panel uses, copied in (the Plugi
 The planner is pure and covered by unit tests (`gradlew test`). Run a dev client with the plugin
 loaded via `gradlew run` (JDK 11).
 
-A developer-mode client (`--developer-mode`) also reads the tutorial layout from
-`~/.runelite/ba-autopilot/tutorial-layout.json`, created from the bundled copy the first time, and
-places the props again whenever that file is saved. Other clients always use the bundled layout.
+The Java namespace is `com.bautopilot.baautopilot`, the Gradle group is `com.bautopilot`, and the
+plugin's author label is `bautopilot`.
+
+## Wave detection and Defender guidance
+
+The tracker accepts the game's `---- Wave: N ----` line before checking arena position. Like
+[RuneLite's BA plugin](https://github.com/runelite/runelite/blob/master/runelite-client/src/main/java/net/runelite/client/plugins/barbarianassault/BarbarianAssaultPlugin.java),
+it must receive that line while the scene is loading;
+[BA Minigame](https://github.com/SkylerPIlot/Ba-Minigame/blob/9204c0831b02c76eb50e3e9676306b3c15f3ccf3/src/main/java/begosrs/barbarianassault/BaMinigamePlugin.java)
+also documents that it arrives before the role HUD. Leaving the arena clears the wave number, so
+the next role HUD supplies a fallback if the start message was missed. Other chat and active
+tracking remain gated to the arena. `BaTrackerIdleTest` exercises consecutive waves on one live
+tracker; starting each capture with a fresh `RoundLogic` alone cannot catch a stale wave number.
+
+The Defender's **Bait guide** dropdown offers Wiki and Gau Cho patterns, each with safety-first
+and no-safety variants. The default is **Wiki - safety first**: after stocking up, head to the
+safety bait south of the trap, wait for a fresh call, drop one bad bait, then lay the trap food
+and remaining pattern. A short remaining first call still prioritizes unfinished good-food
+spots. The no-safety variants omit both the opening safety stop and its later upkeep. Old captures
+retain their recorded `safetyBait` boolean.
+
+Advanced multikills require two charges, enough good food, and at least two visible runners
+beside the food. Recently unseen runners can delay a release for one runner cycle (10 ticks);
+older unseen positions remain tracked as unconfirmed but cannot block the gathered batch.
+If an arriving group stops growing for 10 ticks, release that batch at the next timing mark
+instead of waiting indefinitely. A lone ready runner can also be released after this wait with
+one charge. Once offered, the step-off prompt persists until the player moves; stay off the
+food while that batch eats, then repair or prepare the next batch.
+
+The plugin itself does no file I/O: it reads only bundled resources. In a developer-mode client
+(`--developer-mode`) the debug recorder plugin hands the tutorial an editable layout,
+`~/.runelite/ba-autopilot/tutorial-layout.json`, created from the bundled copy the first time; the
+props are placed again whenever that file is saved (`dev/TutorialLayoutFile`).
 
 The Plugin Hub's review bot refuses more than 200,000 tokens of `src/main/java` with comments
 removed (string literals count, resources and tests don't).
@@ -70,6 +100,10 @@ Recordings made before 2026-10-19 were scrubbed the same way before the reposito
 ## Not yet verified in game
 
 These are coded from the reference plugins and the wiki, but haven't been watched live:
+
+- **Bounded multikill waits:** replay and sequence tests cover stale unseen runners, late arrivals,
+  singleton batches, persistent release prompts and waiting beside the trap. Validate the updated
+  release timing in the next live run; replay keeps the original player's movement.
 
 - **Call clock:** the first call starts 1 tick after the `---- Wave: N ----` message. The clock
   re-anchors when the HUD's call-to-give text changes.
