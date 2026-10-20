@@ -1,0 +1,13 @@
+Collector phase verification
+Build: collector-phases-2026-10-17
+JUnit: {"failures":0,"tests":152,"errors":0}
+43 saved capture replays pass. 677 trace ticks changed across 10 Collector captures; other roles unchanged.
+Red: gather while space remains, including above the configured blue batch size.
+Blue: load configured held batch (inventory plus bag), at least three fitting eggs.
+Green: load with <=3 free inventory slots; collect with >=4 free slots.
+Support interrupt: Attacker or Healer completed its work, useful ammunition, targetable stray in cannon range.
+Empty hoppers and shot rate alone do not qualify. Stacked/lured runners do not qualify as strays.
+Pending trips yield to collecting phases and resume when eligible.
+Runtime and recorder jars built successfully.
+Build command: .\gradlew.bat :test :jar :recorderJar -PbaReviewJar=true -PbaReviewClassifier=collector-phases --init-script docs/review-evidence/alternate-ui-kit-jar.init.gradle --console=plain
+Historical traces do not predict different wave outcomes.

@@ -1,0 +1,188 @@
+{
+  "_help": [
+    "Where the tutorials place things in the lobby rooms. Each entry has a room (1-10, default 1) and a",
+    "tile in it: x 0-7 from the west wall (left), y 0-7 from the south wall (bottom).",
+    "rooms: each room's south-west tile in world coordinates. Rooms not listed are worked out from the",
+    "game's own room objects; add one here to pin it exactly.",
+    "orientation: 0 faces south, 512 west, 1024 north, 1536 east. In scenes, actors turn to face their target.",
+    "scale (NPCs, optional): size in percent. labelHeight (optional): how high the label floats.",
+    "attach (NPCs, optional): worn item models merged in, such as the shortbow (model 512) in the Attacker's hands.",
+    "models: bare game models (trap, launcher, hopper, spring); loop: true plays their animation all the time.",
+    "lift (models): raise by this much (128 = a tile); onFloor: true raises it until its bottom rests on the floor.",
+    "Rooms: 1 team, 9 the Penance line-up, 10 the Queen. Basics: 2 Attacker, 3 Defender, 4 Healer,",
+    "5 Collector, 6 egg launcher, 7 Healer spring, 8 Queen eggs.",
+    "Edit and save: the scene reloads within a tick while the tutorial is running.",
+    "Entries missing here are taken from the plugin's own copy, so delete one to get its default back."
+  ],
+  "rooms": {
+    "1": { "x": 2576, "y": 5291 }
+  },
+  "npcs": [
+    { "key": "attacker-1", "npcId": 1662, "animation": 808, "x": 2, "y": 5 },
+    { "key": "attacker-2", "npcId": 1662, "animation": 808, "x": 4, "y": 5 },
+    { "key": "defender", "npcId": 1664, "animation": 808, "x": 6, "y": 5 },
+    { "key": "collector", "npcId": 1663, "animation": 808, "x": 3, "y": 3 },
+    { "key": "healer", "npcId": 1665, "animation": 808, "x": 5, "y": 3 },
+
+    { "key": "lf-1", "npcId": 1658, "animation": 808, "x": 2, "y": 5 },
+    { "key": "lf-2", "npcId": 1659, "animation": 808, "x": 5, "y": 5 },
+    { "key": "lf-3", "npcId": 1660, "animation": 808, "x": 3, "y": 2 },
+    { "key": "leader", "npcId": 1661, "animation": 808, "x": 3, "y": 4, "orientation": 1536 },
+    { "key": "you", "npcId": 1662, "animation": 808, "x": 5, "y": 4, "orientation": 512 },
+
+    { "key": "pen-fighter", "room": 9, "npcId": 5747, "animation": 5094, "x": 3, "y": 5 },
+    { "key": "pen-ranger", "room": 9, "npcId": 5765, "animation": 5393, "x": 5, "y": 5 },
+    { "key": "pen-runner", "room": 9, "npcId": 5756, "animation": 5099, "x": 3, "y": 3 },
+    { "key": "pen-healer", "room": 9, "npcId": 5774, "animation": 5104, "x": 5, "y": 3 },
+
+    { "key": "queen", "room": 10, "npcId": 5775, "animation": 5082, "x": 4, "y": 5, "scale": 55 },
+    { "key": "turret", "room": 10, "npcId": 5777, "animation": 5424, "x": 3, "y": 2 },
+    { "key": "cannon-collector", "room": 10, "npcId": 1663, "animation": 808, "x": 5, "y": 2, "orientation": 512 },
+    { "key": "cannon-stack-1", "room": 10, "npcId": 1659, "animation": 808, "x": 2, "y": 1, "orientation": 1024 },
+    { "key": "cannon-stack-2", "room": 10, "npcId": 1660, "animation": 808, "x": 4, "y": 1, "orientation": 1024 },
+    { "key": "q-collector", "room": 10, "npcId": 1663, "animation": 808, "x": 2, "y": 3, "orientation": 1536 },
+    { "key": "cannon-gunner", "room": 10, "npcId": 1658, "animation": 808, "x": 3, "y": 1, "orientation": 1024 },
+
+    { "key": "atk-fighter", "room": 2, "npcId": 5747, "animation": 5094, "x": 2, "y": 5 },
+    { "key": "atk-ranger", "room": 2, "npcId": 5765, "animation": 5393, "x": 5, "y": 5 },
+    { "key": "atk-attacker", "room": 2, "npcId": 1662, "animation": 808, "x": 4, "y": 2, "orientation": 1024,
+      "attach": [{ "modelId": 512, "recolorFrom": [6674], "recolorTo": [6049] }] },
+    { "key": "atk-collector", "room": 2, "npcId": 1663, "animation": 808, "x": 2, "y": 2, "orientation": 1536 },
+
+    { "key": "def-runner", "room": 3, "npcId": 5756, "animation": 5099, "x": 7, "y": 6, "orientation": 512 },
+    { "key": "def-runner-esc", "room": 3, "npcId": 5756, "animation": 5100, "x": 6, "y": 1, "orientation": 0 },
+    { "key": "def-defender", "room": 3, "npcId": 1664, "animation": 808, "x": 5, "y": 4, "orientation": 512 },
+    { "key": "def-healer", "room": 3, "npcId": 1665, "animation": 808, "x": 4, "y": 1, "orientation": 1024 },
+
+    { "key": "heal-pen", "room": 4, "npcId": 5774, "animation": 5104, "x": 4, "y": 5 },
+    { "key": "heal-runner", "room": 4, "npcId": 5756, "animation": 5099, "x": 2, "y": 5 },
+    { "key": "heal-pen-2", "room": 4, "npcId": 5774, "animation": 5104, "x": 6, "y": 5 },
+    { "key": "heal-healer", "room": 4, "npcId": 1665, "animation": 808, "x": 4, "y": 4, "orientation": 1024 },
+    { "key": "heal-defender", "room": 4, "npcId": 1664, "animation": 808, "x": 6, "y": 2, "orientation": 512 },
+
+    { "key": "col-collector", "room": 5, "npcId": 1663, "animation": 808, "x": 3, "y": 3, "orientation": 1024 },
+    { "key": "col-attacker", "room": 5, "npcId": 1662, "animation": 808, "x": 6, "y": 2, "orientation": 512,
+      "attach": [{ "modelId": 512, "recolorFrom": [6674], "recolorTo": [6049] }] },
+    { "key": "col-ranger", "room": 5, "npcId": 5765, "animation": 5393, "x": 6, "y": 6 },
+
+    { "key": "can-turret", "room": 6, "npcId": 5777, "animation": 5424, "x": 3, "y": 2 },
+    { "key": "can-gunner", "room": 6, "npcId": 1658, "animation": 808, "x": 3, "y": 1, "orientation": 1024 },
+    { "key": "can-collector", "room": 6, "npcId": 1663, "animation": 808, "x": 5, "y": 2, "orientation": 512 },
+    { "key": "can-runner", "room": 6, "npcId": 5756, "animation": 5099, "x": 3, "y": 6 },
+
+    { "key": "spr-healer", "room": 7, "npcId": 1665, "animation": 808, "x": 3, "y": 3 },
+    { "key": "spr-attacker", "room": 7, "npcId": 1662, "animation": 808, "x": 5, "y": 3, "orientation": 512 },
+
+    { "key": "dsp-attacker", "room": 7, "npcId": 1662, "animation": 808, "x": 3, "y": 5, "orientation": 1024 },
+    { "key": "dsp-defender", "room": 7, "npcId": 1664, "animation": 808, "x": 4, "y": 5, "orientation": 1024 },
+    { "key": "dsp-healer", "room": 7, "npcId": 1665, "animation": 808, "x": 5, "y": 5, "orientation": 1024 },
+    { "key": "dsp-collector", "room": 7, "npcId": 1663, "animation": 808, "x": 6, "y": 5, "orientation": 1024 },
+
+    { "key": "chain-collector", "room": 8, "npcId": 1663, "animation": 808, "x": 2, "y": 5 },
+    { "key": "chain-healer", "room": 8, "npcId": 1665, "animation": 808, "x": 5, "y": 5 },
+    { "key": "chain-attacker", "room": 8, "npcId": 1662, "animation": 808, "x": 5, "y": 2 },
+    { "key": "chain-defender", "room": 8, "npcId": 1664, "animation": 808, "x": 2, "y": 2 }
+  ],
+  "items": [
+    { "key": "atk-bullet", "room": 2, "itemId": 22227, "x": 1, "y": 3 },
+    { "key": "atk-field", "room": 2, "itemId": 22228, "x": 3, "y": 3 },
+    { "key": "atk-blunt", "room": 2, "itemId": 22229, "x": 5, "y": 3 },
+    { "key": "atk-barbed", "room": 2, "itemId": 22230, "x": 7, "y": 3 },
+
+    { "key": "col-egg-red", "room": 5, "itemId": 10532, "x": 3, "y": 5 },
+    { "key": "col-egg-green", "room": 5, "itemId": 10531, "x": 2, "y": 4 },
+    { "key": "col-egg-blue", "room": 5, "itemId": 10533, "x": 4, "y": 5 },
+    { "key": "col-egg-red-under", "room": 5, "itemId": 10532, "x": 2, "y": 4 },
+    { "key": "col-drop-egg", "room": 5, "itemId": 10532, "x": 6, "y": 6 },
+
+    { "key": "def-bait", "room": 3, "itemId": 10513, "x": 5, "y": 4 },
+    { "key": "def-logs", "room": 3, "itemId": 1511, "x": 3, "y": 2 },
+    { "key": "def-hammer", "room": 3, "itemId": 2347, "x": 5, "y": 2 },
+
+    { "key": "can-egg-red", "room": 6, "itemId": 10532, "x": 5, "y": 4 },
+    { "key": "can-egg-green", "room": 6, "itemId": 10531, "x": 4, "y": 4 },
+    { "key": "can-egg-blue", "room": 6, "itemId": 10533, "x": 3, "y": 4 },
+
+    { "key": "spr-vial", "room": 7, "itemId": 10546, "x": 3, "y": 4 },
+
+    { "key": "q-yellow-1", "room": 10, "itemId": 10534, "x": 2, "y": 6 },
+    { "key": "q-yellow-2", "room": 10, "itemId": 10534, "x": 6, "y": 6 },
+    { "key": "q-yellow-3", "room": 10, "itemId": 10534, "x": 6, "y": 3 },
+
+    { "key": "chain-yellow", "room": 8, "itemId": 10534, "x": 3, "y": 4 },
+    { "key": "chain-poisoned", "room": 8, "itemId": 10535, "x": 4, "y": 4 },
+    { "key": "chain-spiked", "room": 8, "itemId": 10536, "x": 4, "y": 3 },
+    { "key": "chain-omega", "room": 8, "itemId": 10537, "x": 3, "y": 3 },
+    { "key": "chain-loaded", "room": 8, "itemId": 10537, "x": 3, "y": 4 },
+    { "key": "chain-spikes", "room": 8, "itemId": 10561, "x": 4, "y": 2 }
+  ],
+  "models": [
+    { "key": "cannon", "room": 10, "modelId": 20656, "animation": 5429, "loop": true, "x": 3, "y": 2 },
+    { "key": "hopper", "room": 10, "modelId": 20657, "animation": 5432, "loop": true, "x": 4, "y": 2 },
+
+    { "key": "def-trap", "room": 3, "modelId": 20681, "animation": 5076, "x": 4, "y": 4,
+      "recolorFrom": [7706, 7830, 7954, 8076, 7050], "recolorTo": [5537, 5532, 5656, 5652, 5904] },
+
+    { "key": "def-trap-broken", "room": 3, "modelId": 20680, "x": 4, "y": 4,
+      "recolorFrom": [7706, 7830, 7954, 8076, 7050], "recolorTo": [5537, 5532, 5656, 5652, 5904] },
+
+    { "key": "can-launcher", "room": 6, "modelId": 20656, "animation": 5429, "loop": true, "x": 3, "y": 2 },
+    { "key": "can-hopper", "room": 6, "modelId": 20657, "animation": 5432, "loop": true, "x": 4, "y": 2 },
+
+    { "key": "chain-crater", "room": 8, "modelId": 20655, "animation": 5415, "loop": true, "x": 6, "y": 5,
+      "recolorFrom": [5964, 5819, 1942, 3992, 5018, 7068], "recolorTo": [25511, 23454, 20374, 18328, 18330, 16284] },
+
+    { "key": "machine-attacker", "room": 7, "modelId": 20692, "x": 3, "y": 6 },
+    { "key": "machine-defender", "room": 7, "modelId": 20694, "x": 4, "y": 6 },
+    { "key": "machine-healer", "room": 7, "modelId": 20695, "x": 5, "y": 6 },
+    { "key": "machine-collector", "room": 7, "modelId": 20693, "x": 6, "y": 6 },
+
+    { "key": "chain-lava", "room": 8, "modelId": 20655, "animation": 5415, "loop": true, "x": 1, "y": 2 },
+    { "key": "chain-mushroom", "room": 8, "modelId": 20632, "x": 6, "y": 2 },
+
+    { "key": "spring", "room": 7, "modelId": 20647, "x": 2, "y": 4, "onFloor": true }
+  ],
+  "tiles": [
+    { "key": "team", "x": 4, "y": 4 },
+    { "key": "wave-1", "room": 1, "x": 4, "y": 4 },
+    { "key": "wave-2", "room": 2, "x": 4, "y": 4 },
+    { "key": "wave-3", "room": 3, "x": 4, "y": 4 },
+    { "key": "wave-4", "room": 4, "x": 4, "y": 4 },
+    { "key": "wave-5", "room": 5, "x": 4, "y": 4 },
+    { "key": "wave-6", "room": 6, "x": 4, "y": 4 },
+    { "key": "wave-7", "room": 7, "x": 4, "y": 4 },
+    { "key": "wave-8", "room": 8, "x": 4, "y": 4 },
+    { "key": "wave-9", "room": 9, "x": 4, "y": 4 },
+    { "key": "queen-room", "room": 10, "x": 4, "y": 4 },
+    { "key": "cannon-spot", "room": 10, "x": 3, "y": 3 },
+    { "key": "atk-spot", "room": 2, "x": 4, "y": 4 },
+    { "key": "def-spot", "room": 3, "x": 4, "y": 4 },
+    { "key": "def-fix", "room": 3, "x": 4, "y": 3 },
+    { "key": "def-far", "room": 3, "x": 3, "y": 4 },
+    { "key": "heal-at-1", "room": 4, "x": 4, "y": 4 },
+    { "key": "heal-at-2", "room": 4, "x": 6, "y": 4 },
+    { "key": "heal-spot", "room": 4, "x": 4, "y": 4 },
+    { "key": "col-spot", "room": 5, "x": 4, "y": 4 },
+    { "key": "can-spot", "room": 6, "x": 3, "y": 4 },
+    { "key": "spr-spot", "room": 7, "x": 3, "y": 4 },
+    { "key": "chain-spot", "room": 8, "x": 4, "y": 4 },
+    { "key": "dsp-spot", "room": 7, "x": 4, "y": 5 },
+
+    { "key": "col-west-route", "room": 5, "x": 1, "y": 6 },
+    { "key": "col-wait", "room": 5, "x": 5, "y": 6 },
+    { "key": "q-watch", "room": 10, "x": 2, "y": 4 },
+    { "key": "heal-spawn", "room": 4, "x": 6, "y": 6 },
+    { "key": "atk-wait", "room": 2, "x": 3, "y": 6 },
+    { "key": "atk-west-route", "room": 2, "x": 1, "y": 4 },
+    { "key": "pat-trap", "room": 3, "x": 5, "y": 4 },
+    { "key": "pat-trail", "room": 3, "x": 6, "y": 5 },
+    { "key": "pat-main", "room": 3, "x": 7, "y": 6 },
+    { "key": "pat-west", "room": 3, "x": 1, "y": 6 },
+    { "key": "pat-safety", "room": 3, "x": 5, "y": 2 },
+    { "key": "def-clear", "room": 3, "x": 5, "y": 5 },
+    { "key": "def-ahead", "room": 3, "x": 6, "y": 3 },
+    { "key": "chain-crater-spot", "room": 8, "x": 5, "y": 4 },
+    { "key": "chain-mushroom-spot", "room": 8, "x": 5, "y": 3 },
+    { "key": "chain-lava-spot", "room": 8, "x": 2, "y": 3 }
+  ]
+}

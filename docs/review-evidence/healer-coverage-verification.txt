@@ -1,0 +1,27 @@
+Healer coverage verification
+Build: healer-coverage-2026-10-17
+JUnit: {"failures":0,"tests":138,"errors":0}
+43 saved fixtures: 11557 in-arena ticks; all replay invariants passed.
+Before/after full-poison feed ticks: 149 -> 0 (new wave8 fixture:68 -> 0).
+Before/after known-untagged-bypassed feed ticks:0 -> 0; unseen and duo scenarios have unit regressions.
+Before/after short step flips:65 -> 74; target flips:77 -> 81.
+These are historical decision audits, not simulated outcomes.
+Latest eight completed captures in the 18:04-18:24 Healer run:
+
+2026-10-17_18-04-23-wave1.jsonl - 651 ticks, strategy null
+invariants hold
+2026-10-17_18-10-53-wave2.jsonl - 198 ticks, strategy null
+invariants hold
+2026-10-17_18-12-52-wave3.jsonl - 211 ticks, strategy null
+invariants hold
+2026-10-17_18-14-58-wave4.jsonl - 193 ticks, strategy null
+invariants hold
+2026-10-17_18-16-54-wave5.jsonl - 278 ticks, strategy null
+invariants hold
+2026-10-17_18-19-41-wave6.jsonl - 205 ticks, strategy null
+invariants hold
+2026-10-17_18-21-44-wave7.jsonl - 249 ticks, strategy null
+invariants hold
+2026-10-17_18-24-13-wave8.jsonl - 319 ticks, strategy null
+invariants hold
+BUILD SUCCESSFUL in 8s

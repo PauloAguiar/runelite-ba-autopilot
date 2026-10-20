@@ -1,0 +1,40 @@
+Task continuity and initial Healer food verification
+Build: tasks-initial-feed-2026-10-17
+JUnit: {"failures":0,"tests":133,"errors":0}
+Saved fixtures: 42 captures; 11246 in-arena decision ticks; invariant replay passed.
+Latest local Healer captures: 2026-10-17 waves 2-10, 9 captures; all replay invariants passed.
+Capture 2026-10-17_17-52-14-wave10.jsonl tick3502: live HEAL_WAIT until21s; updated HEAL_FEED npc64668 healer#1.
+Same capture tick3507: updated HEAL_FEED npc64803 healer#2 after observed first poison.
+42-capture before/after: step flips67->62; target flips75->76;169 changed trace ticks across7 captures.
+Runtime and debug-recorder alternate jars built successfully. Existing client was not restarted.
+
+Build command:
+.\gradlew.bat :test :jar :recorderJar --init-script docs/review-evidence/alternate-ui-kit-jar.init.gradle -PbaReviewJar=true --console=plain
+
+Recent capture replay results:
+2026-10-17_17-32-40-wave2.jsonl - 149 ticks, strategy null
+invariants hold
+2026-10-17_17-34-09-wave3.jsonl - 139 ticks, strategy null
+note: initial poison: 10 available decision ticks checked
+invariants hold
+2026-10-17_17-35-33-wave4.jsonl - 156 ticks, strategy null
+note: initial poison: 18 available decision ticks checked
+invariants hold
+2026-10-17_17-37-06-wave5.jsonl - 247 ticks, strategy null
+note: initial poison: 5 available decision ticks checked
+invariants hold
+2026-10-17_17-39-35-wave6.jsonl - 373 ticks, strategy null
+note: initial poison: 22 available decision ticks checked
+invariants hold
+2026-10-17_17-43-21-wave7.jsonl - 280 ticks, strategy null
+note: initial poison: 29 available decision ticks checked
+invariants hold
+2026-10-17_17-46-10-wave8.jsonl - 282 ticks, strategy null
+note: initial poison: 34 available decision ticks checked
+invariants hold
+2026-10-17_17-48-59-wave9.jsonl - 325 ticks, strategy null
+note: initial poison: 35 available decision ticks checked
+invariants hold
+2026-10-17_17-52-14-wave10.jsonl - 713 ticks, strategy null
+note: initial poison: 36 available decision ticks checked
+invariants hold

@@ -1,0 +1,177 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	mavenLocal()
+	maven {
+		url = 'https://repo.runelite.net'
+		content {
+			includeGroupByRegex("net\\.runelite.*")
+		}
+	}
+	mavenCentral()
+}
+
+def runeLiteVersion = '1.13.2'
+def pluginMainClass = 'com.galesong.baautopilot.BaAutopilotPluginTest'
+
+dependencies {
+	compileOnly group: 'net.runelite', name: 'client', version: runeLiteVersion
+
+	compileOnly 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+	testImplementation 'junit:junit:4.13.2'
+	testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion
+	testImplementation group: 'net.runelite', name: 'jshell', version: runeLiteVersion
+	testCompileOnly 'org.projectlombok:lombok:1.18.30'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+group = 'com.galesong'
+version = '0.1-beta'
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+	options.release.set(11)
+	options.compilerArgs += ['-Xlint:deprecation']
+}
+
+tasks.register('run', JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = pluginMainClass
+	jvmArgs "-ea"
+	args "--developer-mode", "--debug"
+}
+
+// Print a recorded round tick by tick (recorder: dev/BaRecorderPlugin, test sources only):
+//   gradlew replay -Pfile=path/to/recording.jsonl [-Pall]
+tasks.register('replay', JavaExec) {
+	description = 'Prints a recorded BA round tick by tick against the current planner'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.ReplayTimeline'
+	args = [project.findProperty('file') ?: '']
+	if (project.hasProperty('all')) {
+		args += '--all'
+	}
+}
+
+// The round recorder lives in TEST sources (never in the hub jar). This outgoing variant hands it
+// to the dev-launcher composite build, the same way shortest-path hands over its transport audit.
+def devAuditAttribute = Attribute.of('dev.audit.bundle', String)
+tasks.register('recorderJar', Jar) {
+	dependsOn compileTestJava
+	archiveClassifier = 'dev-recorder'
+	from sourceSets.test.output
+	include 'com/galesong/baautopilot/dev/BaRecorderPlugin*', 'com/galesong/baautopilot/dev/Rec.class',
+		'com/galesong/baautopilot/dev/Rec$*'
+}
+configurations {
+	devAuditElements {
+		canBeConsumed = true
+		canBeResolved = false
+		attributes {
+			attribute(devAuditAttribute, 'true')
+		}
+	}
+}
+artifacts {
+	devAuditElements recorderJar
+}
+
+// Guidance stability per recorded wave (instruction/target changes, call prompt timing, relures):
+//   gradlew metrics [-Pdir=src/test/resources/recordings] [-Pdump=folder for per-tick lines, to diff]
+tasks.register('metrics', JavaExec) {
+	description = 'Prints guidance metrics for every recorded BA wave'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.ReplayMetrics'
+	args = [project.findProperty('dir') ?: '', project.findProperty('dump') ?: '']
+}
+
+// Compare experimental decisions on the same historical states; does not simulate outcomes.
+tasks.register('compareStrategies', JavaExec) {
+	description = 'Compares current and proposed strategy decisions across recorded BA waves'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.StrategyComparison'
+	args = [project.findProperty('dir') ?: '', project.findProperty('output') ?: '']
+}
+
+tasks.register('auditCollector', JavaExec) {
+	description = 'Audits cannon interruption reasons and recent firing in captured Collector waves'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.CollectorRunAudit'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/collector-audit']
+}
+
+tasks.register('auditCollectorNavigation', JavaExec) {
+	description = 'Checks Collector pickup timing, near targets, hopper travel and pointer stability'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.CollectorNavigationAudit'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/collector-navigation', project.findProperty('capturePrefix') ?: 'opening-run']
+}
+
+tasks.register('calibrateCollector', JavaExec) {
+	description = 'Fits a weight proposal against human egg-versus-loading labels on captured states'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.CollectorWeightCalibration'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings',
+		project.findProperty('labels') ?: 'docs/review-evidence/collector-preferences.json',
+		project.findProperty('output') ?: 'build/reports/collector-weight-proposal.json']
+}
+
+tasks.register('simulateScenario', JavaExec) {
+	description = 'Opens a capture library and replays the recorded role with the real planner'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.ScenarioSimulator'
+	args = [project.findProperty('file') ?: '', project.findProperty('port') ?: '', project.findProperty('dir') ?: '']
+}
+
+tasks.register('previewPanel', JavaExec) {
+	description = 'Renders the role settings sidebar without opening a game client'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.ui.BaAutopilotPanelTest'
+	jvmArgs '-Djava.awt.headless=true'
+}
+
+tasks.register('auditDefenderProximity', JavaExec) {
+	description = 'Checks Defender target stability when only the observed player position changes'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.DefenderProximityAudit'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/defender-proximity']
+}
+
+tasks.register('auditDefenderTrap', JavaExec) {
+	description = 'Checks captured Defender releases, charge prerequisites and hold markers'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.DefenderTrapAudit'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/defender-trap']
+}
+
+tasks.register('evaluateDefenderRun', JavaExec) {
+	description = 'Evaluates Defender guidance and observed outcomes across captured waves'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.DefenderRunEvaluation'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/defender-run-evaluation']
+}
+
+tasks.register('compareDefenderModes', JavaExec) {
+	description = 'Compares continuous Defender upkeep with optional timed multikills on captures'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.DefenderModeAudit'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/defender-modes']
+}
+
+tasks.register('auditHealerPriority', JavaExec) {
+	description = 'Audits poison coverage and refresh ordering in captured Healer waves'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.HealerPriorityAudit'
+	args = [project.findProperty('dir') ?: 'src/test/resources/recordings', project.findProperty('output') ?: 'build/reports/healer-priority']
+}
+
+tasks.register('auditQueenHealer', JavaExec) {
+	description = 'Audits Queen-phase healing and egg work against a captured Healer wave'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.galesong.baautopilot.dev.QueenHealerAudit'
+	args = [project.findProperty('file') ?: '', project.findProperty('output') ?: 'build/reports/queen-healer-audit']
+}

@@ -1,0 +1,10 @@
+recording,ticks,step_changes,step_flips,target_changes,target_flips,position_probes,position_only_target_changes
+2026-10-17_20-14-18-wave10.jsonl,131,5,1,7,0,19,0
+2026-10-17_20-27-12-wave2.jsonl,130,11,0,12,0,27,0
+2026-10-17_20-28-34-wave3.jsonl,151,15,1,16,3,19,0
+2026-10-17_20-30-09-wave4.jsonl,230,10,0,9,0,31,0
+2026-10-17_20-32-31-wave5.jsonl,300,16,2,16,1,22,0
+2026-10-17_20-35-38-wave6.jsonl,296,20,2,37,3,26,0
+2026-10-17_20-38-45-wave7.jsonl,348,15,3,16,0,27,0
+2026-10-17_20-42-18-wave8.jsonl,484,39,4,59,3,24,0
+2026-10-17_20-47-14-wave9.jsonl,393,21,1,28,3,46,1

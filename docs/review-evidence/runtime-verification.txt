@@ -1,0 +1,23 @@
+Runtime reliability implementation - 17 October 2026
+125 tests passed; 0 failures. Includes 41 recorded-wave invariant replays.
+Before current policy: 10633 ticks; stale work 3; risky chase 61; step flips 63; target flips 68.
+After current policy: 10633 ticks; stale work 0; risky chase 0; step flips 62; target flips 70.
+132 changed full-trace ticks across five Defender captures.
+No live game session was run. Holding-area navigation is covered by synthetic collision tests.
+
+> Task :processResources NO-SOURCE
+> Task :processTestResources UP-TO-DATE
+> Task :ui-kit:compileJava UP-TO-DATE
+> Task :ui-kit:processResources NO-SOURCE
+> Task :ui-kit:classes UP-TO-DATE
+> Task :ui-kit:jar UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :jar UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :testClasses UP-TO-DATE
+> Task :recorderJar
+> Task :test
+
+BUILD SUCCESSFUL in 3s
+8 actionable tasks: 2 executed, 6 up-to-date

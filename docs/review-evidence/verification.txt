@@ -1,0 +1,62 @@
+BA Autopilot review verification - 17 October 2026
+Baseline commit: 2527f69; runtime sources unchanged.
+Existing tests: 111 passed, 0 failures, 0 skipped.
+Comparison command: .\gradlew.bat :test :compareStrategies --init-script docs/review-evidence/alternate-ui-kit-jar.init.gradle --console=plain
+Current build and comparison output:
+
+> Task :processResources NO-SOURCE
+> Task :processTestResources UP-TO-DATE
+> Task :ui-kit:compileJava UP-TO-DATE
+> Task :ui-kit:processResources NO-SOURCE
+> Task :ui-kit:classes UP-TO-DATE
+> Task :ui-kit:jar UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava
+> Task :testClasses
+> Task :test
+
+> Task :compareStrategies
+41 captures; each policy keeps its own previous instruction and target.
+All counts are historical decision ticks, NOT predicted kills, escapes prevented, or completions.
+policy,ticks,changed_decisions,stale_call_work_ticks,risky_chase_ticks,last_runner_held_ticks,step_flips,target_flips
+"current","10633","0","3","61","0","63","68"
+"strict-calls","10633","3","0","59","0","64","68"
+"trap-first","10633","61","1","0","0","63","69"
+"ordinary-kills","10633","40","3","61","0","63","67"
+"combined","10633","102","0","0","0","64","68"
+CSV evidence: Z:\runelite\plugins\ba-autopilot\build\reports\strategy-comparison
+
+BUILD SUCCESSFUL in 7s
+7 actionable tasks: 3 executed, 4 up-to-date
+
+Temporary targeted snapshot probe output (problem reproductions and experimental fixes):
+
+> Task :processResources NO-SOURCE
+> Task :processTestResources UP-TO-DATE
+> Task :ui-kit:compileJava UP-TO-DATE
+> Task :ui-kit:processResources NO-SOURCE
+> Task :ui-kit:classes UP-TO-DATE
+> Task :ui-kit:jar UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :testClasses UP-TO-DATE
+> Task :test
+> Task :compileBaReviewProbe
+
+> Task :baReviewProbe
+Old call, 5 ticks into period => HEAL_WAIT_CALL | Wait for the defender's new call
+Old call, 30 ticks into period => HEAL_FEED | Use Poisoned worms on healer #1
+Final runner, standing on good bait => DEF_HOLD | Hold on the trap food
+Same final runner 20 ticks later => DEF_HOLD | Hold on the trap food
+Broken trap next to player, existing chase => DEF_RELURE | Runner going for your bad bait: wait
+Queen visible, ordinary runner and broken trap remain => QUEEN_WAIT | Wait for the attacker's spiked egg
+Healer, teammate at 40%, no vial => HEAL_FEED | Use Poisoned worms on healer #1
+All 7 observations matched current behavior; these are problem reproductions, not proposed acceptance tests.
+Strict calls, old healer call => HEAL_WAIT_CALL | Wait for the defender's call
+Ordinary kills, final runner => DEF_STEP | Step off the food: let the working trap kill
+Trap first, broken trap during chase => DEF_REPAIR | Fix the trap
+
+BUILD SUCCESSFUL in 4s
+8 actionable tasks: 3 executed, 5 up-to-date
