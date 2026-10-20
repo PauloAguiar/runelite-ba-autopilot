@@ -103,7 +103,8 @@ Build with JDK 11. `gradlew test` runs the unit tests and replays every recorded
 `src/test/resources/recordings` through the planner. `gradlew run` starts a developer-mode client
 with BA Autopilot and its debug recorder, which saves rounds to
 `~/.runelite/ba-autopilot/recordings` (game messages and horn calls only, never other players'
-chat).
+chat). See [Development](docs/Development.md) for the layout, recordings and analysis tools, and
+[AGENTS.md](AGENTS.md) for guidance to AI coding agents.
 
 ## License
 
