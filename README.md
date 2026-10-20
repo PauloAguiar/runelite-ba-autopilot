@@ -99,8 +99,11 @@ BA Autopilot makes no network requests. Nothing leaves your client.
 
 ## Development
 
-How the plugin is built, tested and checked against recorded rounds is described in
-[Development](docs/Development.md).
+Build with JDK 11. `gradlew test` runs the unit tests and replays every recorded round in
+`src/test/resources/recordings` through the planner. `gradlew run` starts a developer-mode client
+with BA Autopilot and its debug recorder, which saves rounds to
+`~/.runelite/ba-autopilot/recordings` (game messages and horn calls only, never other players'
+chat).
 
 ## License
 

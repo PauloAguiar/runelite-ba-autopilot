@@ -10,3 +10,4 @@ nbproject/
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
 *.log
+docs/
