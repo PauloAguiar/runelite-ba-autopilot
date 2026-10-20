@@ -1,5 +1,21 @@
 # Next-run validation
 
+Latest: [arena-only live guidance](Arena-Only-Activity.md). The Join a team overlay is gone.
+Outside the arena, full tracking, planning, pathfinding, recurring sidebar updates and live
+overlay/entity-render hooks are asleep. The opt-in tutorial still works outside the arena,
+with its own overlays/input/camera work enabled only while running. All **365 tests pass**.
+Check lobby → arena → lobby transitions and Start/Stop tutorial; rebuild/restart the client
+for live validation. The developer recorder's capture workload is separate.
+
+Latest: [Collector visible eggs and retired centre checks](Collector-Visible-Eggs.md).
+No centre-check task or marker remains. Waiting near attackers yields to eligible pickups;
+wave-10 blues are still limited to enabling an empty cannon when no held egg can do so.
+The latest ten-wave run has zero centre checks and waits over eligible pickups across 2,480
+ticks. The wider 6,809-tick Collector audit also has clean pickup timing, travel and target
+stability checks. All **355 tests pass across 96 capture fixtures**. Inspect latest saved
+Collector wave 9 at ticks 2482 and 2507 in the refreshed simulator. Rebuild/restart the client
+for live guidance. Earlier centre-check descriptions below are historical.
+
 Latest: [Healer reserve finishing](Healer-Reserve-Finishing.md). When every known healer is
 covered and poison is at 4, spare food can finish a nearby wounded healer to open reserve slots.
 New first tags and weak-poison refreshes still lead. Check that the finish target stays stable,

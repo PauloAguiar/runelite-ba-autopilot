@@ -1,5 +1,10 @@
 # Capture scenario simulator
 
+Collector centre checks are removed, and waiting near attackers yields to eligible pickups.
+See [visible eggs](Collector-Visible-Eggs.md). The saved Collector wave-9 capture
+`2026-10-19_21-43-46-wave9.jsonl`, tick **2482**, now picks up red instead of waiting;
+tick **2507** picks up a blue stack. Calls, pickup deadlines and wave-10 supply limits remain.
+
 The planner includes [Healer reserve finishing](Healer-Reserve-Finishing.md). Select the latest
 Healer wave-10 capture (`2026-10-18_20-38-20-wave10.jsonl`) and tick **3230** to inspect the
 `heal.reserve` decision: finish healer #1 while three reserves still need kills. Coverage and

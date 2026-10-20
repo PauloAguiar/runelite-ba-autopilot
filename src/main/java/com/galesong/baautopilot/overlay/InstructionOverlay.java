@@ -118,7 +118,7 @@ public class InstructionOverlay extends OverlayPanel
 	 */
 	public Dimension render(Graphics2D g, Instruction ins, Snapshot s, boolean live)
 	{
-		if (ins == null || s == null || ins.getStep() == Step.NOT_IN_GAME)
+		if (ins == null || s == null || ins.getStep() == Step.NOT_IN_GAME || live && !s.isInArena())
 		{
 			return null;
 		}

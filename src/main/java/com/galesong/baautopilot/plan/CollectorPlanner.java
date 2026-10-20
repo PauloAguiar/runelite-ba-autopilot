@@ -36,8 +36,6 @@ class CollectorPlanner
 	static final int EXPIRY_MARGIN = 3;
 	/** Ordinary pickups stay local; yellow Queen eggs have their own collection policy. */
 	static final int MAX_EGG_WALK = 12;
-	static final int CENTRE_CHECK_WALK = 6;
-	static final int CENTRE_CHECK_COOLDOWN = 50;
 	/** Expiry metadata for the debugger; the score determines precedence. */
 	static final int EXPIRY_URGENT_TICKS = 10;
 	static final int LOW_RED_AMMO = 2;
@@ -108,15 +106,13 @@ class CollectorPlanner
 		if (roomRed != null && s.count(BaIds.EGG_GREEN) > 0)
 			out.add(CollectorScoring.makeRoom(s, discardForRed(s, BaIds.EGG_GREEN), roomRed, true));
 		Instruction fallback = preparing ? queenReady(s) : positioning(s, call);
-		Instruction check = preparing ? null : centreCheck(s);
-		if (check != null) out.add(CollectorScoring.centreCheck(s, check));
-		out.add(CollectorScoring.follow(s, fallback));
+		double bestPickup = out.stream().filter(candidate -> "col.collect".equals(candidate.getTask()))
+			.mapToDouble(candidate -> candidate.getInstruction().getScore()).max().orElse(Double.POSITIVE_INFINITY);
+		out.add(CollectorScoring.follow(s, fallback, bestPickup));
 		return out;
 	}
 	static final String LOAD_TASK = "col.load";
 	static final String SUPPORT_TASK = "col.support";
-	static final String CHECK_TASK = "col.scan";
-	static final String CHECK_DONE = "Centre checked";
 
 	/** Absence from the scene is not evidence that every runner and healer has died. */
 	static boolean cannonTargetsRemain(Snapshot s)
@@ -126,48 +122,19 @@ class CollectorPlanner
 			|| (!s.getCleared().contains(PenanceType.HEALER) && s.getHealersKilled() < WaveInfo.healersTotal(s.getWave())));
 	}
 
-	private static Instruction centreCheck(Snapshot s)
-	{
-		if (!s.isCollectorOpeningComplete() || s.getWaveTick() < WaveInfo.TICKS_PER_CALL || s.getPlayerTile() == null
-			|| s.isQueenAlive() || s.isQueenDead() || !cannonTargetsRemain(s) || s.getEggsRed() + s.getEggsGreen() == 0) return null;
-		TaskMemory.Progress prior = s.getTasks().getEntries().get(CHECK_TASK);
-		WorldPoint target = null;
-		if (prior != null)
-		{
-			if (!CHECK_DONE.equals(prior.getReason()) && s.getTick() - prior.getLastActiveTick() <= 12
-				&& s.getTick() - prior.getStartedTick() <= 16 && s.walk(prior.getTarget().getTile()) <= CENTRE_CHECK_WALK)
-				target = prior.getTarget().getTile();
-			else if (s.getTick() - Math.max(prior.getLastActiveTick(), prior.getLastProgressTick()) < CENTRE_CHECK_COOLDOWN) return null;
-		}
-		if (target == null)
-		{
-			WorldPoint centre = ArenaTiles.p(s.getWave() == 10 ? ArenaTiles.REGION_WAVE_10 : ArenaTiles.REGION_WAVES_1_9, 32, 35);
-			if (ArenaTiles.distance(s.getPlayerTile(), centre) <= 8) return null;
-			for (int reach = CENTRE_CHECK_WALK; reach >= 3; reach--)
-			{
-				int dx = Math.max(-reach, Math.min(reach, centre.getX() - s.getPlayerTile().getX()));
-				int dy = Math.max(-reach, Math.min(reach, centre.getY() - s.getPlayerTile().getY()));
-				WorldPoint point = s.getPlayerTile().dx(dx).dy(dy);
-				if (s.walk(point) <= CENTRE_CHECK_WALK) { target = point; break; }
-			}
-		}
-		if (target == null || s.walk(target) <= 1) return null;
-		return Instruction.builder().step(Step.COL_POSITION).headline("Check a little toward the centre")
-			.detail("The cannon is stocked. Move only to the nearby marker to check for strays outside your view; leave shooting to teammates. Then reassess nearby eggs")
-			.target(Target.tile(target, "Check centre")).urgency(Urgency.INFO).build();
-	}
-
 	static int loadedAmmo(Snapshot s)
 	{
 		return s.getEggsRed() + s.getEggsGreen() + s.getEggsBlue() + s.getEggsOmega();
 	}
 
-	/** Wave 10 piles are ammunition, not points: don't request a whole large stack. */
+	/** Wave 10 piles are ammunition, not points. A blue only helps enable an empty cannon. */
 	private static int usefulPickups(Snapshot s, int safe)
 	{
 		if (s.getWave() != 10) return safe;
 		int needed = s.getListenCall() == BaCall.RED_EGG ? HOPPER_CAP - CollectorScoring.reds(s) - s.getEggsRed()
-			: s.getListenCall() == BaCall.GREEN_EGG ? 2 - CollectorScoring.greens(s) - s.getEggsGreen() : 1;
+			: s.getListenCall() == BaCall.GREEN_EGG ? 2 - CollectorScoring.greens(s) - s.getEggsGreen()
+			: loadedAmmo(s) == 0 && CollectorScoring.reds(s) + CollectorScoring.greens(s)
+				+ s.count(BaIds.EGG_BLUE) + s.getBagBlue() == 0 ? 1 : 0;
 		return Math.min(safe, Math.max(0, needed));
 	}
 

@@ -277,6 +277,12 @@ public class RoundLogic
 
 	// ------------------------------------------------------------------ tick
 
+	/** Retain only the lobby roster while the live tracker is asleep outside the arena. */
+	public void rememberTeam(Hud hud)
+	{
+		roster.read(hud);
+	}
+
 	/**
 	 * Advances the round to {@code tick}. Call once per game tick, before {@link #penance} and
 	 * {@link #snapshot}.

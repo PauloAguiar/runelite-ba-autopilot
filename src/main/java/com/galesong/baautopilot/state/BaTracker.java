@@ -28,6 +28,7 @@ import net.runelite.api.Skill;
 import net.runelite.api.Tile;
 import net.runelite.api.TileItem;
 import net.runelite.api.TileObject;
+import net.runelite.api.WorldView;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ActorDeath;
@@ -113,6 +114,10 @@ public class BaTracker
 	private final Map<Integer, NPC> npcs = new LinkedHashMap<>();
 	private final Map<TileObject, Integer> objects = new HashMap<>();
 	private final List<GroundEntry> ground = new ArrayList<>();
+	private static final Snapshot INACTIVE = Snapshot.builder().build();
+	private boolean wasActive;
+	/** Scene spawn events can precede the first arena GameTick. */
+	private boolean arenaSeen;
 
 	public Performance getPerformance()
 	{
@@ -130,18 +135,24 @@ public class BaTracker
 		npcs.clear();
 		objects.clear();
 		ground.clear();
+		wasActive = false;
+		arenaSeen = false;
 	}
 
 	// ------------------------------------------------------------------ snapshot
 
 	public Snapshot snapshot()
 	{
+		WorldView world = client.getTopLevelWorldView();
+		if (client.getGameState() != GameState.LOGGED_IN || world == null) return inactive(false);
 		int tick = client.getTickCount();
 		Player me = client.getLocalPlayer();
-		WorldPoint here = me == null ? null : template(me.getLocalLocation());
+		WorldPoint here = me == null ? null : world.isInstance() ? template(me.getLocalLocation()) : me.getWorldLocation();
 		int region = here == null ? -1 : here.getRegionID();
-		boolean inArena = client.getTopLevelWorldView().isInstance() && ArenaTiles.isArenaRegion(region);
-		boolean inLobby = !client.getTopLevelWorldView().isInstance() && ArenaTiles.isLobby(here);
+		boolean inArena = world.isInstance() && ArenaTiles.isArenaRegion(region);
+		if (!inArena) return inactive(!world.isInstance() && ArenaTiles.isLobby(here));
+		wasActive = true;
+		arenaSeen = true;
 
 		Map<Integer, Integer> inventory = inventoryCounts();
 		round.setSelfName(me == null ? null : me.getName());
@@ -187,7 +198,6 @@ public class BaTracker
 		return round.snapshot()
 			.selfName(me == null ? null : me.getName())
 			.interactingNpc(interacting)
-			.inLobby(inLobby)
 			.inventory(inventory)
 			.freeSlots(freeSlots())
 			.ammoId(ammo)
@@ -218,6 +228,40 @@ public class BaTracker
 			.build();
 	}
 
+	/** No inventory, player/scene scan, combat history, varbit maps or snapshot allocation while idle. */
+	private Snapshot inactive(boolean lobby)
+	{
+		if (wasActive)
+		{
+			round.tick(client.getTickCount(), false, hud, ImmutableMap.of(), 0, 0, 0);
+			npcs.clear();
+			objects.clear();
+			ground.clear();
+			wasActive = false;
+		}
+		arenaSeen = false;
+		// The lobby team list supplies named Queen hand-offs. Only this small read stays awake here.
+		if (lobby) round.rememberTeam(hud);
+		return INACTIVE;
+	}
+
+	private boolean arenaTile(LocalPoint local)
+	{
+		WorldView world = client.getTopLevelWorldView();
+		if (world == null || !world.isInstance() || local == null) return false;
+		WorldPoint point = template(local);
+		return point != null && ArenaTiles.isArenaRegion(point.getRegionID());
+	}
+
+	private boolean arenaEvents()
+	{
+		WorldView world = client.getTopLevelWorldView();
+		if (world == null || !world.isInstance()) return false;
+		if (arenaSeen) return true;
+		Player me = client.getLocalPlayer();
+		return me != null && arenaTile(me.getLocalLocation());
+	}
+
 	/** A hammer in the inventory, or an Imcando hammer worn or carried. */
 	public static boolean hasHammer(Map<Integer, Integer> inventory, boolean imcandoWorn)
 	{
@@ -232,6 +276,7 @@ public class BaTracker
 	{
 		if (e.getGameState() == GameState.LOADING)
 		{
+			arenaSeen = false;
 			objects.clear();
 			ground.clear();
 		}
@@ -244,6 +289,7 @@ public class BaTracker
 	@Subscribe
 	public void onChatMessage(ChatMessage e)
 	{
+		if (!arenaEvents()) return;
 		Player me = client.getLocalPlayer();
 		boolean fromMe = me != null && e.getName() != null
 			&& Text.standardize(e.getName()).equals(Text.standardize(me.getName()));
@@ -259,6 +305,7 @@ public class BaTracker
 	@Subscribe
 	public void onOverheadTextChanged(OverheadTextChanged e)
 	{
+		if (!arenaEvents()) return;
 		if (!(e.getActor() instanceof Player) || e.getOverheadText() == null)
 		{
 			return;
@@ -271,6 +318,7 @@ public class BaTracker
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked e)
 	{
+		if (!arenaEvents()) return;
 		String option = Text.removeTags(e.getMenuOption());
 		round.menuClicked(option, Text.removeTags(e.getMenuTarget()), client.getTickCount());
 		if (round.getRole() != null && option.startsWith("Tell-"))
@@ -292,12 +340,15 @@ public class BaTracker
 	@Subscribe
 	public void onNpcSpawned(NpcSpawned e)
 	{
+		WorldView world = client.getTopLevelWorldView();
+		if (world == null || !world.isInstance()) return;
 		NPC npc = e.getNpc();
 		PenanceType type = PenanceType.forNpcId(npc.getId());
-		if (type == null)
+		if (type == null || !arenaTile(npc.getLocalLocation()))
 		{
 			return;
 		}
+		arenaSeen = true;
 		npcs.put(npc.getIndex(), npc);
 		round.npcSpawned(npc.getIndex(), type, client.getTickCount());
 	}
@@ -305,6 +356,7 @@ public class BaTracker
 	@Subscribe
 	public void onNpcDespawned(NpcDespawned e)
 	{
+		if (!arenaEvents()) return;
 		NPC npc = e.getNpc();
 		if (npcs.remove(npc.getIndex()) != null)
 		{
@@ -318,6 +370,7 @@ public class BaTracker
 	@Subscribe
 	public void onHitsplatApplied(HitsplatApplied e)
 	{
+		if (!arenaEvents()) return;
 		if (e.getActor() instanceof NPC && npcs.containsKey(((NPC) e.getActor()).getIndex()))
 		{
 			Hitsplat h = e.getHitsplat();
@@ -330,6 +383,7 @@ public class BaTracker
 	@Subscribe
 	public void onActorDeath(ActorDeath e)
 	{
+		if (!arenaEvents()) return;
 		if (e.getActor() instanceof NPC)
 		{
 			NPC npc = (NPC) e.getActor();
@@ -346,6 +400,7 @@ public class BaTracker
 	@Subscribe
 	public void onGameObjectDespawned(GameObjectDespawned e)
 	{
+		if (!arenaEvents()) return;
 		objects.remove(e.getGameObject());
 	}
 
@@ -358,18 +413,23 @@ public class BaTracker
 	@Subscribe
 	public void onGroundObjectDespawned(GroundObjectDespawned e)
 	{
+		if (!arenaEvents()) return;
 		objects.remove(e.getGroundObject());
 	}
 
 	@Subscribe
 	public void onItemSpawned(ItemSpawned e)
 	{
+		WorldView world = client.getTopLevelWorldView();
+		if (world == null || !world.isInstance()) return;
 		TileItem item = e.getItem();
 		if (!RoundLogic.tracksGroundItem(item.getId()))
 		{
 			return;
 		}
 		Tile tile = e.getTile();
+		if (!arenaTile(tile.getLocalLocation())) return;
+		arenaSeen = true;
 		WorldPoint p = template(tile.getLocalLocation());
 		Player me = client.getLocalPlayer();
 		GroundItemView view = round.groundItemSpawned(item.getId(), p, item.getQuantity(), client.getTickCount(),
@@ -380,6 +440,7 @@ public class BaTracker
 	@Subscribe
 	public void onItemDespawned(ItemDespawned e)
 	{
+		if (!arenaEvents()) return;
 		TileItem item = e.getItem();
 		for (GroundEntry g : ground)
 		{
@@ -504,8 +565,11 @@ public class BaTracker
 
 	private void track(TileObject obj)
 	{
-		if (obj != null && BaIds.TRACKED_OBJECTS.contains(obj.getId()))
+		WorldView world = client.getTopLevelWorldView();
+		if (world == null || !world.isInstance()) return;
+		if (obj != null && BaIds.TRACKED_OBJECTS.contains(obj.getId()) && arenaTile(obj.getLocalLocation()))
 		{
+			arenaSeen = true;
 			objects.put(obj, obj.getId());
 		}
 	}

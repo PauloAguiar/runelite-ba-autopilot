@@ -23,11 +23,6 @@ public class CollectorProactiveTest
 	}
 	private static GroundItemView egg(int item, WorldPoint tile) { return new GroundItemView(item, tile, 1, false, 990); }
 	private Instruction plan(Snapshot s) { return planner.plan(s, Settings.builder().build()); }
-	private static Snapshot after(Snapshot s, Instruction action, int tick, WorldPoint tile)
-	{
-		return s.toBuilder().tick(tick).playerTile(tile).tasks(action.getTasks()).lastTask(action.getTask())
-			.lastStep(action.getStep()).lastActionTarget(action.getTarget()).build();
-	}
 
 	@Test public void largeRedReservesSupplyTheCannonWithoutVisibleThreatsOrShooting()
 	{
@@ -67,30 +62,26 @@ public class CollectorProactiveTest
 		assertNotEquals(Step.COL_COLLECT, plan(base().toBuilder().walkCost(tile -> 20).build()).getStep());
 	}
 
-	@Test public void centreCheckKeepsItsMarkerAndDoesNotRepeatAfterArriving()
+	@Test public void idleTimeNeverOffersACentreCheck()
 	{
 		Snapshot idle = base().toBuilder().listenCall(BaCall.BLUE_EGG).groundItems(List.of()).eggsRed(5).build();
-		Instruction check = plan(idle);
-		assertEquals("col.scan", check.getTask());
-		assertTrue(idle.walk(check.getTarget().getTile()) <= 6);
-		Instruction moving = plan(after(idle, check, 1001, ME.dx(1)));
-		assertEquals(check.getTarget(), moving.getTarget());
-		Instruction arrived = plan(after(idle, moving, 1002, check.getTarget().getTile()));
-		assertNotEquals("col.scan", arrived.getTask());
-		assertNotEquals("col.scan", plan(after(idle, arrived, 1003, ME)).getTask());
-		assertEquals("col.scan", plan(after(idle, arrived, 1053, ME)).getTask());
-		Instruction ignored = plan(after(idle, check, 1017, ME));
-		assertNotEquals("col.scan", ignored.getTask());
+		for (WorldPoint tile : List.of(ME, ME.dx(20), ME.dy(-18)))
+		{
+			Instruction decision = plan(idle.toBuilder().playerTile(tile).build());
+			assertEquals(Step.COL_FOLLOW, decision.getStep());
+			assertEquals(Target.NONE, decision.getTarget());
+			assertTrue(decision.getPriorities().stream().noneMatch(p -> "col.scan".equals(p.getTask())));
+		}
 	}
 
-	@Test public void centreChecksYieldToLocalWorkAndRequireAmmoAndRemainingTargets()
+	@Test public void oldCentreCheckHistoryCannotResumeOrRetainAMarker()
 	{
-		Snapshot idle = base().toBuilder().listenCall(BaCall.BLUE_EGG).groundItems(List.of()).eggsRed(5).build();
-		for (Snapshot noCheck : List.of(idle.toBuilder().eggsRed(0).build(), idle.toBuilder().waveTick(2).build(),
-			idle.toBuilder().collectorOpeningComplete(false).build(), idle.toBuilder().playerTile(ME.dx(7).dy(-6)).build(),
-			idle.toBuilder().cleared(Set.of(PenanceType.RUNNER, PenanceType.HEALER)).build(), idle.toBuilder().walkCost(tile -> 20).build()))
-			assertNotEquals("col.scan", plan(noCheck).getTask());
-		assertEquals(Step.COL_COLLECT, plan(idle.toBuilder().listenCall(BaCall.GREEN_EGG)
-			.groundItems(List.of(egg(BaIds.EGG_GREEN, ME.dx(1)))).build()).getStep());
+		TaskMemory old = new TaskMemory(Role.COLLECTOR, 3, Map.of("col.scan", new TaskMemory.Progress(
+			Target.tile(ME.dy(6), "Check centre"), TaskMemory.Status.RUNNING, "", 990, 999, 999, 0, ME)));
+		Instruction decision = plan(base().toBuilder().listenCall(BaCall.BLUE_EGG).groundItems(List.of()).eggsRed(5)
+			.tasks(old).lastTask("col.scan").lastTargetTile(ME.dy(6)).build());
+		assertEquals(Step.COL_FOLLOW, decision.getStep());
+		assertEquals(Target.NONE, decision.getTarget());
+		assertFalse(decision.getTasks().getEntries().containsKey("col.scan"));
 	}
 }

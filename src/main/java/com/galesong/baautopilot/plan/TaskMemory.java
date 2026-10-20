@@ -34,7 +34,7 @@ public class TaskMemory
 	}
 
 	private static final Set<String> TRACKED = Set.of("def.tools", "def.repair", "def.fix", "def.pattern",
-		"col.load", "col.support", "col.scan", "queen.col.pass", "heal.stock", "heal.food", "heal.topup", "heal.cover", "heal.reserve", "call");
+		"col.load", "col.support", "queen.col.pass", "heal.stock", "heal.food", "heal.topup", "heal.cover", "heal.reserve", "call");
 	Role role;
 	int wave;
 	Map<String, Progress> entries;
@@ -101,7 +101,7 @@ public class TaskMemory
 		Map<String, Progress> next = new LinkedHashMap<>(entries);
 		for (PriorityLine option : chosen.getPriorities())
 		{
-			if (TRACKED.contains(option.getTask() == null ? "" : option.getTask()) && !CollectorPlanner.CHECK_TASK.equals(option.getTask()))
+			if (TRACKED.contains(option.getTask() == null ? "" : option.getTask()))
 			{
 				seed(next, option.getTask(), s, c);
 			}
@@ -110,9 +110,7 @@ public class TaskMemory
 		if (selected != null && TRACKED.contains(selected) && needed(selected, s, c))
 		{
 			Progress old = next.get(selected);
-			boolean restartCheck = selected.equals(CollectorPlanner.CHECK_TASK) && old != null
-				&& (CollectorPlanner.CHECK_DONE.equals(old.getReason()) || s.getTick() - old.getLastActiveTick() >= CollectorPlanner.CENTRE_CHECK_COOLDOWN);
-			int started = old == null || old.getStartedTick() < 0 || restartCheck ? s.getTick() : old.getStartedTick();
+			int started = old == null || old.getStartedTick() < 0 ? s.getTick() : old.getStartedTick();
 			int progress = old == null ? s.getTick() : old.getLastProgressTick();
 			if (old != null && !sameTarget(old.getTarget(), chosen.getTarget())) progress = s.getTick();
 			next.put(selected, new Progress(chosen.getTarget(), Status.RUNNING, "", started,
@@ -141,11 +139,6 @@ public class TaskMemory
 
 	private static Progress refresh(String id, Progress p, Snapshot s)
 	{
-		if (id.equals(CollectorPlanner.CHECK_TASK) && (CollectorPlanner.CHECK_DONE.equals(p.getReason())
-			|| p.getTarget().getTile() != null && s.walk(p.getTarget().getTile()) <= 1))
-			return new Progress(p.getTarget(), Status.READY, CollectorPlanner.CHECK_DONE, p.getStartedTick(),
-				p.getLastActiveTick(), CollectorPlanner.CHECK_DONE.equals(p.getReason()) ? p.getLastProgressTick() : s.getTick(),
-				0, s.getPlayerTile());
 		String blocked = blocked(id, s);
 		boolean moved = p.getTarget().getTile() != null && ArenaTiles.distance(s.getPlayerTile(), p.getTarget().getTile())
 			< ArenaTiles.distance(p.getPosition(), p.getTarget().getTile());
@@ -183,7 +176,6 @@ public class TaskMemory
 			case "def.fix": return !s.getCleared().contains(PenanceType.RUNNER) && s.getTrapCharges() < 2;
 			case "col.load": return s.count(BaIds.EGG_RED) + s.count(BaIds.EGG_GREEN) + s.getBagRed() + s.getBagGreen() > 0;
 			case "col.support": return CollectorPlanner.supportReady(s);
-			case "col.scan": return s.getRole() == Role.COLLECTOR;
 			case "queen.col.pass": return s.getRole() == Role.COLLECTOR && s.getWave() == 10 && !s.isQueenDead() && s.has(BaIds.EGG_YELLOW)
 				&& (s.getQueenYellowPassed() < Math.max(1, c.getQueenEggBatch()) || QueenPlanner.reserveReady(s, c));
 			case "queen.col.recipient": return s.getRole() == Role.COLLECTOR && s.getWave() == 10 && s.isQueenAlive();

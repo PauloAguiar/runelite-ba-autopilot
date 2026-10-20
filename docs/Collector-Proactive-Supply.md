@@ -1,5 +1,10 @@
 # Proactive red supply and local Collector movement
 
+**2026-10-19 update:** [visible eggs and retired centre checks](Collector-Visible-Eggs.md)
+removes the centre-check functionality described below. Waiting near attackers can no longer
+beat an eligible ground-egg pickup. Proactive red supply remains active; the centre-check
+section and its validation results below describe the earlier implementation.
+
 A large carried red reserve now adds loading value even when no escaping runner or recent
 cannon shot is visible. Inventory and bag reds both count. The term is strategic supply,
 not an assertion that an unseen runner is escaping; it retains the normal `col.load` task

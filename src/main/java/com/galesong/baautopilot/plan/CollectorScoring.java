@@ -158,17 +158,20 @@ final class CollectorScoring
 
 	static Candidate follow(Snapshot s, Instruction ins)
 	{
-		Map<String, Double> terms = new LinkedHashMap<>();
-		terms.put("wait for useful drops", s.getWave() != 10 && s.getListenCall() == BaCall.RED_EGG ? .3 * redValue(s) : 0);
-		// A positioning fallback is not penalised for walking: it remains preferable to pointless work.
-		return finish("col.follow", Tier.IDLE, ins, terms);
+		return follow(s, ins, Double.POSITIVE_INFINITY);
 	}
 
-	static Candidate centreCheck(Snapshot s, Instruction ins)
+	static Candidate follow(Snapshot s, Instruction ins, double bestPickupScore)
 	{
 		Map<String, Double> terms = new LinkedHashMap<>();
-		terms.put("check unseen threats with ammo ready", 14.0);
-		return score(s, CollectorPlanner.CHECK_TASK, Tier.IDLE, ins, terms);
+		double waiting = s.getWave() != 10 && s.getListenCall() == BaCall.RED_EGG ? .3 * redValue(s) : 0;
+		terms.put("wait for useful drops", waiting);
+		// Waiting for a future drop cannot beat a called, reachable pickup already on the ground.
+		// Keep its score visible; useful loading/cleanup still competes with the pickup normally.
+		if (ins.getStep() == Step.COL_FOLLOW && Double.isFinite(bestPickupScore))
+			terms.put("visible egg before waiting", Math.min(0, bestPickupScore - 1 - waiting));
+		// A positioning fallback is not penalised for walking: it remains preferable to pointless work.
+		return finish("col.follow", Tier.IDLE, ins, terms);
 	}
 
 	private static Candidate score(Snapshot s, String task, Tier tier, Instruction ins, Map<String, Double> terms)

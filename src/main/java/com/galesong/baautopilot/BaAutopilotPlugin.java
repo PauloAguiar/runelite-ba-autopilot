@@ -41,6 +41,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
+import net.runelite.api.GameState;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
@@ -48,6 +49,7 @@ import net.runelite.api.NPC;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ClientTick;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.PostMenuSort;
 import net.runelite.client.Notifier;
@@ -218,6 +220,10 @@ public class BaAutopilotPlugin extends Plugin
 	/** Tick the current instruction step began, for the call notification's delay. */
 	private int stepSinceTick;
 	private boolean notifiedThisStep;
+	private boolean arenaRunning;
+	private boolean arenaOverlaysVisible;
+	private boolean tutorialOverlaysVisible;
+	private boolean drawListenerRegistered;
 
 	@Provides
 	BaAutopilotConfig provideConfig(ConfigManager configManager)
@@ -230,24 +236,10 @@ public class BaAutopilotPlugin extends Plugin
 	{
 		tracker.reset();
 		eventBus.register(tracker);
-		overlayManager.add(instructionOverlay);
-		overlayManager.add(sceneOverlay);
-		overlayManager.add(itemOverlay);
-		overlayManager.add(turretOverlay);
-		overlayManager.add(tintOverlay);
-		overlayManager.add(pathOverlay);
-		overlayManager.add(priorityOverlay);
-		overlayManager.add(penanceDebugOverlay);
-		renderCallbacks.register(drawListener);
 		tutorialSceneOverlay.setShown(() -> tutorialShown);
 		tutorialBoxOverlay.setShown(() -> tutorialShown);
-		overlayManager.add(tutorialSceneOverlay);
-		overlayManager.add(tutorialBoxOverlay);
 		tutorialMapOverlay.setShown(() -> tutorialShown);
-		overlayManager.add(tutorialMapOverlay);
 		tutorialInventoryOverlay.setShown(() -> tutorialShown);
-		overlayManager.add(tutorialInventoryOverlay);
-		mouseManager.registerMouseListener(tutorialBoxOverlay.mouseListener);
 
 		panel = new BaAutopilotPanel();
 		panel.setOnOption((key, value) -> configManager.setConfiguration(BaAutopilotConfig.GROUP, key, value));
@@ -298,25 +290,15 @@ public class BaAutopilotPlugin extends Plugin
 	protected void shutDown()
 	{
 		eventBus.unregister(tracker);
-		overlayManager.remove(instructionOverlay);
-		overlayManager.remove(sceneOverlay);
-		overlayManager.remove(itemOverlay);
-		overlayManager.remove(turretOverlay);
-		overlayManager.remove(tintOverlay);
-		overlayManager.remove(pathOverlay);
-		overlayManager.remove(priorityOverlay);
-		overlayManager.remove(penanceDebugOverlay);
-		renderCallbacks.unregister(drawListener);
-		overlayManager.remove(tutorialSceneOverlay);
-		overlayManager.remove(tutorialBoxOverlay);
-		overlayManager.remove(tutorialMapOverlay);
-		overlayManager.remove(tutorialInventoryOverlay);
-		mouseManager.unregisterMouseListener(tutorialBoxOverlay.mouseListener);
+		arenaRunning = false;
+		tutorialShown = false;
+		updateOverlayState();
 		hiddenNpcs = java.util.Collections.emptySet();
 		tutorialOn = false;
 		tutorialShown = false;
 		clientThread.invoke(() ->
 		{
+			tutorialActions.stop();
 			tutorialScene.clear();
 			tutorialCamera.release();
 		});
@@ -333,13 +315,20 @@ public class BaAutopilotPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick e)
 	{
+		Snapshot fresh = tracker.snapshot();
+		if (!fresh.isInArena())
+		{
+			stopArena();
+			if (tutorialOn || tutorialShown) updateTutorial();
+			return;
+		}
+		arenaRunning = true;
 		WorldPoint lastTarget = instruction == null ? null : instruction.getTarget().getTile();
 		// Remember the last NPC target across steps without one (a call or a hold mid-fight)
 		if (instruction != null && instruction.getTarget().getKind() == Target.Kind.NPC)
 		{
 			lastNpcTarget = instruction.getTarget().getId();
 		}
-		Snapshot fresh = tracker.snapshot();
 		snapshot = fresh.toBuilder().lastTargetTile(lastTarget).lastTargetNpc(lastNpcTarget)
 			.lastTask(instruction == null ? null : instruction.getTask())
 			.lastStep(instruction == null ? null : instruction.getStep())
@@ -363,8 +352,9 @@ public class BaAutopilotPlugin extends Plugin
 		}
 		updateHintArrow();
 		hiddenNpcs = blockers();
-		updateTutorial();
-		if (config.showPath() && snapshot.isInArena())
+		if (tutorialOn || tutorialShown) updateTutorial();
+		updateOverlayState();
+		if (config.showPath())
 		{
 			routeFinder.update(instruction, snapshot);
 		}
@@ -372,23 +362,97 @@ public class BaAutopilotPlugin extends Plugin
 		{
 			routeFinder.clear();
 		}
-		if (!snapshot.isInArena())
-		{
-			List<WaveStats> done = tracker.getPerformance().history();
-			lastWave = done.isEmpty() ? null : done.get(done.size() - 1);
-		}
 		pushToPanel();
+	}
+
+	/** Run once on exit, rather than rebuilding lobby guidance and Swing updates every tick. */
+	private void stopArena()
+	{
+		if (!arenaRunning && snapshot == null && instruction == null) return;
+		Snapshot progress = snapshot;
+		arenaRunning = false;
+		snapshot = null;
+		instruction = null;
+		lastStep = null;
+		lastNpcTarget = -1;
+		notifiedThisStep = false;
+		hiddenNpcs = java.util.Collections.emptySet();
+		routeFinder.clear();
+		client.clearHintArrow();
+		List<WaveStats> done = tracker.getPerformance().history();
+		lastWave = done.isEmpty() ? null : done.get(done.size() - 1);
+		updateOverlayState();
+		// Keep the last observed levels/points in the settings sidebar without polling while idle.
+		BaAutopilotPanel p = panel;
+		if (p != null && progress != null) SwingUtilities.invokeLater(() -> p.updateProgress(progress));
+	}
+
+	/** No live overlays or per-entity render callback are registered while outside the arena. */
+	private void updateOverlayState()
+	{
+		boolean live = arenaRunning;
+		boolean tutorial = tutorialOn && tutorialShown;
+		boolean boxWasVisible = arenaOverlaysVisible || tutorialOverlaysVisible;
+		if (live != arenaOverlaysVisible)
+		{
+			setOverlay(sceneOverlay, live);
+			setOverlay(itemOverlay, live);
+			setOverlay(turretOverlay, live);
+			setOverlay(tintOverlay, live);
+			setOverlay(pathOverlay, live);
+			setOverlay(priorityOverlay, live);
+			setOverlay(penanceDebugOverlay, live);
+			arenaOverlaysVisible = live;
+		}
+		if (tutorial != tutorialOverlaysVisible)
+		{
+			setOverlay(tutorialSceneOverlay, tutorial);
+			setOverlay(tutorialBoxOverlay, tutorial);
+			setOverlay(tutorialMapOverlay, tutorial);
+			setOverlay(tutorialInventoryOverlay, tutorial);
+			if (tutorial) mouseManager.registerMouseListener(tutorialBoxOverlay.mouseListener);
+			else mouseManager.unregisterMouseListener(tutorialBoxOverlay.mouseListener);
+			tutorialOverlaysVisible = tutorial;
+		}
+		if (boxWasVisible != (live || tutorial)) setOverlay(instructionOverlay, live || tutorial);
+		boolean drawing = tutorial || live && config.hideBlockers();
+		if (drawing != drawListenerRegistered)
+		{
+			if (drawing) renderCallbacks.register(drawListener);
+			else renderCallbacks.unregister(drawListener);
+			drawListenerRegistered = drawing;
+		}
+	}
+
+	private void setOverlay(net.runelite.client.ui.overlay.Overlay overlay, boolean shown)
+	{
+		if (shown) overlayManager.add(overlay);
+		else overlayManager.remove(overlay);
+	}
+
+	@Subscribe
+	public void onGameStateChanged(GameStateChanged e)
+	{
+		if (e.getGameState() != GameState.LOGGED_IN)
+		{
+			if (arenaRunning)
+			{
+				client.clearHintArrow();
+				hiddenNpcs = java.util.Collections.emptySet();
+				routeFinder.clear();
+			}
+			arenaRunning = false;
+			updateOverlayState();
+			if (tutorialOn || tutorialShown) updateTutorial();
+		}
 	}
 
 	/** The tutorial camera glides every client tick; it follows you again once the tutorial ends. */
 	@Subscribe
 	public void onClientTick(ClientTick e)
 	{
-		if (!tutorialShown)
+		if (!tutorialOn || !tutorialShown)
 		{
-			tutorialCamera.release();
-			tutorialActions.stop();
-			tourPage = null;
 			return;
 		}
 		tutorialSteps.tick();
@@ -466,6 +530,7 @@ public class BaAutopilotPlugin extends Plugin
 		if (BaAutopilotConfig.GROUP.equals(e.getGroup()))
 		{
 			pushOptions();
+			clientThread.invoke(this::updateOverlayState);
 		}
 	}
 
@@ -494,7 +559,7 @@ public class BaAutopilotPlugin extends Plugin
 	@Subscribe
 	public void onMenuEntryAdded(MenuEntryAdded e)
 	{
-		if (snapshot == null || instruction == null || !snapshot.isInArena())
+		if (!arenaRunning || snapshot == null || instruction == null || !snapshot.isInArena())
 		{
 			return;
 		}
@@ -518,7 +583,7 @@ public class BaAutopilotPlugin extends Plugin
 	@Subscribe
 	public void onPostMenuSort(PostMenuSort e)
 	{
-		if (client.isMenuOpen() || snapshot == null || !snapshot.isInArena())
+		if (!arenaRunning || snapshot == null || !snapshot.isInArena() || client.isMenuOpen())
 		{
 			return;
 		}
@@ -586,7 +651,7 @@ public class BaAutopilotPlugin extends Plugin
 
 	private boolean shouldDraw(net.runelite.api.Renderable renderable, boolean drawingUI)
 	{
-		if (tutorialShown && (renderable instanceof NPC
+		if (tutorialOn && tutorialShown && (renderable instanceof NPC
 			|| (renderable instanceof Player && renderable != client.getLocalPlayer())))
 		{
 			return false;
@@ -600,11 +665,20 @@ public class BaAutopilotPlugin extends Plugin
 	 */
 	private void updateTutorial()
 	{
+		if (!tutorialOn && !tutorialShown) return;
+		boolean wasShown = tutorialShown;
 		Player me = client.getLocalPlayer();
-		boolean ready = tutorialOn && me != null && !client.getTopLevelWorldView().isInstance()
+		boolean ready = tutorialOn && client.getGameState() == GameState.LOGGED_IN
+			&& me != null && !client.getTopLevelWorldView().isInstance()
 			&& LobbyRooms.inRoomOne(me.getWorldLocation());
 		if (!ready)
 		{
+			if (wasShown)
+			{
+				tutorialCamera.release();
+				tutorialActions.stop();
+				tourPage = null;
+			}
 			tutorialScene.clear();
 		}
 		else if (tutorialScene.isStale())
@@ -618,6 +692,7 @@ public class BaAutopilotPlugin extends Plugin
 			tutorialSteps.reset();
 		}
 		tutorialShown = tutorialScene.isShown();
+		updateOverlayState();
 		String status = !tutorialOn ? ""
 			: tutorialShown ? "Running: everyone else is hidden."
 			: ready ? "Loading the scene..."
