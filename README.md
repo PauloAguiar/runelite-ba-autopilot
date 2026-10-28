@@ -40,12 +40,19 @@ automatically. You are always the one who plays.**
   - **Wave 10 and the Queen:** the omega egg chain for every role, with the Collector's yellow egg
     batch and reserve.
 - **Wave info.** Per Penance type: how many are out, how many are dead, and the reserves left.
+- **In-game tutorial.** Six tutorials (Introduction, Basics, Collector, Healer, Attacker and
+  Defender) are staged in the Barbarian Assault lobby with models of the Penance, eggs, launchers
+  and dispensers. The role tutorials show the real BA Autopilot overlay and highlights for each
+  situation, so they always match what the plugin does.
 
 ## Getting started
 
 1. Install **BA Autopilot** from the Plugin Hub.
 2. Click the **BA Autopilot** button in RuneLite's sidebar to open the panel.
-3. Join a team and play. The BA Autopilot overlay appears as soon as your role is known. Hold
+3. To learn the minigame and the plugin, pick a tutorial in the **Tutorial** list (start with
+   **Introduction**), click **Start tutorial**, and go to room 1 of the Barbarian Assault lobby.
+   Use **Next** and **Back** in the tutorial box to move through the pages.
+4. Join a team and play. The BA Autopilot overlay appears as soon as your role is known. Hold
    **Alt** and drag it to move it.
 
 ## Settings

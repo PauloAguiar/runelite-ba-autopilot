@@ -77,8 +77,7 @@ public class BaAutopilotPanel extends PluginPanel
 		header.getIconLabel().setIcon(new ImageIcon(navIcon()));
 		shell.getHeader().add(discordLink());
 		shell.getHeader().add(header);
-		// Tutorial hidden for now; uncomment to bring the card back.
-		// shell.getContent().add(tutorialCard());
+		shell.getContent().add(tutorialCard());
 		for (Role role : Role.values()) shell.getContent().add(roleSection(role));
 		shell.getContent().add(generalOptions());
 		add(shell, BorderLayout.CENTER);
