@@ -257,7 +257,7 @@ public class SceneOverlay extends Overlay
 
 	/**
 	 * Defender: each bait on the ground with the square of tiles in which a runner notices it (4 at
-	 * defender level 1, 5 from level 2) - green for good bait, red for bad. While you're told to
+	 * defender level 1, 5 from level 2) - green for good bait, purple for bad. While you're told to
 	 * drop bait, a fainter square around you previews where the next one lands.
 	 */
 	private void lureRange(Graphics2D g, Snapshot s)
@@ -343,7 +343,7 @@ public class SceneOverlay extends Overlay
 	}
 
 	/**
-	 * Defender: how many good and bad bait lie on each tile ("4" green, "1" red), on a dark
+	 * Defender: how many good and bad bait lie on each tile ("4" green, "1" purple), on a dark
 	 * backing just above the tile, so a spot's count reads at a glance without hovering the pile.
 	 */
 	private void baitCounts(Graphics2D g, Snapshot s)

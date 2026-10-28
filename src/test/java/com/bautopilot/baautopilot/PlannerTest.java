@@ -1008,6 +1008,22 @@ public class PlannerTest
 	}
 
 	@Test
+	public void singleKindRestockStepsAreChosen()
+	{
+		// Trap food short, only the called kind needed: take it from the machine
+		WorldPoint trap = ArenaTiles.trapFood(3);
+		Snapshot s = base(Role.DEFENDER, 3).listenCall(BaCall.BAIT_WORMS).waveTick(120).playerTile(trap)
+			.trapCharges(2).hasHammer(true).logsTaken(WaveInfo.defenderLogs(3))
+			.inventory(ImmutableMap.of(BaCall.BAIT_TOFU.getItemId(), 3, BaCall.BAIT_CRACKERS.getItemId(), 3))
+			.groundItems(ImmutableList.of(new GroundItemView(BaCall.BAIT_WORMS.getItemId(), ArenaTiles.mainstack(3), 4, true, 5)))
+			.build();
+		assertEquals(Step.DEF_TAKE_BAIT, plan(s).getStep());
+		// The healer fetches the called food
+		Snapshot heal = base(Role.HEALER, 3).listenCall(BaCall.POISON_MEAT).waveTick(60).build();
+		assertEquals(Step.HEAL_TAKE_FOOD, plan(heal).getStep());
+	}
+
+	@Test
 	public void defenderLogTargetCountsPickupsForTheWholeWave()
 	{
 		// Reported 2026-10-16: both logs used on repairs sent the defender back for more

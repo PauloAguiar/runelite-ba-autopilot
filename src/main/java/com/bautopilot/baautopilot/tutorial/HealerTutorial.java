@@ -46,7 +46,7 @@ final class HealerTutorial
 			.body("As the Healer, you poison the Penance Healers with the food the Defender calls, and you heal your "
 				+ "teammates with the vial. You also tell the Defender which bait the Runners want.\n\n"
 				+ "BA Autopilot shows you one step at a time: which food to use and on which Penance Healer, when to "
-				+ "restock, and who to heal. It sets the right call on your horn.")
+				+ "restock, and who to heal. It colours the right call green in your horn's menu.")
 			.props(HEAL_ROOM).mark(Tutorials.role("heal-healer", ROLE))
 			.camera("heal-spot").build(),
 		Page.builder().title("The BA Autopilot overlay")
@@ -60,8 +60,8 @@ final class HealerTutorial
 			.title("Your call")
 			.body("Every 30 seconds, the Defender needs a new call from you: which bait the Runners want. When it's "
 				+ "time, your game view turns red. That's your signal.\n\n"
-				+ "*Stop whatever you're doing and click your horn.* BA Autopilot has already set the right call on it, "
-				+ "so one click is enough. The red goes away once you've called.")
+				+ "*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot "
+				+ "colours green. The red goes away once you've called.")
 			.camera("heal-spot").build(),
 		Page.builder().title("Opening: Stock-Up")
 			.body("Start every wave at your dispenser. Click it once: its left-click is Stock-Up, which gives you all "
@@ -80,8 +80,9 @@ final class HealerTutorial
 			.pilot(pilot(Step.HEAL_WAIT_CALL, opening(ROLE, 4, 35, 16).inventory(foods())))
 			.camera("heal-spot").build(),
 		Page.builder().title("Poison outlines")
-			.body("Each Penance Healer is outlined by its poison: green while the poison works, red if it hasn't been "
-				+ "fed yet. Feed the red ones first.\n\n"
+			.body("Each Penance Healer is outlined by its poison: green while it's fresh, then light green, yellow and "
+				+ "orange as it fades, and red when it has none, because it was never fed or the poison wore off. Feed "
+				+ "the red ones first.\n\n"
 				+ "BA Autopilot marks the one to feed next: it gets a thicker outline and a FEED badge above its head, "
 				+ "with the food to use. The overlay names it too, so you can simply follow it.")
 			.props(HEAL_ROOM).mark(Tutorials.role("heal-healer", ROLE))
@@ -101,10 +102,10 @@ final class HealerTutorial
 			.mark(feedTarget("heal-pen"))
 			.says("heal-defender", "Healer: Poison worms!")
 			.pilot(pilot(Step.HEAL_FEED, stocked(4).penance(ImmutableList.of(fed(1, 40), fed(2, 4)))))
-			.menu(Tutorials.menu(BaCall.POISON_WORMS.getItemId(), "Use", "Use", "Examine"))
+			.menu(Tutorials.menu(BaCall.POISON_WORMS.getItemId(), "Use", "Use", "Destroy", "Examine"))
 			.action(Action.POISON_HEALER).camera("heal-spot").build(),
 		Page.builder().title("The healer table")
-			.body("Under the overlay, you can see each Penance Healer's food and poison, how full your vial is, and your "
+			.body("At the bottom of the overlay, you can see each Penance Healer's food and poison, how full your vial is, and your "
 				+ "two most hurt teammates.\n\n"
 				+ "You don't need to act on this: the overlay already tells you what to do next.")
 			.props(HEAL_ROOM).mark(Tutorials.role("heal-healer", ROLE))
@@ -113,10 +114,9 @@ final class HealerTutorial
 			.camera("heal-spot").build(),
 		Page.builder().title("Keeping food")
 			.body("You need food for the Penance Healers that haven't come out yet.\n\n"
-				+ "When you're running low, the overlay sends you back to your dispenser for more. Click the dispenser to "
-				+ "take the food it names.")
+				+ "When you're running low, the overlay sends you back to your dispenser for more. Right-click the "
+				+ "dispenser and pick the Take- option for the food it names. Its left-click, Stock-Up, takes all three.")
 			.props(HEAL_ROOM).mark(Tutorials.role("heal-healer", ROLE))
-			.tile(new TileMark("heal-spawn", "Wait here", ActionKind.WAIT.getColor()))
 			.pilot(pilot(Step.HEAL_TAKE_FOOD, stocked(9).penance(ImmutableList.of(fed(1, 4), fed(2, 6)))
 				.inventory(ImmutableMap.of(BaCall.POISON_WORMS.getItemId(), 1, BaIds.VIAL_FULL, 1))))
 			.camera("heal-spot").build(),
@@ -128,7 +128,7 @@ final class HealerTutorial
 			.mark(new Mark("spring", "Healer spring", Tutorials.PROP, Style.OUTLINE))
 			.pilot(pilot(Step.HEAL_TEAMMATE, lastHealers().penance(ImmutableList.of(fed(1, 4), fed(2, 6)))
 				.teammates(team(42, 90))))
-			.menu(Tutorials.menu(BaIds.VIAL_FULL, "Use", "Use", "Examine"))
+			.menu(Tutorials.menu(BaIds.VIAL_FULL, "Use", "Use", "Destroy", "Examine"))
 			.action(Action.SPRING).camera("spr-spot").build(),
 		Page.builder().title("Staying alive")
 			.body("Only you, the Healer, can drink from the spring. When your own health is low, the overlay sends you "
@@ -145,7 +145,7 @@ final class HealerTutorial
 			.mark(new Mark("chain-crater", "Poison crater", new Color(120, 220, 90), Style.OUTLINE))
 			.pilot(pilot(Step.QUEEN_DUNK, arena(ROLE, 10, 19, 18).queenAlive(true)
 				.inventory(ImmutableMap.of(BaIds.EGG_YELLOW, 2, BaIds.VIAL_FULL, 1))))
-			.menu(Tutorials.menu(BaIds.EGG_YELLOW, "Use", "Use", "Examine"))
+			.menu(Tutorials.menu(BaIds.EGG_YELLOW, "Use", "Use", "Destroy", "Examine"))
 			.camera("chain-crater-spot").build(),
 		Page.builder().title("Wave 10: by the spring")
 			.body("Between eggs, stay by the Healer spring. Hurt teammates can come to you there, and you can refill "
@@ -157,7 +157,7 @@ final class HealerTutorial
 				.teammates(team(85, 90))))
 			.action(Action.SPRING).camera("spr-spot").build(),
 		Page.builder().title("Healer: done")
-			.body("That's the Healer. Click Next to continue with the Attacker tutorial.")
+			.body("That's the Healer. Click Attacker > to continue with the Attacker tutorial.")
 			.props(HEAL_ROOM).mark(Tutorials.role("heal-healer", ROLE))
 			.camera("heal-spot").build()));
 

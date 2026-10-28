@@ -182,15 +182,16 @@ public class BaAutopilotPlugin extends Plugin
 	private net.runelite.client.callback.RenderCallbackManager renderCallbacks;
 
 	/**
-	 * Penance standing on or next to the item you're told to pick up are not drawn, so the click
-	 * reaches the item (as RuneLite's Entity Hider does it: a render callback).
+	 * While the tutorial scene is up, every NPC and every other player is left undrawn so only the
+	 * tutorial's own models show (as RuneLite's Entity Hider does it: a render callback). Registered
+	 * only then.
 	 */
 	private final net.runelite.client.callback.RenderCallback drawListener = new net.runelite.client.callback.RenderCallback()
 	{
 		@Override
 		public boolean addEntity(net.runelite.api.Renderable renderable, boolean ui)
 		{
-			return shouldDraw(renderable, ui);
+			return shouldDraw(renderable);
 		}
 	};
 
@@ -575,14 +576,10 @@ public class BaAutopilotPlugin extends Plugin
 		}
 	}
 
-	private boolean shouldDraw(net.runelite.api.Renderable renderable, boolean drawingUI)
+	private boolean shouldDraw(net.runelite.api.Renderable renderable)
 	{
-		if (tutorialOn && tutorialShown && (renderable instanceof NPC
-			|| (renderable instanceof Player && renderable != client.getLocalPlayer())))
-		{
-			return false;
-		}
-		return true;
+		return !(tutorialOn && tutorialShown && (renderable instanceof NPC
+			|| (renderable instanceof Player && renderable != client.getLocalPlayer())));
 	}
 
 	/**

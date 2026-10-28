@@ -45,7 +45,7 @@ final class CollectorTutorial
 				+ "calls and load them into the egg launchers, so the team can fire them. You also tell the Attacker "
 				+ "which style to use.\n\n"
 				+ "BA Autopilot shows you one step at a time: which eggs to pick up, when to load them, and when to fire. "
-				+ "It sets the right call on your horn.")
+				+ "It colours the right call green in your horn's menu.")
 			.props(EGGS_ROOM).prop("col-ranger").prop("col-drop-egg").mark(Tutorials.role("col-collector", ROLE))
 			.mark(new Mark("col-ranger", "Penance Ranger", Tutorials.RANGER, Style.OUTLINE))
 			.action(Action.EGG_DROP)
@@ -61,8 +61,8 @@ final class CollectorTutorial
 			.title("Your call")
 			.body("Every 30 seconds, the Attacker needs a new call from you: which style to use. When it's time, your "
 				+ "game view turns red. That's your signal.\n\n"
-				+ "*Stop whatever you're doing and click your horn.* BA Autopilot has already set the right call on it, "
-				+ "so one click is enough. The red goes away once you've called.")
+				+ "*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot "
+				+ "colours green. The red goes away once you've called.")
 			.camera("col-spot").build(),
 		Page.builder().title("Opening: the west route")
 			.body("At the start of each wave, walk around the west cannon hill to reach the Attackers. Don't wait for a "
@@ -130,13 +130,11 @@ final class CollectorTutorial
 				.penance(ImmutableList.of(penance(1, PenanceType.RUNNER, 4, 42, 26).toBuilder().previousTile(Situations.at(4, 42, 27)).build()))))
 			.action(Action.CANNON_PENANCE).camera("can-spot").build(),
 		Page.builder().title("Waiting for eggs")
-			.body("When there's nothing to pick up, the overlay asks you to wait on a marked tile near the Attackers. Stand "
-				+ "on that tile.\n\n"
+			.body("When there's nothing to pick up, the overlay asks you to wait near the Attackers.\n\n"
 				+ "Eggs drop where Fighters and Rangers die, so new eggs will appear close to you.")
 			.props(EGGS_ROOM).prop("col-ranger").prop("col-drop-egg").mark(Tutorials.role("col-collector", ROLE))
 			.mark(new Mark("col-ranger", "Penance Ranger", Tutorials.RANGER, Style.OUTLINE))
 			.action(Action.EGG_DROP)
-			.tile(new TileMark("col-wait", "Wait here", ActionKind.WAIT.getColor()))
 			.pilot(pilot(Step.COL_FOLLOW, arena(ROLE, 4, 21, 40).listenCall(BaCall.GREEN_EGG)))
 			.camera("col-spot").build(),
 		Page.builder().title("Wave 10: before the Queen")
@@ -200,7 +198,7 @@ final class CollectorTutorial
 			.arrow(new TutorialSteps.Arrow("chain-collector", "chain-healer", BasicsTutorial.PASS))
 			.pilot(pilot(Step.QUEEN_PASS, arena(ROLE, 10, 28, 25).queenAlive(true)
 				.inventory(ImmutableMap.of(BaIds.EGG_YELLOW, 5)).team(ImmutableMap.of("Healer", Role.HEALER))))
-			.menu(Tutorials.menu(BaIds.EGG_YELLOW, "Use", "Use", "Examine"))
+			.menu(Tutorials.menu(BaIds.EGG_YELLOW, "Use", "Use", "Destroy", "Examine"))
 			.camera("chain-spot").build(),
 		Page.builder().title("Wave 10: collecting the reserve")
 			.body("After you pass the first 5 yellow eggs, the overlay asks you to pick up 3 more. These 3 eggs are the "
@@ -232,7 +230,7 @@ final class CollectorTutorial
 			.action(Action.QUEEN_RAGE).camera("queen-room").build(),
 		Page.builder().title("Wave 10: loading omegas")
 			.body("The finished omega eggs come back to you from the Defender. You load them into the hopper one at a "
-				+ "time.\n\n"
+				+ "time. The overlay first marks a tile two tiles south of the hopper: stand there.\n\n"
 				+ "To load one egg, click an omega egg in your inventory, then click the hopper. *Don't just click the "
 				+ "hopper:* that loads all of them at once.")
 			.prop("queen").prop("cannon").prop("turret").prop("hopper").prop("cannon-collector").prop("cannon-gunner")
@@ -241,16 +239,17 @@ final class CollectorTutorial
 			.mark(new Mark("queen", "Penance Queen", Tutorials.QUEEN, Style.OUTLINE))
 			.pilot(pilot(Step.QUEEN_LOAD_ONE, arena(ROLE, 10, 22, 32).queenAlive(true)
 				.inventory(ImmutableMap.of(BaIds.EGG_OMEGA, 3))))
-			.menu(Tutorials.menu(BaIds.EGG_OMEGA, "Use", "Use", "Examine"))
+			.menu(Tutorials.menu(BaIds.EGG_OMEGA, "Use", "Use", "Destroy", "Examine"))
 			.action(Action.CANNON_QUEEN).camera("cannon-spot").build(),
 		Page.builder().title("Wave 10: spamming omegas")
 			.body("Many teams stack at the cannon: they wait there and keep clicking the Omega button, *spamming* it, "
 				+ "so each omega egg is fired as soon as you load it.\n\n"
 				+ "Why is spamming useful? When several players fire the same loaded egg, that one egg can hit the Queen "
 				+ "several times. That reduces the total number of omega eggs your team needs.\n\n"
-				+ "If your team plays this way, turn on the setting that tells BA Autopilot. To open the panel, click "
-				+ "the BA Autopilot button in RuneLite's sidebar. Open the General & display section, and turn on Team "
-				+ "stacks at Queen cannon.")
+				+ "Loading one at a time is on by default: it's One omega at a time, in the Advanced part of the "
+				+ "Collector card. If your whole team stacks, also tell BA Autopilot: click the BA Autopilot button in "
+				+ "RuneLite's sidebar, open the General & display section, and turn on Team stacks at Queen cannon. Your "
+				+ "teammates' overlays then send them to the cannon once their eggs are done.")
 			.prop("queen").prop("cannon").prop("turret").prop("hopper").prop("cannon-collector")
 			.prop("cannon-gunner").prop("cannon-stack-1").prop("cannon-stack-2")
 			.mark(Tutorials.role("cannon-collector", ROLE))
@@ -261,7 +260,7 @@ final class CollectorTutorial
 				.inventory(ImmutableMap.of(BaIds.EGG_OMEGA, 2))))
 			.action(Action.CANNON_QUEEN).camera("cannon-spot").build(),
 		Page.builder().title("Collector: done")
-			.body("That's the Collector. Click Next to continue with the Healer tutorial.")
+			.body("That's the Collector. Click Healer > to continue with the Healer tutorial.")
 			.props(EGGS_ROOM).mark(Tutorials.role("col-collector", ROLE))
 			.camera("col-spot").build()));
 

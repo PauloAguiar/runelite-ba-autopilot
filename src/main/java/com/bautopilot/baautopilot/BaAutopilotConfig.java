@@ -227,7 +227,7 @@ public interface BaAutopilotConfig extends Config
 	}
 
 	@ConfigItem(keyName = "baitCounts", name = "Defender: bait count per tile", position = 4, section = displaySection,
-		description = "Label each tile with bait on it with how many are good (green) and bad (red)")
+		description = "Label each tile with bait on it with how many are good (green) and bad (purple)")
 	default boolean baitCounts()
 	{
 		return true;

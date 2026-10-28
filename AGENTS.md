@@ -28,9 +28,12 @@ for the layout, recordings and tools.
   holds such plugins for extra review. Read bundled resources; file tools belong in `src/test`
   (the editable tutorial layout is `dev/TutorialLayoutFile`). If data must be saved, use the
   plugin's `getPluginDirectory()` Filepath API.
-- The plugin guides; it never clicks, types or automates input. Menu changes are limited to the
-  existing three (horn left-click, off-role Attack removed, the step's dispenser/vial option as
-  left-click). Don't add menu reordering or deprioritising: egg reordering was removed for review.
+- The plugin guides; it never clicks, types or automates input. Menus are only recoloured (the
+  owed Tell- option, egg names): never move an option to the left-click, remove or deprioritise an
+  entry, or hide an NPC or player to make a click land (that removes its entries too). The hub
+  rejected the plugin for horn left-click calling and conditional menu entry removal (see the
+  wiki's Rejected or Rolled Back Features); the step left-clicks and the pickup hiding went with
+  them.
 - Bump the version in `build.gradle` and `runelite-plugin.properties` together.
 
 ## Privacy

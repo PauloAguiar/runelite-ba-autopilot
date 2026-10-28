@@ -45,9 +45,11 @@ final class DefenderTutorial
 	/** Pattern tiles: gold while good bait is still due, purple for bad bait (the plugin's colours). */
 	private static final Color GOOD = new Color(255, 196, 0);
 	private static final Color BAD = new Color(190, 120, 255);
-	/** Runner outlines by how trapped they are. */
-	private static final Color ESCAPING = new Color(240, 70, 60);
-	private static final Color LURED = new Color(150, 230, 110);
+	/** Good bait on the ground and in your inventory: green, as the plugin draws it. */
+	private static final Color GOOD_BAIT = com.bautopilot.baautopilot.overlay.Palette.GOOD;
+	/** Runner outlines by how trapped they are (the plugin's colours). */
+	private static final Color ESCAPING = new Color(230, 50, 50);
+	private static final Color LURED = new Color(150, 230, 90);
 	private static final List<String> TRAP_ROOM = Arrays.asList(
 		"def-runner", "def-trap", "def-trap-broken", "def-bait", "def-defender", "def-healer", "def-logs", "def-hammer");
 	private static final List<String> QUIET_ROOM = Arrays.asList(
@@ -66,7 +68,7 @@ final class DefenderTutorial
 			.body("As the Defender, you lure the Penance Runners onto the trap with the bait the Healer calls, and you "
 				+ "repair the trap when it breaks. You also tell the Healer which poisoned food to use.\n\n"
 				+ "BA Autopilot shows you one step at a time: where to drop bait, when to repair the trap, and when a "
-				+ "Runner is escaping. It sets the right call on your horn.")
+				+ "Runner is escaping. It colours the right call green in your horn's menu.")
 			.props(QUIET_ROOM).mark(Tutorials.role("def-defender", ROLE))
 			.camera("def-spot").build(),
 		Page.builder().title("The BA Autopilot overlay")
@@ -79,8 +81,8 @@ final class DefenderTutorial
 			.title("Your call")
 			.body("Every 30 seconds, the Healer needs a new call from you: which poisoned food to use. When it's time, "
 				+ "your game view turns red. That's your signal.\n\n"
-				+ "*Stop whatever you're doing and click your horn.* BA Autopilot has already set the right call on it, "
-				+ "so one click is enough. The red goes away once you've called.")
+				+ "*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot "
+				+ "colours green. The red goes away once you've called.")
 			.camera("def-spot").build(),
 		Page.builder().title("Opening: Stock-Up")
 			.body("Start at your dispenser. Click it once: its left-click is Stock-Up, which gives you all three kinds "
@@ -99,7 +101,7 @@ final class DefenderTutorial
 				+ "A bait counts as good or bad by the call at the moment it hits the ground, so wait for the Healer's "
 				+ "call before you drop it.")
 			.props(TRAP_ROOM).mark(Tutorials.role("def-defender", ROLE))
-			.mark(new Mark("def-bait", "Good bait", GOOD, Style.OUTLINE))
+			.mark(new Mark("def-bait", "Good bait", GOOD_BAIT, Style.OUTLINE))
 			.mark(new Mark("def-runner", "Penance Runner", Tutorials.RUNNER, Style.OUTLINE))
 			.action(Action.TRAP_RUNNER).camera("def-spot").build(),
 		Page.builder().title("Bad bait")
@@ -115,7 +117,7 @@ final class DefenderTutorial
 			.body("Your inventory marks each bait as GOOD or BAD for the current call. Good bait is the one the Healer "
 				+ "called.")
 			.props(QUIET_ROOM).mark(Tutorials.role("def-defender", ROLE))
-			.mark(new Mark("def-bait", "4 good", GOOD, Style.OUTLINE))
+			.mark(new Mark("def-bait", "4 good", GOOD_BAIT, Style.OUTLINE))
 			.tile(new TileMark("pat-safety", "1 bad", BAD))
 			.pilot(pilot(Step.DEF_WATCH, beside().trapCharges(2).runnersKilled(WaveInfo.runnersTotal(WAVE) - 1)
 				.penance(ImmutableList.of(penance(1, PenanceType.RUNNER, WAVE, 35, 45)))))
@@ -127,10 +129,10 @@ final class DefenderTutorial
 				+ "bait pulls Runners to the trap, and bad bait sends them north. *Drop it early.*")
 			.props(QUIET_ROOM).mark(Tutorials.role("def-defender", ROLE))
 			.tile(new TileMark("pat-trap", "Trap 0/4 good", GOOD))
-			.tile(new TileMark("pat-trail", "Trail 1 bad", BAD))
+			.tile(new TileMark("pat-trail", "Trail 0/1 bad", BAD))
 			.tile(new TileMark("pat-main", "Mainstack 0/4 good", GOOD))
-			.tile(new TileMark("pat-west", "West relure 1 bad", BAD))
-			.tile(new TileMark("pat-safety", "Safety 1 bad", BAD))
+			.tile(new TileMark("pat-west", "West relure 0/1 bad", BAD))
+			.tile(new TileMark("pat-safety", "Safety 0/1 bad", BAD))
 			.pilot(pilot(Step.DEF_DROP, opening(ROLE, WAVE, 45, 35).inventory(baits()).listenCall(BaCall.BAIT_CRACKERS)
 				.listenFresh(true).waveTick(12)))
 			.camera("def-spot").build(),
@@ -138,12 +140,13 @@ final class DefenderTutorial
 			.body("Then pick up the hammer and the logs in one trip: click each of them on the ground. You need them to "
 				+ "repair the trap.")
 			.props(QUIET_ROOM).mark(Tutorials.role("def-defender", ROLE))
-			.mark(new Mark("def-logs", "LOGS", ActionKind.GET.getColor(), Style.OUTLINE))
-			.mark(new Mark("def-hammer", "Hammer", Tutorials.PROP, Style.OUTLINE))
+			.mark(new Mark("def-hammer", "HAMMER", ActionKind.GET.getColor(), Style.OUTLINE))
+			.mark(new Mark("def-logs", "Logs", Tutorials.PROP, Style.OUTLINE))
 			.pilot(pilot(Step.DEF_HAMMER, patterned().playerTile(at(WAVE, 31, 44)).groundItems(tools())))
 			.camera("def-spot").build(),
 		Page.builder().title("Runner outlines")
-			.body("Runners are outlined in green when they're lured, and in red when they're escaping.\n\n"
+			.body("Runners are outlined by how well your bait holds them: green when they're stacked on the trap, light "
+				+ "green when lured to good bait, yellow near bad bait only, orange when loose, and red when escaping.\n\n"
 				+ "Don't stand on the trap's food tile: Runners can't eat it while you're on it. The overlay marks the tile "
 				+ "to step onto.")
 			.props(TRAP_ROOM).mark(Tutorials.role("def-defender", ROLE))
@@ -180,11 +183,12 @@ final class DefenderTutorial
 			.pilot(pilot(Step.DEF_DROP, beside().trapCharges(2).groundItems(trapAndTrail())))
 			.camera("def-spot").build(),
 		Page.builder().title("All Runners dead")
-			.body("Once every Runner is dead, help at the egg launcher. Click it when the overlay asks, then click the "
-				+ "button BA Autopilot outlines.")
+			.body("Once every Runner is dead, the overlay asks you to hide behind the corner east of the trap, so the "
+				+ "Penance Healers stay by the wall. Then help at the egg launcher: click it, then click the button BA "
+				+ "Autopilot outlines in its window.")
 			.prop("can-launcher").prop("can-turret").prop("can-hopper").prop("can-collector").prop("can-gunner").prop("can-runner")
 			.mark(new Mark("can-gunner", "Defender", com.bautopilot.baautopilot.overlay.Palette.role(ROLE), Style.CIRCLE))
-			.mark(new Mark("can-launcher", "FIRE", ActionKind.FIGHT.getColor(), Style.OUTLINE))
+			.mark(new Mark("can-launcher", "Egg launcher", Tutorials.PROP, Style.OUTLINE))
 			.pilot(pilot(Step.DEF_SUPPORT, beside().cleared(ImmutableSet.of(PenanceType.RUNNER))
 				.runnersKilled(WaveInfo.runnersTotal(WAVE))))
 			.action(Action.CANNON_PENANCE).camera("can-spot").build(),
@@ -195,7 +199,6 @@ final class DefenderTutorial
 			.mark(new Mark("chain-lava", "Lava crater", new Color(255, 120, 40), Style.OUTLINE))
 			.pilot(pilot(Step.QUEEN_LAVA, arena(ROLE, 10, 17, 20).queenAlive(true)
 				.inventory(ImmutableMap.of(BaIds.EGG_SPIKED, 1))))
-			.menu(Tutorials.menu(BaIds.EGG_SPIKED, "Use", "Use", "Examine"))
 			.camera("chain-lava-spot").build(),
 		Page.builder().title("Wave 10: waiting")
 			.body("Leave the Queen alone: weapons can't hurt her. Wait by the Healer spring for the next spiked egg.")

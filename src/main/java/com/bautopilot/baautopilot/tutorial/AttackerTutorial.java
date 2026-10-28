@@ -43,7 +43,7 @@ final class AttackerTutorial
 			.body("As the Attacker, you kill the Penance Fighters and Rangers, using the style the Collector calls. You "
 				+ "also tell the Collector which eggs to pick up.\n\n"
 				+ "BA Autopilot shows you one step at a time: which arrows to wield, who to attack, and when to stop. "
-				+ "It sets the right call on your horn.")
+				+ "It colours the right call green in your horn's menu.")
 			.props(FIGHT_ROOM).mark(Tutorials.role("atk-attacker", ROLE))
 			.camera("atk-spot").build(),
 		Page.builder().title("The BA Autopilot overlay")
@@ -58,15 +58,15 @@ final class AttackerTutorial
 			.title("Your call")
 			.body("Every 30 seconds, the Collector needs a new call from you: which eggs to pick up. When it's time, "
 				+ "your game view turns red. That's your signal.\n\n"
-				+ "*Stop whatever you're doing and click your horn.* BA Autopilot has already set the right call on it, "
-				+ "so one click is enough. The red goes away once you've called.")
+				+ "*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot "
+				+ "colours green. The red goes away once you've called.")
 			.camera("atk-spot").build(),
 		Page.builder().title("Opening: arrows")
 			.body("Start at your dispenser and take all four types of arrows. Right-click the dispenser to see each "
 				+ "type, and take every one.\n\n"
 				+ "With all four in your inventory, you can switch as soon as the Collector calls.")
 			.props(BasicsTutorial.MACHINES).prop("dsp-attacker")
-			.mark(new Mark("machine-attacker", "Take-Arrows", ActionKind.GET.getColor(), Style.OUTLINE))
+			.mark(new Mark("machine-attacker", "TAKE", ActionKind.GET.getColor(), Style.OUTLINE))
 			.mark(Tutorials.role("dsp-attacker", ROLE))
 			.use(new TutorialSteps.Arrow("dsp-attacker", "machine-attacker", null))
 			.pilot(pilot(Step.ATT_GET_ARROWS, opening(ROLE, 4, 33, 16)))
@@ -114,7 +114,7 @@ final class AttackerTutorial
 				+ "window.")
 			.prop("can-launcher").prop("can-turret").prop("can-hopper").prop("can-collector").prop("can-gunner").prop("can-runner")
 			.mark(new Mark("can-gunner", "Attacker", com.bautopilot.baautopilot.overlay.Palette.role(ROLE), Style.CIRCLE))
-			.mark(new Mark("can-launcher", "FIRE", ActionKind.FIGHT.getColor(), Style.OUTLINE))
+			.mark(new Mark("can-launcher", "Egg launcher", Tutorials.PROP, Style.OUTLINE))
 			.pilot(pilot(Step.ATT_SUPPORT, armed(4).cleared(ImmutableSet.of(PenanceType.FIGHTER, PenanceType.RANGER))
 				.fighterRangerKills(WaveInfo.fightersTotal(4) + WaveInfo.rangersTotal(4))
 				.penance(ImmutableList.of(penance(3, PenanceType.RUNNER, 4, 36, 44)))))
@@ -147,7 +147,7 @@ final class AttackerTutorial
 				.inventory(ImmutableMap.of(BaIds.SPIKES, 8))))
 			.camera("spr-spot").build(),
 		Page.builder().title("Attacker: done")
-			.body("That's the Attacker. Click Next to continue with the Defender tutorial.")
+			.body("That's the Attacker. Click Defender > to continue with the Defender tutorial.")
 			.props(FIGHT_ROOM).mark(Tutorials.role("atk-attacker", ROLE))
 			.camera("atk-spot").build()));
 

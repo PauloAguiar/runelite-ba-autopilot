@@ -135,8 +135,9 @@ These are coded from the reference plugins and the wiki, but haven't been watche
 - **Left-click eggs:** an egg is taken by a left-click when it is the top item on its tile
   (`GroundItemView.underneath` reads the tile's item layer); otherwise the dots and the step say to
   right-click and pick Take.
-- **Menu option lists** drawn in the tutorial (eggs, arrows, spikes, vial, horn) are written from
-  memory of the game, not read from it.
+- **Menu option lists** drawn in the tutorial follow each item's inventory options in the game
+  cache (checked 2026-10-27): eggs, the vial and poisoned food are Use, Destroy, Examine; spikes Use,
+  Drop, Examine; arrows Wield, Use, Drop, Examine; the horns' Tell- order is pinned by `HornMenuTest`.
 
 ## Tools
 

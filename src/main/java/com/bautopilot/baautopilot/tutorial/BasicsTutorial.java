@@ -206,7 +206,7 @@ final class BasicsTutorial
 			.body("After collecting eggs, the Collector loads them into the egg launcher. The Collector, or any teammate, can then fire them to help kill the Penance.\n\n"
 				+ "There's no aiming: you pick the kind of Penance, and the launcher picks which one to hit. "
 				+ "Whoever fires, aim in this order: red at Runners, red at Healers, green at Runners, then green at Healers.\n\n"
-				+ "BA Autopilot outlines that button in the launcher window and crosses out the stun eggs.")
+				+ "BA Autopilot outlines that button in the launcher window and crosses out the stun buttons.")
 			.prop("can-launcher").prop("can-turret").prop("can-hopper").prop("can-gunner").prop("can-collector").prop("can-runner")
 			.mark(new Mark("can-launcher", "Egg launcher", Tutorials.PROP, Style.OUTLINE))
 			.mark(new Mark("can-hopper", "Egg hopper", Tutorials.PROP, Style.OUTLINE))
@@ -233,7 +233,7 @@ final class BasicsTutorial
 			.mark(new Mark("spring", "Healer spring", Tutorials.PROP, Style.OUTLINE))
 			.mark(Tutorials.role("spr-healer", Role.HEALER))
 			.mark(new Mark("spr-attacker", "Teammate", Tutorials.PROP, Style.CIRCLE))
-			.item(BaIds.VIAL_FULL, 1).menu(Tutorials.menu(BaIds.VIAL_FULL, "Use", "Use", "Examine"))
+			.item(BaIds.VIAL_FULL, 1).menu(Tutorials.menu(BaIds.VIAL_FULL, "Use", "Use", "Destroy", "Examine"))
 			.action(Action.SPRING).camera("spr-spot").build(),
 		Page.builder().title("Eggs for the Queen: C-H-A-D-C")
 			.body("Once the Queen appears, the team passes each of her eggs around in a fixed order: Collector, Healer, "

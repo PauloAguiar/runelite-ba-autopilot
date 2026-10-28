@@ -204,6 +204,7 @@ public class BaTracker
 		}
 		round.observeQueenPlayers(players);
 		int interacting = me != null && me.getInteracting() instanceof NPC ? ((NPC) me.getInteracting()).getIndex() : -1;
+		Snapshot account = progress();
 		return round.snapshot()
 			.selfName(me == null ? null : me.getName())
 			.interactingNpc(interacting)
@@ -223,8 +224,8 @@ public class BaTracker
 			.eggsBlue(client.getVarbitValue(VarbitID.BARBASSAULT_EGGCOUNT_STUN))
 			.eggsOmega(client.getVarbitValue(VarbitID.BARBASSAULT_EGGCOUNT_OMEGA))
 			.trapCharges(RoundLogic.trapCharges(views, round.getWave()))
-			.roleLevels(progress().getRoleLevels())
-			.rolePoints(progress().getRolePoints())
+			.roleLevels(account.getRoleLevels())
+			.rolePoints(account.getRolePoints())
 			.queenAlive(queenAlive)
 			.build();
 	}

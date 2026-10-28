@@ -56,6 +56,7 @@ final class Tutorials
 			.says(caller, said)
 			.hud(new TutorialSteps.Hud(role, panelCall, panelHeard))
 			.pilot(pilot(Step.CALL, situation.shoutCall(shout).shoutDone(false)))
+			.menu(hornMenu(role, shout))
 			.tint(true)
 			.action(TutorialSteps.Action.HORNS);
 	}
@@ -85,8 +86,9 @@ final class Tutorials
 	}
 
 	/**
-	 * The horn's right-click menu: one Tell- option per call the partner can get, in call order, the
-	 * owed one flashing (the plugin colours it green; it doesn't move it).
+	 * The horn's right-click menu: one Tell- option per call the partner can get, the owed one
+	 * flashing (the plugin colours it green; it doesn't move it). BaCall's order is the horns' own
+	 * inventory option order in the game cache (items 10516, 10560, 10538, 10526; checked 2026-10-27).
 	 */
 	static TutorialSteps.Menu hornMenu(Role role, BaCall shout)
 	{
