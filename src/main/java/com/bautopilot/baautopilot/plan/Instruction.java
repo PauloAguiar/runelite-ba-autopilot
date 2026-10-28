@@ -52,11 +52,6 @@ public class Instruction
 	 */
 	Step then;
 	/**
-	 * The menu option on the target to make its left-click ("Take-Worms" on the item machine),
-	 * when the step needs exactly that one; null to leave the menu alone.
-	 */
-	String leftClick;
-	/**
 	 * A warning shown under the step without replacing it: low HP says retreat when you can, but a
 	 * step about to finish (dipping an egg) shouldn't be pulled away (reported 2026-10-17).
 	 */

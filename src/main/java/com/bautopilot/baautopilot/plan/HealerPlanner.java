@@ -59,7 +59,6 @@ class HealerPlanner
 				.headline("Stock-Up at the healer item machine")
 				.detail("All three foods in one click; no call needed")
 				.target(machine == null ? Target.NONE : Target.object(machine.getId(), machine.getTile()))
-				.leftClick("Stock-Up")
 				.build()));
 			return out;
 		}
@@ -95,7 +94,6 @@ class HealerPlanner
 			out.add(Candidate.task(Tier.TIME_CRITICAL, "heal.food", Instruction.builder()
 				.step(Step.HEAL_TAKE_FOOD)
 				.headline("Take " + call.getItemName())
-				.leftClick("Take-" + call.getKeyword())
 				.detail("Healer item machine: Take-" + call.getKeyword() + (stale.isEmpty() ? "" : "\n" + stale))
 				.target(machine == null ? Target.NONE : Target.object(machine.getId(), machine.getTile()))
 				.build()));
@@ -140,7 +138,6 @@ class HealerPlanner
 				.headline("Top up " + call.getItemName() + " (" + s.count(food) + "/" + keep + ")")
 				.detail("Every healer out is poisoned: get food now for the ones still to come")
 				.target(machine == null ? Target.NONE : Target.object(machine.getId(), machine.getTile()))
-				.leftClick("Take-" + call.getKeyword())
 				.build()));
 		}
 		out.add(Candidate.of(Tier.IDLE, "heal.support", Instruction.builder()
@@ -376,7 +373,6 @@ class HealerPlanner
 				.step(Step.HEAL_FILL_VIAL)
 				.headline("Take a vial: " + worst.getName() + " is at " + Math.round(worst.fraction() * 100) + "%")
 				.detail("Healer item machine: Take-vial, then fill it at the spring")
-				.leftClick("Take-vial")
 				.target(machine == null ? Target.NONE : Target.object(machine.getId(), machine.getTile()))
 				.urgency(Urgency.HIGH)
 				.build();

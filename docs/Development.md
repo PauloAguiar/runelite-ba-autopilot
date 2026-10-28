@@ -29,6 +29,15 @@ loaded via `gradlew run` (JDK 11).
 The Java namespace is `com.bautopilot.baautopilot`, the Gradle group is `com.bautopilot`, and the
 plugin's author label is `bautopilot`.
 
+The sidebar's levels and available Honour points use a separate `state/RoleProgress` cache, so
+they load after login even outside BA. It reads four level varbits and the eight point varbits
+(remainder + 512 × multiplier, as in
+[BA Minigame](https://github.com/SkylerPIlot/Ba-Minigame/blob/9204c0831b02c76eb50e3e9676306b3c15f3ccf3/src/main/java/begosrs/barbarianassault/Role.java#L184)).
+Relevant varbit or backing-varp events mark this cache dirty; the next game tick batches those
+changes into one read. Unchanged values reuse the same snapshot and do not schedule a Swing
+update. Login/scene readiness refreshes the cache, and logout or hopping clears the displayed
+account data. This does not enable arena scans, pathfinding or overlays outside the arena.
+
 ## Wave detection and Defender guidance
 
 The tracker accepts the game's `---- Wave: N ----` line before checking arena position. Like

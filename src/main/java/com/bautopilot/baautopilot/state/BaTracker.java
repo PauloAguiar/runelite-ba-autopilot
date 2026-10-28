@@ -45,6 +45,7 @@ import net.runelite.api.events.HitsplatApplied;
 import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.OverheadTextChanged;
+import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.gameval.InventoryID;
 import net.runelite.api.gameval.ItemID;
 import net.runelite.api.gameval.VarbitID;
@@ -82,6 +83,7 @@ public class BaTracker
 	private Client client;
 
 	private final RoundLogic round = new RoundLogic();
+	private final RoleProgress progress = new RoleProgress();
 	private final RoundLogic.Hud hud = new RoundLogic.Hud()
 	{
 		@Override
@@ -132,11 +134,18 @@ public class BaTracker
 	public void reset()
 	{
 		round.reset();
+		progress.reset();
 		npcs.clear();
 		objects.clear();
 		ground.clear();
 		wasActive = false;
 		arenaSeen = false;
+	}
+
+	/** Cached account data for the sidebar; does not inspect the arena, inventory or players. */
+	public Snapshot progress()
+	{
+		return progress.read(client);
 	}
 
 	// ------------------------------------------------------------------ snapshot
@@ -214,16 +223,8 @@ public class BaTracker
 			.eggsBlue(client.getVarbitValue(VarbitID.BARBASSAULT_EGGCOUNT_STUN))
 			.eggsOmega(client.getVarbitValue(VarbitID.BARBASSAULT_EGGCOUNT_OMEGA))
 			.trapCharges(RoundLogic.trapCharges(views, round.getWave()))
-			.roleLevels(com.google.common.collect.ImmutableMap.of(
-				Role.ATTACKER, client.getVarbitValue(VarbitID.BARBASSULT_ROLELEVEL_ATT),
-				Role.DEFENDER, client.getVarbitValue(VarbitID.BARBASSULT_ROLELEVEL_DEF),
-				Role.COLLECTOR, client.getVarbitValue(VarbitID.BARBASSULT_ROLELEVEL_COL),
-				Role.HEALER, client.getVarbitValue(VarbitID.BARBASSULT_ROLELEVEL_HEAL)))
-			.rolePoints(com.google.common.collect.ImmutableMap.of(
-				Role.ATTACKER, points(VarbitID.BARBASSAULT_POINTS_ATTACKER_BASE, VarbitID.BARBASSAULT_POINTS_ATTACKER_EXTRA),
-				Role.DEFENDER, points(VarbitID.BARBASSAULT_POINTS_DEFENDER_BASE, VarbitID.BARBASSAULT_POINTS_DEFENDER_EXTRA),
-				Role.COLLECTOR, points(VarbitID.BARBASSAULT_POINTS_COLLECTOR_BASE, VarbitID.BARBASSAULT_POINTS_COLLECTOR_EXTRA),
-				Role.HEALER, points(VarbitID.BARBASSAULT_POINTS_HEALER_BASE, VarbitID.BARBASSAULT_POINTS_HEALER_EXTRA)))
+			.roleLevels(progress().getRoleLevels())
+			.rolePoints(progress().getRolePoints())
 			.queenAlive(queenAlive)
 			.build();
 	}
@@ -274,7 +275,11 @@ public class BaTracker
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged e)
 	{
-		if (e.getGameState() == GameState.LOADING)
+		if (e.getGameState() == GameState.LOGGED_IN)
+		{
+			progress.invalidate();
+		}
+		else if (e.getGameState() == GameState.LOADING)
 		{
 			arenaSeen = false;
 			objects.clear();
@@ -284,6 +289,12 @@ public class BaTracker
 		{
 			reset();
 		}
+	}
+
+	@Subscribe
+	public void onVarbitChanged(VarbitChanged e)
+	{
+		progress.changed(e);
 	}
 
 	@Subscribe
@@ -491,11 +502,6 @@ public class BaTracker
 		}
 		return !java.util.Objects.equals(hud.text(r.getShoutComponent()), s.getShoutText())
 			|| !java.util.Objects.equals(RoundLogic.readListen(hud, r), s.getListenText());
-	}
-
-	private int points(int base, int extra)
-	{
-		return client.getVarbitValue(base) + 512 * client.getVarbitValue(extra);
 	}
 
 	/** The tracked object with this id on this template tile, for overlays. */

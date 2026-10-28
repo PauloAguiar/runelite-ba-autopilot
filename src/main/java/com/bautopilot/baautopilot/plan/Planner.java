@@ -129,7 +129,7 @@ public class Planner
 				.detail(call.getDetail() + (next.isEmpty() ? "" : "\n" + next)).task("call");
 			if (s.getCallPeriod() == 0)
 			{
-				led.target(work.getTarget()).marks(work.getMarks()).then(work.getStep()).leftClick(work.getLeftClick())
+				led.target(work.getTarget()).marks(work.getMarks()).then(work.getStep())
 					.pickupCount(work.getPickupCount()).badBait(work.isBadBait()).rightClick(work.isRightClick());
 			}
 			return led.priorities(work.getPriorities())

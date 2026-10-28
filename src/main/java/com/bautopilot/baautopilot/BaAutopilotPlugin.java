@@ -43,7 +43,6 @@ import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.GameState;
 import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.NPC;
 import net.runelite.api.coords.WorldPoint;
@@ -51,7 +50,6 @@ import net.runelite.api.events.ClientTick;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.MenuEntryAdded;
-import net.runelite.api.events.PostMenuSort;
 import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.events.ConfigChanged;
@@ -187,7 +185,6 @@ public class BaAutopilotPlugin extends Plugin
 	 * Penance standing on or next to the item you're told to pick up are not drawn, so the click
 	 * reaches the item (as RuneLite's Entity Hider does it: a render callback).
 	 */
-	private volatile java.util.Set<Integer> hiddenNpcs = java.util.Collections.emptySet();
 	private final net.runelite.client.callback.RenderCallback drawListener = new net.runelite.client.callback.RenderCallback()
 	{
 		@Override
@@ -200,6 +197,7 @@ public class BaAutopilotPlugin extends Plugin
 	private final Planner planner = new Planner();
 
 	private BaAutopilotPanel panel;
+	private Snapshot panelProgress;
 	private NavigationButton navButton;
 
 	@Getter
@@ -235,6 +233,7 @@ public class BaAutopilotPlugin extends Plugin
 	protected void startUp()
 	{
 		tracker.reset();
+		panelProgress = null;
 		eventBus.register(tracker);
 		tutorialSceneOverlay.setShown(() -> tutorialShown);
 		tutorialBoxOverlay.setShown(() -> tutorialShown);
@@ -293,7 +292,6 @@ public class BaAutopilotPlugin extends Plugin
 		arenaRunning = false;
 		tutorialShown = false;
 		updateOverlayState();
-		hiddenNpcs = java.util.Collections.emptySet();
 		tutorialOn = false;
 		tutorialShown = false;
 		clientThread.invoke(() ->
@@ -306,6 +304,7 @@ public class BaAutopilotPlugin extends Plugin
 		clientToolbar.removeNavigation(navButton);
 		navButton = null;
 		panel = null;
+		panelProgress = null;
 		client.clearHintArrow();
 		snapshot = null;
 		instruction = null;
@@ -315,6 +314,7 @@ public class BaAutopilotPlugin extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick e)
 	{
+		pushProgressToPanel();
 		Snapshot fresh = tracker.snapshot();
 		if (!fresh.isInArena())
 		{
@@ -351,7 +351,6 @@ public class BaAutopilotPlugin extends Plugin
 			notifier.notify(instruction.getHeadline());
 		}
 		updateHintArrow();
-		hiddenNpcs = blockers();
 		if (tutorialOn || tutorialShown) updateTutorial();
 		updateOverlayState();
 		if (config.showPath())
@@ -362,29 +361,23 @@ public class BaAutopilotPlugin extends Plugin
 		{
 			routeFinder.clear();
 		}
-		pushToPanel();
 	}
 
 	/** Run once on exit, rather than rebuilding lobby guidance and Swing updates every tick. */
 	private void stopArena()
 	{
 		if (!arenaRunning && snapshot == null && instruction == null) return;
-		Snapshot progress = snapshot;
 		arenaRunning = false;
 		snapshot = null;
 		instruction = null;
 		lastStep = null;
 		lastNpcTarget = -1;
 		notifiedThisStep = false;
-		hiddenNpcs = java.util.Collections.emptySet();
 		routeFinder.clear();
 		client.clearHintArrow();
 		List<WaveStats> done = tracker.getPerformance().history();
 		lastWave = done.isEmpty() ? null : done.get(done.size() - 1);
 		updateOverlayState();
-		// Keep the last observed levels/points in the settings sidebar without polling while idle.
-		BaAutopilotPanel p = panel;
-		if (p != null && progress != null) SwingUtilities.invokeLater(() -> p.updateProgress(progress));
 	}
 
 	/** No live overlays or per-entity render callback are registered while outside the arena. */
@@ -415,7 +408,7 @@ public class BaAutopilotPlugin extends Plugin
 			tutorialOverlaysVisible = tutorial;
 		}
 		if (boxWasVisible != (live || tutorial)) setOverlay(instructionOverlay, live || tutorial);
-		boolean drawing = tutorial || live && config.hideBlockers();
+		boolean drawing = tutorial;
 		if (drawing != drawListenerRegistered)
 		{
 			if (drawing) renderCallbacks.register(drawListener);
@@ -433,12 +426,17 @@ public class BaAutopilotPlugin extends Plugin
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged e)
 	{
+		if (e.getGameState() == GameState.LOGIN_SCREEN || e.getGameState() == GameState.HOPPING)
+		{
+			panelProgress = null;
+			BaAutopilotPanel p = panel;
+			if (p != null) SwingUtilities.invokeLater(() -> p.updateProgress(null));
+		}
 		if (e.getGameState() != GameState.LOGGED_IN)
 		{
 			if (arenaRunning)
 			{
 				client.clearHintArrow();
-				hiddenNpcs = java.util.Collections.emptySet();
 				routeFinder.clear();
 			}
 			arenaRunning = false;
@@ -545,14 +543,16 @@ public class BaAutopilotPlugin extends Plugin
 		SwingUtilities.invokeLater(() -> p.setOptions(config));
 	}
 
-	private void pushToPanel()
+	private void pushProgressToPanel()
 	{
 		BaAutopilotPanel p = panel;
 		if (p == null)
 		{
 			return;
 		}
-		Snapshot s = snapshot;
+		Snapshot s = tracker.progress();
+		if (s == panelProgress) return;
+		panelProgress = s;
 		SwingUtilities.invokeLater(() -> p.updateProgress(s));
 	}
 
@@ -575,80 +575,6 @@ public class BaAutopilotPlugin extends Plugin
 		}
 	}
 
-	/**
-	 * The current call's Tell- option becomes the horn's left-click (moved to the top of the menu,
-	 * as Menu Entry Swapper does). Re-telling a call already made is harmless, so this holds for
-	 * the whole call; not once calls stop mattering (wave 10 cleared, the Queen).
-	 */
-	@Subscribe
-	public void onPostMenuSort(PostMenuSort e)
-	{
-		if (!arenaRunning || snapshot == null || !snapshot.isInArena() || client.isMenuOpen())
-		{
-			return;
-		}
-		MenuEntry[] entries = client.getMenu().getMenuEntries();
-		// Off-role "Attack" on penance only ever costs points: gone for collector, defender and
-		// healer (as the BA Minigame plugin does). Healers keep "Use <food> -> Penance Healer"
-		if (config.hideOffRoleAttack() && snapshot.getRole() != null && snapshot.getRole() != Role.ATTACKER)
-		{
-			MenuEntry[] kept = java.util.Arrays.stream(entries)
-				.filter(m -> !("Attack".equals(Text.removeTags(m.getOption()))
-					&& (Text.removeTags(m.getTarget()).contains("Penance") || Text.removeTags(m.getTarget()).contains("Queen spawn"))))
-				.toArray(MenuEntry[]::new);
-			if (kept.length != entries.length)
-			{
-				entries = kept;
-				client.getMenu().setMenuEntries(entries);
-			}
-		}
-		entries = promoteStepOption(entries);
-		if (!config.hornLeftClick() || snapshot.getShoutCall() == null || !snapshot.isShoutSettled() || Planner.callsOver(snapshot))
-		{
-			return;
-		}
-		String want = snapshot.getShoutCall().getHornOption();
-		for (int i = 0; i < entries.length - 1; i++)
-		{
-			if (Text.removeTags(entries[i].getOption()).equalsIgnoreCase(want))
-			{
-				MenuEntry tell = entries[i];
-				// A low-priority item op can't be the left-click even at the top (BA Minigame does the same)
-				if (tell.getType() == MenuAction.CC_OP_LOW_PRIORITY)
-				{
-					tell.setType(MenuAction.CC_OP);
-				}
-				System.arraycopy(entries, i + 1, entries, i, entries.length - 1 - i);
-				entries[entries.length - 1] = tell;
-				client.getMenu().setMenuEntries(entries);
-				return;
-			}
-		}
-	}
-
-	/** Penance within a tile of the item to pick up (not the step's own NPC target). */
-	private java.util.Set<Integer> blockers()
-	{
-		if (!config.hideBlockers() || !snapshot.isInArena() || instruction.getTarget().getKind() != Target.Kind.GROUND_ITEM
-			|| instruction.getTarget().getTile() == null)
-		{
-			return java.util.Collections.emptySet();
-		}
-		WorldPoint item = instruction.getTarget().getTile();
-		java.util.Set<Integer> out = new java.util.HashSet<>();
-		for (com.bautopilot.baautopilot.state.PenanceView p : snapshot.getPenance())
-		{
-			if (p.getTile() != null && com.bautopilot.baautopilot.model.ArenaTiles.distance(p.getTile(), item) <= HIDE_RADIUS)
-			{
-				out.add(p.getNpcIndex());
-			}
-		}
-		return out;
-	}
-
-	/** Tiles around the item whose penance are hidden. */
-	private static final int HIDE_RADIUS = 1;
-
 	private boolean shouldDraw(net.runelite.api.Renderable renderable, boolean drawingUI)
 	{
 		if (tutorialOn && tutorialShown && (renderable instanceof NPC
@@ -656,7 +582,7 @@ public class BaAutopilotPlugin extends Plugin
 		{
 			return false;
 		}
-		return !(renderable instanceof NPC) || !hiddenNpcs.contains(((NPC) renderable).getIndex());
+		return true;
 	}
 
 	/**
@@ -708,33 +634,6 @@ public class BaAutopilotPlugin extends Plugin
 		{
 			SwingUtilities.invokeLater(() -> p.setTutorial(on, status));
 		}
-	}
-
-	/**
-	 * The step needs exactly one option on its target (one bait kind, the vial): make it the
-	 * left-click, so the machine is one click instead of right-click + pick.
-	 */
-	private MenuEntry[] promoteStepOption(MenuEntry[] entries)
-	{
-		Instruction ins = instruction;
-		if (ins == null || ins.getLeftClick() == null
-			|| (ins.getTarget().getKind() != Target.Kind.OBJECT && ins.getTarget().getKind() != Target.Kind.GROUND_ITEM))
-		{
-			return entries;
-		}
-		for (int i = 0; i < entries.length - 1; i++)
-		{
-			MenuEntry m = entries[i];
-			if (m.getIdentifier() == ins.getTarget().getId()
-				&& Text.removeTags(m.getOption()).equalsIgnoreCase(ins.getLeftClick()))
-			{
-				System.arraycopy(entries, i + 1, entries, i, entries.length - 1 - i);
-				entries[entries.length - 1] = m;
-				client.getMenu().setMenuEntries(entries);
-				return entries;
-			}
-		}
-		return entries;
 	}
 
 	/** "Take Red egg": the egg name in its own colour, or grey when it is the wrong colour now. */

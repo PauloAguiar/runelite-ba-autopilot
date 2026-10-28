@@ -233,27 +233,6 @@ public interface BaAutopilotConfig extends Config
 		return true;
 	}
 
-	@ConfigItem(keyName = "hideBlockers", name = "Hide penance over your pickup", position = 5, section = displaySection,
-		description = "While you're told to pick something up (logs, hammer, eggs), penance standing on or next to it aren't drawn, so the click reaches the item")
-	default boolean hideBlockers()
-	{
-		return true;
-	}
-
-	@ConfigItem(keyName = "hideOffRoleAttack", name = "No Attack on penance off-role", position = 5, section = displaySection,
-		description = "Remove 'Attack' on penance for collector, defender and healer (it only costs points)")
-	default boolean hideOffRoleAttack()
-	{
-		return true;
-	}
-
-	@ConfigItem(keyName = "hornLeftClick", name = "Horn left-clicks the call", position = 5, section = displaySection,
-		description = "Make the right Tell- option the horn's left-click, so one click makes the call")
-	default boolean hornLeftClick()
-	{
-		return true;
-	}
-
 	@ConfigItem(keyName = "highlightHorn", name = "Highlight correct horn option", position = 5, section = displaySection,
 		description = "Colour the right Tell- option in the horn's menu while a call is owed")
 	default boolean highlightHorn()

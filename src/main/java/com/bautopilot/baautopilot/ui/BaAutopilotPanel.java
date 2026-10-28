@@ -257,7 +257,7 @@ public class BaAutopilotPanel extends PluginPanel
 		for (Role role : Role.values())
 		{
 			int level = snapshot == null ? 0 : snapshot.getRoleLevels().getOrDefault(role, 0);
-			Integer points = snapshot == null || level <= 0 ? null : snapshot.getRolePoints().get(role);
+			Integer points = snapshot == null ? null : snapshot.getRolePoints().get(role);
 			progress.get(role).setText("Level " + (level > 0 ? level : "—") + " · "
 				+ (points == null ? "—" : String.format(java.util.Locale.ROOT, "%,d", points)) + " Honour points");
 		}
@@ -329,9 +329,6 @@ public class BaAutopilotPanel extends PluginPanel
 			"Retreat threshold for non-Healer roles"));
 		general.addContent(toggle("skipCoveredCalls", "Skip calls a teammate made", BaAutopilotConfig::skipCoveredCalls));
 		general.addContent(toggle("queenStack", "Team stacks at Queen cannon", BaAutopilotConfig::queenStack));
-		general.addContent(toggle("hornLeftClick", "Horn left-click makes the call", BaAutopilotConfig::hornLeftClick));
-		general.addContent(toggle("hideOffRoleAttack", "Hide off-role Attack options", BaAutopilotConfig::hideOffRoleAttack));
-		general.addContent(toggle("hideBlockers", "Hide Penance over pickups", BaAutopilotConfig::hideBlockers));
 		general.addContent(toggle("compactHud", "Compact instruction box", BaAutopilotConfig::compactHud));
 		general.addContent(toggle("showPath", "Show walking route", BaAutopilotConfig::showPath));
 		general.addContent(toggle("highlightTarget", "Highlight targets", BaAutopilotConfig::highlightTarget));

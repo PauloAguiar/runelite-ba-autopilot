@@ -101,8 +101,7 @@ final class BasicsTutorial
 			.body("Every 30 seconds, each player gets a new call to make, shown in their role's panel. "
 				+ "Right-click the horn in your inventory and pick that Tell- option to send it to your partner. "
 				+ "\"Collector: Red eggs!\" tells the Collector which eggs to pick up.\n\n"
-				+ "BA Autopilot makes this easier: it sets the right call as the horn's left-click, so you only need "
-				+ "to click the horn.")
+				+ "BA Autopilot makes this easier: it colours the right Tell- option green in the horn's menu.")
 			.hud(new TutorialSteps.Hud(Role.ATTACKER, "Red eggs", "Accurate/Field/Water"))
 			.prop("attacker-1").prop("collector")
 			.mark(Tutorials.role("attacker-1", Role.ATTACKER))

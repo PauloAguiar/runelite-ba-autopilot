@@ -119,6 +119,17 @@ public class BaAutopilotPanelTest
 		});
 	}
 
+	@Test public void availablePointsAreShownEvenIfTheRoleLevelIsNotKnownYet() throws Exception
+	{
+		SwingUtilities.invokeAndWait(() ->
+		{
+			BaAutopilotPanel panel = new BaAutopilotPanel();
+			panel.updateProgress(Snapshot.builder().rolePoints(Map.of(Role.HEALER, 1200, Role.DEFENDER, 0)).build());
+			assertEquals("Level — · 1,200 Honour points", ((JLabel) named(panel, "HEALER.progress")).getText());
+			assertEquals("Level — · 0 Honour points", ((JLabel) named(panel, "DEFENDER.progress")).getText());
+		});
+	}
+
 	private static Component named(Container root, String name)
 	{
 		for (Component child : root.getComponents())

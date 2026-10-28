@@ -1008,26 +1008,6 @@ public class PlannerTest
 	}
 
 	@Test
-	public void singleKindRestockIsALeftClick()
-	{
-		// Trap food short, only the called kind needed: Take-Worms becomes the machine's left-click
-		WorldPoint trap = ArenaTiles.trapFood(3);
-		Snapshot s = base(Role.DEFENDER, 3).listenCall(BaCall.BAIT_WORMS).waveTick(120).playerTile(trap)
-			.trapCharges(2).hasHammer(true).logsTaken(WaveInfo.defenderLogs(3))
-			.inventory(ImmutableMap.of(BaCall.BAIT_TOFU.getItemId(), 3, BaCall.BAIT_CRACKERS.getItemId(), 3))
-			.groundItems(ImmutableList.of(new GroundItemView(BaCall.BAIT_WORMS.getItemId(), ArenaTiles.mainstack(3), 4, true, 5)))
-			.build();
-		Instruction take = plan(s);
-		assertEquals(Step.DEF_TAKE_BAIT, take.getStep());
-		assertEquals("Take-Worms", take.getLeftClick());
-		// The healer's food is one kind by nature
-		Snapshot heal = base(Role.HEALER, 3).listenCall(BaCall.POISON_MEAT).waveTick(60).build();
-		Instruction food = plan(heal);
-		assertEquals(Step.HEAL_TAKE_FOOD, food.getStep());
-		assertEquals("Take-Meat", food.getLeftClick());
-	}
-
-	@Test
 	public void defenderLogTargetCountsPickupsForTheWholeWave()
 	{
 		// Reported 2026-10-16: both logs used on repairs sent the defender back for more

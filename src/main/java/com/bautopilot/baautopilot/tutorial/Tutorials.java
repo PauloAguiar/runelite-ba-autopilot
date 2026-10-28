@@ -55,7 +55,6 @@ final class Tutorials
 			.arrow(new TutorialSteps.Arrow(caller, partner, CALL_ARROW))
 			.says(caller, said)
 			.hud(new TutorialSteps.Hud(role, panelCall, panelHeard))
-			// No menu: the plugin makes the right Tell- option the horn's left-click, so one click calls
 			.pilot(pilot(Step.CALL, situation.shoutCall(shout).shoutDone(false)))
 			.tint(true)
 			.action(TutorialSteps.Action.HORNS);
@@ -86,21 +85,20 @@ final class Tutorials
 	}
 
 	/**
-	 * The horn's right-click menu: one Tell- option per call the partner can get, the owed one on top
-	 * (the plugin makes it the left-click), the rest in the plugin's own call order.
+	 * The horn's right-click menu: one Tell- option per call the partner can get, in call order, the
+	 * owed one flashing (the plugin colours it green; it doesn't move it).
 	 */
 	static TutorialSteps.Menu hornMenu(Role role, BaCall shout)
 	{
 		java.util.List<String> options = new java.util.ArrayList<>();
-		options.add(shout.getHornOption());
 		for (BaCall c : BaCall.values())
 		{
-			if (c.getReceiver() == role.partner() && c != shout)
+			if (c.getReceiver() == role.partner())
 			{
 				options.add(c.getHornOption());
 			}
 		}
-		return new TutorialSteps.Menu(horn(role), options, 0);
+		return new TutorialSteps.Menu(horn(role), options, options.indexOf(shout.getHornOption()));
 	}
 
 	private Tutorials()

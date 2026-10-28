@@ -117,7 +117,7 @@ final class QueenHealerPlanner
 		{
 			ObjectView machine = s.nearestObject(BaIds.HEALER_MACHINE);
 			return Instruction.builder().step(Step.HEAL_FILL_VIAL).headline("Take a vial from the healer machine")
-				.detail(need + ". Take-vial, then fill it at the spring").leftClick("Take-vial")
+				.detail(need + ". Take-vial, then fill it at the spring")
 				.target(machine == null ? Target.NONE : Target.object(machine.getId(), machine.getTile())).urgency(urgency).build();
 		}
 		ObjectView spring = s.nearestObject(BaIds.SPRING);

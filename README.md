@@ -19,8 +19,8 @@ automatically. You are always the one who plays.**
   on the Penance Healer" or "Drop Tofu". When something needs your attention right away, the step
   turns red.
 - **Calls made easy.** The overlay shows the call you must give and the call you heard. When the
-  call changes, the right `Tell-` option becomes your horn's left-click, so a single click on the
-  horn makes the call. A reminder tint (optional) tells you a call is owed.
+  call changes, the right `Tell-` option is coloured green in the horn's menu. A reminder tint
+  (optional) tells you a call is owed.
 - **Highlights.** The target of the step (a Penance, an egg pile, a dispenser, a launcher, the
   trap) is highlighted in the scene. The item you need is outlined in your inventory, and a walking
   route can be drawn to it.
@@ -68,7 +68,7 @@ are also in the plugin's configuration (the cog next to BA Autopilot in the plug
 | Blue-call batch, Queen yellow batch, Queen reserve eggs | How many eggs the Collector gathers before loading or passing them |
 | Healer: heal teammates below | When a teammate is low enough for a vial heal |
 | Retreat below HP | When you are sent to safety |
-| Horn left-clicks the call | Makes the right `Tell-` option the horn's left-click |
+| Highlight correct horn option | Colours the right `Tell-` option green in the horn's menu |
 | Colour egg names and spots | Colours egg names in menus by egg colour, grey when it is the wrong colour now |
 | Display options | Compact overlay, target highlight, hint arrow, walking route, inventory outlines, wave info, live numbers, call notification, colours |
 

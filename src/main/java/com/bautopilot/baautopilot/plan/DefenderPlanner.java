@@ -892,7 +892,6 @@ class DefenderPlanner
 				.headline("Pick up the hammer")
 				.detail(log != null ? "Then the logs next to it, in the same trip" : "You need it to repair the trap")
 				.target(Target.groundItem(hammer.getItemId(), hammer.getTile()))
-				.leftClick("Take")
 				.build();
 		}
 		if (log != null)
@@ -904,7 +903,6 @@ class DefenderPlanner
 					: hammer != null ? "Then the hammer, on the way back to the trap" : "Each repair takes one log")
 				.target(Target.groundItem(log.getItemId(), log.getTile()))
 				// Bait dropped on the same tile (the West relure) would otherwise sit on top
-				.leftClick("Take")
 				.build();
 		}
 		if (needLog && opening && logs > 0)
@@ -1008,7 +1006,6 @@ class DefenderPlanner
 				+ (settings.isDefenderMultiKill() ? " Keep holding until the stack-release prompt"
 					: " Once repaired, top up food if needed, then step aside so runners can eat"))
 			.target(trap == null ? Target.NONE : Target.object(trap.getId(), trap.getTile()))
-			.leftClick("Fix")
 			.urgency(Urgency.HIGH)
 			.build();
 	}
@@ -1107,8 +1104,6 @@ class DefenderPlanner
 			.headline("Take " + what)
 			.detail("From the defender item machine. The call is " + call.getItemName())
 			.target(machine == null ? Target.NONE : Target.object(machine.getId(), machine.getTile()))
-			// One kind only: its Take is the left-click, no right-click menu
-			.leftClick(bad == 0 ? "Take-" + call.getKeyword() : null)
 			.build();
 	}
 
