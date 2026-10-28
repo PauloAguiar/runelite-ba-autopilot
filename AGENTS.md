@@ -45,8 +45,12 @@ for the layout, recordings and tools.
 
 ## Tutorial and overlay text
 
-- Tutorial pages that show the overlay use `pilot(Step, Situations...)`: the real planner and the
-  real overlay render them. Never hand-write overlay text; `TutorialPilotTest` checks every page.
+- Tutorial pages are data: `src/main/resources/.../tutorial/tutorial-pages.json` (tutorial name
+  to its pages, in order; colours as "#AARRGGBB"). Only the overlay's situations stay code, in
+  `TutorialSituations`, keyed by tutorial and page index: inserting or removing a page means
+  shifting its cases too.
+- Pages that show the overlay use `pilot(Step, Situations...)`: the real planner and the real
+  overlay render them. Never hand-write overlay text; `TutorialPilotTest` checks every page.
 - Write complete, plain sentences. Say exactly what to click and where, for example "Click the BA
   Autopilot button in RuneLite's sidebar, open the Collector section and turn on ...". Never leave
   a step implicit.

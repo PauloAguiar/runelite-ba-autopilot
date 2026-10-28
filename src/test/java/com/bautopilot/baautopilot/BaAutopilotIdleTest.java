@@ -108,7 +108,7 @@ public class BaAutopilotIdleTest
 		BaAutopilotPlugin plugin = new BaAutopilotPlugin();
 		set(plugin, "tutorialOn", true);
 		set(plugin, "tutorialShown", true);
-		set(plugin, "tutorialSteps", new TutorialSteps()
+		set(plugin, "tutorialSteps", new TutorialSteps(null)
 		{
 			@Override public void tick() { throw new TutorialTickReached(); }
 		});

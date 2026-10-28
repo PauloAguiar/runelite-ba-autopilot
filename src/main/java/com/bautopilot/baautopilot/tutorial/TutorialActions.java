@@ -3,6 +3,7 @@ package com.bautopilot.baautopilot.tutorial;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
@@ -113,6 +114,12 @@ public class TutorialActions
 	private static final long CHAIN_PAGE_STEP = 2800;
 	private static final long SPIKES_TAKEN = 1000;
 	private static final long SPIKES_USED = 2200;
+	/** The Queen's egg at each step of C-H-A-D-C; the last is the finished egg back with the Collector. */
+	private static final List<String> CHAIN_EGGS = Arrays.asList(
+		"chain-yellow", "chain-poisoned", "chain-spiked", "chain-omega", "chain-loaded");
+	/** Who works the egg at each step: Collector, Healer, Attacker, Defender, Collector. */
+	private static final List<String> CHAIN_PLAYERS = Arrays.asList(
+		"chain-collector", "chain-healer", "chain-attacker", "chain-defender", "chain-collector");
 	/** Each player's turn with the Queen's egg. */
 	private static final long CHAIN_STEP = 1500;
 	private static final long HEAL_LANDS = 600;
@@ -577,8 +584,8 @@ public class TutorialActions
 	 */
 	private void chain(long elapsed, Integer only)
 	{
-		List<String> eggs = BasicsTutorial.CHAIN_EGGS;
-		List<String> players = BasicsTutorial.CHAIN_PLAYERS;
+		List<String> eggs = CHAIN_EGGS;
+		List<String> players = CHAIN_PLAYERS;
 		int steps = eggs.size();
 		// One step on repeat (slower, with its tools), or the whole chain
 		long at = only != null ? elapsed % CHAIN_PAGE_STEP : elapsed % (CHAIN_STEP * steps);
@@ -648,8 +655,8 @@ public class TutorialActions
 	 */
 	private void pass(long elapsed)
 	{
-		List<String> players = BasicsTutorial.CHAIN_PLAYERS;
-		List<String> eggs = BasicsTutorial.CHAIN_EGGS.subList(0, 4);
+		List<String> players = CHAIN_PLAYERS;
+		List<String> eggs = CHAIN_EGGS.subList(0, 4);
 		int legs = eggs.size();
 		long at = elapsed % (PASS_LEG * legs);
 		long loop = elapsed / (PASS_LEG * legs);

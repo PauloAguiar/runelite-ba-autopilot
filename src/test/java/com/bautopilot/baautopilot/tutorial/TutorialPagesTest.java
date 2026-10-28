@@ -18,7 +18,7 @@ public class TutorialPagesTest
 		List<String> wrong = new ArrayList<>();
 		for (Tutorial t : Tutorial.values())
 		{
-			for (TutorialSteps.Page page : t.getPages())
+			for (TutorialSteps.Page page : TutorialTestPages.of(t))
 			{
 				TutorialSteps.Menu menu = page.getMenu();
 				if (menu == null)

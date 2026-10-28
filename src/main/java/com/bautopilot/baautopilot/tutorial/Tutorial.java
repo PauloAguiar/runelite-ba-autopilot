@@ -1,26 +1,24 @@
 package com.bautopilot.baautopilot.tutorial;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
  * The tutorials the panel offers, in order; Next on a tutorial's last page goes on to the next.
- * Planned: one per role and an advanced one; each is a list of pages like the introduction's.
+ * Their pages are in tutorial-pages.json (see TutorialLibrary).
  */
 @Getter
 @RequiredArgsConstructor
 public enum Tutorial
 {
-	INTRODUCTION("Introduction", IntroductionTutorial.PAGES),
-	BASICS("Basics", BasicsTutorial.PAGES),
-	COLLECTOR("Collector", CollectorTutorial.PAGES),
-	HEALER("Healer", HealerTutorial.PAGES),
-	ATTACKER("Attacker", AttackerTutorial.PAGES),
-	DEFENDER("Defender", DefenderTutorial.PAGES);
+	INTRODUCTION("Introduction"),
+	BASICS("Basics"),
+	COLLECTOR("Collector"),
+	HEALER("Healer"),
+	ATTACKER("Attacker"),
+	DEFENDER("Defender");
 
 	private final String label;
-	private final List<TutorialSteps.Page> pages;
 
 	/** The tutorial after this one; null for the last. */
 	public Tutorial next()

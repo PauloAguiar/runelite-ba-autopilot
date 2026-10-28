@@ -17,7 +17,8 @@ state/    BaTracker (client events and widgets -> RoundLogic -> Snapshot), Round
 plan/     Planner (pure: Snapshot + Settings -> Instruction) and one planner per role + the queen
 overlay/  InstructionOverlay (the BA Autopilot overlay), SceneOverlay (target + plan tiles),
           ItemHighlightOverlay
-tutorial/ The in-game tutorials: pages, lobby props (tutorial-layout.json), real overlay situations
+tutorial/ The in-game tutorials: pages (tutorial-pages.json), lobby props (tutorial-layout.json),
+          real overlay situations (TutorialSituations, by page index)
 ui/       BaAutopilotPanel (role settings, collapsed advanced options, BA levels and Honour points)
 ui/kit/   The FreeArcanes UI kit components the panel uses, copied in (the Plugin Hub builds this
           repo on its own, so it can't depend on the separate ui-kit project)

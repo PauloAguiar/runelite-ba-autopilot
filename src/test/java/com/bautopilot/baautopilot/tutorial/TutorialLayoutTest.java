@@ -40,7 +40,7 @@ public class TutorialLayoutTest
 		java.util.List<TutorialSteps.Page> pages = new java.util.ArrayList<>();
 		for (Tutorial t : Tutorial.values())
 		{
-			pages.addAll(t.getPages());
+			pages.addAll(TutorialTestPages.of(t));
 		}
 		return pages;
 	}

@@ -1,0 +1,4864 @@
+{
+  "INTRODUCTION": [
+    {
+      "title": "Welcome",
+      "body": "Welcome to the BA Autopilot tutorial. It starts with a brief introduction to Barbarian Assault, then explains how the plugin works. Use Next and Back to move through it.\n\nBA Autopilot is still being tested: there may be bugs, and some mechanics may not work reliably yet. Feel free to join our Discord to give feedback and suggestions. The link is at the top left of the BA Autopilot panel (click the BA Autopilot button in RuneLite's sidebar to open it).\n\nBA Autopilot guides your actions, one step at a time. It never clicks or does anything automatically: you are always the one who plays.",
+      "props": [],
+      "marks": [],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Your team",
+      "body": "Barbarian Assault is played by a team of five. Each player has a role: Attacker, Defender, Collector or Healer.",
+      "props": [
+        "attacker-1",
+        "attacker-2",
+        "defender",
+        "collector",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "attacker-2",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Team setups",
+      "body": "One role is doubled. Teams usually run two Attackers (as shown) or two Healers. A single Healer can struggle, but so can a single weak Attacker: the right setup depends on the players.",
+      "props": [
+        "attacker-1",
+        "attacker-2",
+        "defender",
+        "collector",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "attacker-2",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Changing roles",
+      "body": "Roles can change between waves. A team might start with two Attackers and switch to two Healers for the last few waves.",
+      "props": [
+        "attacker-1",
+        "attacker-2",
+        "defender",
+        "collector",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "attacker-2",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Ten waves",
+      "body": "Barbarian Assault is played in ten waves. Waves 1 to 9 play the same way, each one harder than the last.",
+      "props": [
+        "pen-fighter",
+        "pen-ranger",
+        "pen-runner",
+        "pen-healer"
+      ],
+      "marks": [],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "tour": [
+        "wave-1",
+        "wave-2",
+        "wave-3",
+        "wave-4",
+        "wave-5",
+        "wave-6",
+        "wave-7",
+        "wave-8",
+        "wave-9"
+      ],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": true,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The Penance",
+      "body": "Every wave, four kinds of Penance come at the team: Fighters, Rangers, Runners and Healers.",
+      "props": [
+        "pen-fighter",
+        "pen-ranger",
+        "pen-runner",
+        "pen-healer"
+      ],
+      "marks": [
+        {
+          "key": "pen-fighter",
+          "label": "Penance Fighter",
+          "color": "#FFF05A50",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "pen-ranger",
+          "label": "Penance Ranger",
+          "color": "#FF5AC878",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "pen-runner",
+          "label": "Penance Runner",
+          "color": "#FFF0C846",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "pen-healer",
+          "label": "Penance Healer",
+          "color": "#FF6EAAFF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "wave-9",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The Queen",
+      "body": "Wave 10 starts like the others, but once all its Penance are dead, the Penance Queen appears. *Defeat her to finish the run.*",
+      "props": [
+        "queen"
+      ],
+      "marks": [
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "tour": [
+        "queen-room"
+      ],
+      "speech": {},
+      "action": "QUEEN_RAGE",
+      "autoNext": false,
+      "tourMs": 3500,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    }
+  ],
+  "BASICS": [
+    {
+      "title": "Finding a team",
+      "body": "Before any wave you need a team of five players. Teams form here, in room 1 of the lobby, where you are now.\n\nIf you're looking for a team, type the role you want in the chat, for example \"Def\" for Defender, or \"Coll or Atk\" if you'd play Collector or Attacker.\n\nTeams that are missing a player say what they need: \"Need atk\" means they need an Attacker, and \"Atk2go\" means they're ready to go once an Attacker joins. When a team needs your role, reply to them, and their leader sends you an invite.",
+      "props": [
+        "lf-1",
+        "lf-2",
+        "lf-3"
+      ],
+      "marks": [],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {
+        "lf-1": "Def here",
+        "lf-2": "Atk2go",
+        "lf-3": "Coll or Atk"
+      },
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Joining a team",
+      "body": "The team's leader sends you an invite. Pick your role in it and confirm to join.",
+      "props": [
+        "leader",
+        "you"
+      ],
+      "marks": [
+        {
+          "key": "leader",
+          "label": "Leader",
+          "color": "#FFFF981F",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "you",
+          "label": "You",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "INVITE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Leading a team",
+      "body": "To lead, take a scroll from the table, use it on each player, and confirm the role they picked.",
+      "props": [],
+      "marks": [],
+      "tiles": [],
+      "objects": [
+        {
+          "objectId": 20149,
+          "label": "Scroll table",
+          "color": "#FFFF981F"
+        }
+      ],
+      "arrows": [],
+      "camera": "object:20149",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Starting a wave",
+      "body": "Once the team is ready, the leader climbs down the ladder to start the wave. The leader does this for the first wave and for every wave after it.",
+      "props": [],
+      "marks": [],
+      "tiles": [],
+      "objects": [
+        {
+          "objectId": -1,
+          "label": "Ladder",
+          "color": "#FFFF981F"
+        }
+      ],
+      "arrows": [],
+      "camera": "object:-1",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "If someone leaves",
+      "body": "If a player leaves the team after wave 1, the run can't carry on. Come back to room 1's door, right-click the entrance and choose to reset the wave: the team can then start again from the beginning.",
+      "props": [],
+      "marks": [],
+      "tiles": [],
+      "objects": [
+        {
+          "objectId": 20199,
+          "label": "Room 1 entrance",
+          "color": "#FFFF981F"
+        }
+      ],
+      "arrows": [],
+      "camera": "object:20199",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Inside a wave",
+      "body": "When the leader climbs down the ladder, the whole team is taken into the arena, and the wave begins.\n\nEvery player starts the wave with a horn in their inventory. A role panel also appears on your screen: it shows your role, the time left before the next call, the call you have to make, and the call you heard from your partner.",
+      "props": [
+        "attacker-1",
+        "attacker-2",
+        "defender",
+        "collector",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "attacker-2",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "ATTACKER",
+        "call": "Red eggs",
+        "heard": "Accurate/Field/Water"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {
+        "10516": 1
+      },
+      "tint": false
+    },
+    {
+      "title": "The arena: waves 1 to 9",
+      "body": "Penance come out of the caves along the north wall. The traps are on the west and east sides, and the egg launchers and hoppers stand on two hills. The hills are safer: Penance can't go up them, though Rangers can still shoot you there. The Healer spring and the dispensers are by the south wall.\n\nThis is just a first look at the arena: each of these places is explained on the pages that follow.",
+      "props": [],
+      "marks": [],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "map": "1-9",
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The arena: wave 10",
+      "body": "Wave 10 has a single egg launcher, and adds poison and lava craters and petrified mushrooms for the Queen's eggs. The Queen appears in the middle.",
+      "props": [],
+      "marks": [],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "map": "10",
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The horn",
+      "body": "Every 30 seconds, each player gets a new call to make, shown in their role's panel. Right-click the horn in your inventory and pick that Tell- option to send it to your partner. \"Collector: Red eggs!\" tells the Collector which eggs to pick up.\n\nBA Autopilot makes this easier: it colours the right Tell- option green in the horn's menu.",
+      "props": [
+        "attacker-1",
+        "collector"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "attacker-1",
+          "to": "collector",
+          "color": "#FFFF981F"
+        }
+      ],
+      "camera": "team",
+      "tour": [],
+      "speech": {
+        "attacker-1": "Collector: Red eggs!"
+      },
+      "action": "HORNS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "ATTACKER",
+        "call": "Red eggs",
+        "heard": "Accurate/Field/Water"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {
+        "10516": 1
+      },
+      "menu": {
+        "itemId": 10516,
+        "options": [
+          "Tell-red",
+          "Tell-green",
+          "Tell-blue"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Partners",
+      "body": "Calls go both ways between partners: Attackers and Collectors call each other, and so do Defenders and Healers. Each call tells the partner what to use.",
+      "props": [
+        "attacker-1",
+        "collector",
+        "defender",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "attacker-1",
+          "to": "collector",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "collector",
+          "to": "attacker-1",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "defender",
+          "to": "healer",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "healer",
+          "to": "defender",
+          "color": "#FFFF981F"
+        }
+      ],
+      "camera": "team",
+      "tour": [],
+      "speech": {
+        "attacker-1": "Collector: Red eggs!",
+        "collector": "Attacker: Accurate/Field/Water!",
+        "defender": "Healer: Poison meat!",
+        "healer": "Defender: Drop Tofu!"
+      },
+      "action": "HORNS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Roles in battle",
+      "body": "In a wave, Attackers kill the Fighters and Rangers, the Defender traps the Runners, the Healer poisons the Penance Healers and keeps the team alive, and the Collector gathers the eggs. The next pages cover each role in turn.",
+      "props": [
+        "attacker-1",
+        "attacker-2",
+        "defender",
+        "collector",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "attacker-2",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Attacker: the call",
+      "body": "The Collector calls what the Penance are weak to, in three forms at once: a melee style, an arrow and a spell, such as Accurate/Field/Water. Use the one that fits your weapon.",
+      "props": [
+        "atk-attacker",
+        "atk-collector",
+        "atk-bullet",
+        "atk-field",
+        "atk-blunt",
+        "atk-barbed"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "atk-bullet",
+          "label": "Controlled: Bullet",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "atk-field",
+          "label": "Accurate: Field",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "atk-blunt",
+          "label": "Aggressive: Blunt",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "atk-barbed",
+          "label": "Defensive: Barbed",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-collector": "Attacker: Accurate/Field/Water!"
+      },
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Attacker: weapons",
+      "body": "*Ranged is the strongest style, and the best choice for new players:* switch to the arrows the call names. Melee is used only in very advanced play, and magic is basically not used in BA.",
+      "props": [
+        "atk-attacker",
+        "atk-collector",
+        "atk-bullet",
+        "atk-field",
+        "atk-blunt",
+        "atk-barbed"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "atk-field",
+          "label": "Field arrows",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-collector": "Attacker: Accurate/Field/Water!"
+      },
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Attacker: Fighters",
+      "body": "Attackers kill Penance Fighters, using the attack style the Collector calls.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-fighter",
+          "label": "Penance Fighter",
+          "color": "#FFF05A50",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-collector": "Attacker: Accurate/Field/Water!"
+      },
+      "action": "SHOOT_FIGHTER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Attacker: Rangers",
+      "body": "Rangers attack from a distance. Attackers kill them the same way, with the called style.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-ranger",
+          "label": "Penance Ranger",
+          "color": "#FF5AC878",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-collector": "Attacker: Controlled/Bullet/Wind!"
+      },
+      "action": "SHOOT_RANGER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Defender: Runners",
+      "body": "Runners try to escape. The Defender lures them onto the trap with the bait the Healer calls, and the trap kills them. After two kills the trap breaks, and the Defender fixes it with logs and a hammer.",
+      "props": [
+        "def-runner",
+        "def-trap",
+        "def-trap-broken",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-logs",
+          "label": "Logs",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-hammer",
+          "label": "Hammer",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-trap-broken",
+          "label": "Broken trap",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-runner",
+          "label": "Penance Runner",
+          "color": "#FFF0C846",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-bait",
+          "label": "Crackers",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-trap",
+          "label": "Trap",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {
+        "def-healer": "Defender: Drop Crackers!"
+      },
+      "action": "TRAP_RUNNER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Healer: Penance Healers",
+      "body": "Penance Healers can heal the Runners.",
+      "props": [
+        "heal-pen",
+        "heal-runner",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-pen",
+          "label": "Penance Healer",
+          "color": "#FF6EAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "heal-runner",
+          "label": "Runner",
+          "color": "#FFF0C846",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "HEAL_RUNNER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Healer: poisoning",
+      "body": "The Healer kills them with poisoned food: the kind the Defender calls. With several about, go between them, feeding each in turn.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-pen-2",
+          "label": "Penance Healer",
+          "color": "#FF6EAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "heal-pen",
+          "label": "Penance Healer",
+          "color": "#FF6EAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {
+        "heal-defender": "Healer: Poison meat!"
+      },
+      "action": "POISON_HEALER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Collector: eggs",
+      "body": "Dead Penance drop eggs. The Collector picks up the colour the Attacker calls.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "col-egg-red",
+          "label": "Red egg",
+          "color": "#FFE63C3C",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {
+        "col-attacker": "Collector: Red eggs!"
+      },
+      "action": "COLLECT_EGGS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The egg launcher",
+      "body": "After collecting eggs, the Collector loads them into the egg launcher. The Collector, or any teammate, can then fire them to help kill the Penance.\n\nThere's no aiming: you pick the kind of Penance, and the launcher picks which one to hit. Whoever fires, aim in this order: red at Runners, red at Healers, green at Runners, then green at Healers.\n\nBA Autopilot outlines that button in the launcher window and crosses out the stun buttons.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-gunner",
+        "can-collector",
+        "can-runner"
+      ],
+      "marks": [
+        {
+          "key": "can-launcher",
+          "label": "Egg launcher",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "can-hopper",
+          "label": "Egg hopper",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "can-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "can-gunner",
+          "label": "Teammate",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_PENANCE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Egg types",
+      "body": "Red eggs deal 3 damage, and 0-1 to Penance within 3 tiles.\n\nGreen eggs deal 1 and poison for 5 more.\n\nBlue eggs stun: the Penance can't move, but it can't be attacked either, which only slows the team down. Blue eggs are basically not used.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-egg-red",
+        "can-egg-green",
+        "can-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "can-egg-red",
+          "label": "Red: damage",
+          "color": "#FFE63C3C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "can-egg-green",
+          "label": "Green: poison",
+          "color": "#FF46C85A",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "can-egg-blue",
+          "label": "Blue: stun (avoid)",
+          "color": "#FF508CFF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The Healer spring",
+      "body": "The Healer watches the team's health.\n\nTo heal teammates, use the vial on the Healer spring to fill it, then use it on them.\n\nThe Healer can also drink from the spring to heal itself.",
+      "props": [
+        "spring",
+        "spr-healer",
+        "spr-attacker",
+        "spr-vial"
+      ],
+      "marks": [
+        {
+          "key": "spr-vial",
+          "label": "Vial",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "spring",
+          "label": "Healer spring",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "spr-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spr-attacker",
+          "label": "Teammate",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "spr-spot",
+      "tour": [],
+      "speech": {},
+      "action": "SPRING",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {
+        "10542": 1
+      },
+      "menu": {
+        "itemId": 10542,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Eggs for the Queen: C-H-A-D-C",
+      "body": "Once the Queen appears, the team passes each of her eggs around in a fixed order: Collector, Healer, Attacker, Defender, and back to the Collector. Players remember it as CHAD C. Each player works on the egg, then hands it to the next.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-yellow",
+        "chain-poisoned",
+        "chain-spiked",
+        "chain-omega"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "chain-collector",
+          "to": "chain-healer",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "chain-healer",
+          "to": "chain-attacker",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "chain-attacker",
+          "to": "chain-defender",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "chain-defender",
+          "to": "chain-collector",
+          "color": "#FFFF981F"
+        }
+      ],
+      "camera": "chain-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_PASS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "C: Collector",
+      "body": "Yellow eggs appear at random on the ground around the Queen. The Collector picks them up and passes them to the Healer.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-yellow"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-yellow",
+          "label": "Yellow egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 0,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "H: Healer",
+      "body": "The Healer poisons the egg by using it on a poison crater.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-poisoned",
+        "chain-crater"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-poisoned",
+          "label": "Poisoned egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-crater",
+          "label": "Poison crater",
+          "color": "#FF78DC5A",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-crater-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 1,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "A: Attacker",
+      "body": "The Attacker gets spikes from a petrified mushroom and adds them to the egg.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-spiked",
+        "chain-mushroom",
+        "chain-spikes"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-spiked",
+          "label": "Spiked egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-mushroom",
+          "label": "Petrified mushroom",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-spikes",
+          "label": "Spikes",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-mushroom-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 2,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "D: Defender",
+      "body": "The Defender heats the egg by using it on a lava crater, making an omega egg.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-omega",
+        "chain-lava"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-omega",
+          "label": "Omega egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-lava",
+          "label": "Lava crater",
+          "color": "#FFFF7828",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-lava-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 3,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "C: Collector",
+      "body": "The Collector takes the omega egg back to load it.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-loaded"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-loaded",
+          "label": "Omega egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 4,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Defeating the Queen",
+      "body": "Weapons can't hurt the Queen. The Collector loads the omega eggs into the egg hopper, and teammates fire them at her from the egg launcher.",
+      "props": [
+        "queen",
+        "cannon",
+        "turret",
+        "hopper",
+        "cannon-collector",
+        "cannon-gunner"
+      ],
+      "marks": [
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "cannon",
+          "label": "Egg launcher",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "hopper",
+          "label": "Egg hopper",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "cannon-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-gunner",
+          "label": "Teammate",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "cannon-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_QUEEN",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Spamming omegas",
+      "body": "A common strategy is to stack: everyone whose eggs are done stands at the cannon.\n\nClicking the preloaded cannon opens its aiming window, where the Omega button shows 0, because no omega egg is loaded yet. The players keep clicking that button over and over: this is called *spamming* it.\n\nMeanwhile, the Collector loads the omega eggs one at a time: click one omega egg in the inventory, then click the hopper. Clicking the hopper on its own loads all the eggs at once, which is not what you want here.\n\nWhy spam? As soon as an egg is loaded, every player clicking the button fires it, so one egg hits the Queen several times. Eight hits finish her, so the team needs far fewer omega eggs.",
+      "props": [
+        "queen",
+        "cannon",
+        "turret",
+        "hopper",
+        "cannon-collector",
+        "cannon-gunner",
+        "cannon-stack-1",
+        "cannon-stack-2"
+      ],
+      "marks": [
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "cannon-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-gunner",
+          "label": "Spamming",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-stack-1",
+          "label": "Spamming",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-stack-2",
+          "label": "Spamming",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "cannon-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_QUEEN",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Dispensers",
+      "body": "Next to the Healer spring stand the dispensers, one for each role. Players stock up at theirs at the start of a wave, and restock during it.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-attacker",
+        "dsp-defender",
+        "dsp-healer",
+        "dsp-collector"
+      ],
+      "marks": [
+        {
+          "key": "machine-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "machine-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "machine-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "machine-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Attacker dispenser",
+      "body": "Attackers take arrows or runes here.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-attacker"
+      ],
+      "marks": [
+        {
+          "key": "machine-attacker",
+          "label": "Attacker dispenser",
+          "color": "#FFEB5F55",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-attacker",
+          "to": "machine-attacker"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Defender dispenser",
+      "body": "Defenders take bait here: crackers, tofu or worms.\n\nStock-Up takes all three kinds of bait in one click, so you're ready for any call.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-defender"
+      ],
+      "marks": [
+        {
+          "key": "machine-defender",
+          "label": "Defender dispenser",
+          "color": "#FF5F9BFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-defender",
+          "to": "machine-defender"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Healer dispenser",
+      "body": "Healers take vials and poisoned food here: tofu, worms or meat.\n\nStock-Up takes all three poisoned foods in one click, so you're ready for any call.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-healer"
+      ],
+      "marks": [
+        {
+          "key": "machine-healer",
+          "label": "Healer dispenser",
+          "color": "#FF5FD77D",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-healer",
+          "to": "machine-healer"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Collector Converter",
+      "body": "From Collector level 2, the Collector can convert eggs here: green to red, red to green, and blue to green. Some eggs break: 25% convert at level 2, up to 85% at level 5.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-collector"
+      ],
+      "marks": [
+        {
+          "key": "machine-collector",
+          "label": "Collector Converter",
+          "color": "#FFF0CD46",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-collector",
+          "to": "machine-collector"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "That's the basics",
+      "body": "You now know how a Barbarian Assault run works: the team, the calls, the Penance, the eggs and the Queen. The next tutorials cover one role each, in CHAD order: Collector, Healer, Attacker and Defender, and how BA Autopilot guides you through it, step by step.",
+      "props": [
+        "attacker-1",
+        "attacker-2",
+        "defender",
+        "collector",
+        "healer"
+      ],
+      "marks": [
+        {
+          "key": "attacker-1",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "attacker-2",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "team",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    }
+  ],
+  "COLLECTOR": [
+    {
+      "title": "The Collector",
+      "body": "When Penance die, they drop eggs. As the Collector, you pick up the eggs of the colour the Attacker calls and load them into the egg launchers, so the team can fire them. You also tell the Attacker which style to use.\n\nBA Autopilot shows you one step at a time: which eggs to pick up, when to load them, and when to fire. It colours the right call green in your horn's menu.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue",
+        "col-ranger",
+        "col-drop-egg"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "col-ranger",
+          "label": "Penance Ranger",
+          "color": "#FF5AC878",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_DROP",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The BA Autopilot overlay",
+      "body": "This is the BA Autopilot overlay. It shows the one thing to do now. You can move it by holding Alt and dragging it.\n\nThe coloured tag shows what kind of step it is. Under it are your call, the call you heard, and the time left before the next call.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": true,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Your call",
+      "body": "Every 30 seconds, the Attacker needs a new call from you: which style to use. When it's time, your game view turns red. That's your signal.\n\n*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot colours green. The red goes away once you've called.",
+      "props": [
+        "col-collector",
+        "col-attacker"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "col-collector",
+          "to": "col-attacker",
+          "color": "#FFFFC400"
+        }
+      ],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {
+        "col-collector": "Attacker: Accurate/Field/Water!"
+      },
+      "action": "HORNS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "COLLECTOR",
+        "call": "Accurate/Field/Water",
+        "heard": "Red eggs"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10560,
+        "options": [
+          "Tell-controlled",
+          "Tell-accurate",
+          "Tell-aggressive",
+          "Tell-defensive"
+        ],
+        "pick": 1
+      },
+      "tint": true
+    },
+    {
+      "title": "Opening: the west route",
+      "body": "At the start of each wave, walk around the west cannon hill to reach the Attackers. Don't wait for a call to start walking.\n\nThe route is drawn on the floor for you: follow it, and stop on the marked tile at its end.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "col-west-route",
+          "label": "West route",
+          "color": "#FF46D7E6"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Picking up eggs",
+      "body": "Only pick up eggs of the colour the Attacker called. A wrong egg explodes and hurts you.\n\nEvery egg of the called colour gets a dot. A green dot means a left-click on it picks it up. A yellow dot means another item is on top of it: right-click that spot and choose Take on the called egg.\n\nBA Autopilot marks the tile of the next egg to pick up. It prefers eggs you can left-click, unless they are much further away.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue",
+        "col-egg-red-under"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "col-egg-red",
+          "label": "PICK UP",
+          "color": "#FF5AAAFF",
+          "style": "TARGET"
+        },
+        {
+          "key": "col-egg-red",
+          "color": "#FF5ADC78",
+          "style": "DOT"
+        },
+        {
+          "key": "col-egg-red-under",
+          "color": "#FFF5D73C",
+          "style": "DOT"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {
+        "col-attacker": "Collector: Red eggs!"
+      },
+      "action": "COLLECT_EGGS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Your egg bag",
+      "body": "Your first eggs go into the collection bag in your inventory, so they don't take up any inventory slots. You don't need to do anything for this: it happens when you pick them up.\n\nThe overlay counts the eggs in your bag and in your inventory together, on the line called Carrying.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Loading the hopper",
+      "body": "To load, click the hopper next to the egg launcher. One click loads every egg you carry into it, from your bag and your inventory.\n\n*Load as soon as the overlay asks you to:* your team can only fire the eggs that are in the hopper.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-collector",
+        "can-gunner",
+        "can-runner"
+      ],
+      "marks": [
+        {
+          "key": "can-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "can-hopper",
+          "label": "LOAD",
+          "color": "#FF50E178",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_PENANCE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Blue eggs",
+      "body": "Blue eggs stun the Penance, which doesn't really help your team, so there's no real need for them. Pick them up when blue is called: that still counts.\n\nLoading blue eggs into the hopper is fine, and it's a quick way to free up inventory space. You can also destroy them: when you need the space, the overlay asks you to. Right-click a blue egg in your inventory and choose Destroy, or shift-click it.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "col-egg-blue",
+          "label": "Blue egg",
+          "color": "#FF508CFF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10533,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 1
+      },
+      "tint": false
+    },
+    {
+      "title": "Firing the launcher",
+      "body": "If a Runner is escaping, the overlay might guide you to the egg launcher, to help bring it down.\n\nClick the launcher to open its window. BA Autopilot outlines the best button to click, and crosses out the stun buttons you should never use.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-collector",
+        "can-gunner",
+        "can-runner"
+      ],
+      "marks": [
+        {
+          "key": "can-launcher",
+          "label": "FIRE",
+          "color": "#FFFF7D37",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "can-runner",
+          "label": "Penance Runner",
+          "color": "#FFF0C846",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_PENANCE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Waiting for eggs",
+      "body": "When there's nothing to pick up, the overlay asks you to wait near the Attackers.\n\nEggs drop where Fighters and Rangers die, so new eggs will appear close to you.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue",
+        "col-ranger",
+        "col-drop-egg"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "col-ranger",
+          "label": "Penance Ranger",
+          "color": "#FF5AC878",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_DROP",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: before the Queen",
+      "body": "In wave 10, eggs don't give points. They're still useful, though: load a few to help bring down the Runners and Penance Healers.\n\nMake sure at least one egg stays loaded in the cannon for the Queen. This is called *preloading*: with an egg loaded, your teammates can aim at the Queen as soon as she appears. BA Autopilot tells you when to do it.",
+      "props": [
+        "cannon",
+        "turret",
+        "hopper",
+        "cannon-collector"
+      ],
+      "marks": [
+        {
+          "key": "cannon-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "hopper",
+          "label": "LOAD",
+          "color": "#FF50E178",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "cannon-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: make room",
+      "body": "Once every Penance is dead and an egg is preloaded, the other eggs you carry are no use any more.\n\nYou'll need the space for the Queen's yellow eggs, so the overlay asks you to destroy them. Right-click an egg in your inventory and choose Destroy, or shift-click it.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10532,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 1
+      },
+      "tint": false
+    },
+    {
+      "title": "Wave 10: yellow eggs",
+      "body": "Only omega eggs can hurt the Queen, and every omega egg starts as a yellow egg. When the Queen appears, yellow eggs drop around her.\n\nThe overlay asks you to pick up 5 of them first. These 5 are your first batch: the next pages show what happens to them.",
+      "props": [
+        "queen",
+        "q-collector",
+        "q-yellow-1",
+        "q-yellow-2",
+        "q-yellow-3"
+      ],
+      "marks": [
+        {
+          "key": "q-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "q-yellow-1",
+          "label": "PICK UP",
+          "color": "#FF5AAAFF",
+          "style": "TARGET"
+        },
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "q-watch",
+          "label": "Watch for yellow eggs",
+          "color": "#FFAFAFAF"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "queen-room",
+      "tour": [],
+      "speech": {},
+      "action": "QUEEN_RAGE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: the egg chain",
+      "body": "A yellow egg goes round the team before it can hurt the Queen. You pass it to the Healer, who poisons it. The Attacker adds spikes, and the Defender heats it into an omega egg.\n\nThe omega egg then comes back to you, ready to load into the cannon. Players call this order CHAD: Collector, Healer, Attacker, Defender.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-yellow",
+        "chain-poisoned",
+        "chain-spiked",
+        "chain-omega"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "chain-collector",
+          "to": "chain-healer",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "chain-healer",
+          "to": "chain-attacker",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "chain-attacker",
+          "to": "chain-defender",
+          "color": "#FFFF981F"
+        },
+        {
+          "from": "chain-defender",
+          "to": "chain-collector",
+          "color": "#FFFF981F"
+        }
+      ],
+      "camera": "chain-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_PASS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: passing the batch",
+      "body": "Once you have 5 yellow eggs, the overlay asks you to pass them to the Healer. The Healer is marked for you.\n\nTo pass an egg, click a yellow egg in your inventory, then click the Healer. Do this once for each egg.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-yellow"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "chain-collector",
+          "to": "chain-healer",
+          "color": "#FFFF981F"
+        }
+      ],
+      "camera": "chain-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10534,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Wave 10: collecting the reserve",
+      "body": "After you pass the first 5 yellow eggs, the overlay asks you to pick up 3 more. These 3 eggs are the *reserve*.\n\nThe reserve is there in case the first 5 omega eggs aren't enough to kill the Queen. If your team stacks properly at the cannon (explained a few pages on), each egg can hit the Queen several times, so fewer eggs are needed and the reserve might not be used at all.\n\nPick them up the same way as before: click each marked yellow egg on the ground.\n\nYou can change both numbers. To open the panel, click the BA Autopilot button in RuneLite's sidebar. On the Collector card, set Queen yellow batch (the first batch) and Queen reserve eggs (the reserve).",
+      "props": [
+        "queen",
+        "q-collector",
+        "q-yellow-1",
+        "q-yellow-2"
+      ],
+      "marks": [
+        {
+          "key": "q-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "q-yellow-1",
+          "label": "PICK UP",
+          "color": "#FF5AAAFF",
+          "style": "TARGET"
+        },
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "queen-room",
+      "tour": [],
+      "speech": {},
+      "action": "QUEEN_RAGE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: holding the reserve",
+      "body": "Keep the 3 reserve eggs in your inventory. Don't pass them to the Healer yet: the first 5 omega eggs may be enough to kill the Queen on their own, especially if your team stacks properly at the cannon.\n\nIf the Queen is still alive after the first 5 omega eggs have been fired, the overlay asks you to pass the reserve to the Healer. Pass them the same way as the first batch: click a yellow egg, then click the Healer.",
+      "props": [
+        "queen",
+        "q-collector"
+      ],
+      "marks": [
+        {
+          "key": "q-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "queen-room",
+      "tour": [],
+      "speech": {},
+      "action": "QUEEN_RAGE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: loading omegas",
+      "body": "The finished omega eggs come back to you from the Defender. You load them into the hopper one at a time. The overlay first marks a tile two tiles south of the hopper: stand there.\n\nTo load one egg, click an omega egg in your inventory, then click the hopper. *Don't just click the hopper:* that loads all of them at once.",
+      "props": [
+        "queen",
+        "cannon",
+        "turret",
+        "hopper",
+        "cannon-collector",
+        "cannon-gunner"
+      ],
+      "marks": [
+        {
+          "key": "cannon-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "hopper",
+          "label": "LOAD 1",
+          "color": "#FF50E178",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "queen",
+          "label": "Penance Queen",
+          "color": "#FFC878FF",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "cannon-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_QUEEN",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10537,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Wave 10: spamming omegas",
+      "body": "Many teams stack at the cannon: they wait there and keep clicking the Omega button, *spamming* it, so each omega egg is fired as soon as you load it.\n\nWhy is spamming useful? When several players fire the same loaded egg, that one egg can hit the Queen several times. That reduces the total number of omega eggs your team needs.\n\nLoading one at a time is on by default: it's One omega at a time, in the Advanced part of the Collector card. If your whole team stacks, also tell BA Autopilot: click the BA Autopilot button in RuneLite's sidebar, open the General & display section, and turn on Team stacks at Queen cannon. Your teammates' overlays then send them to the cannon once their eggs are done.",
+      "props": [
+        "queen",
+        "cannon",
+        "turret",
+        "hopper",
+        "cannon-collector",
+        "cannon-gunner",
+        "cannon-stack-1",
+        "cannon-stack-2"
+      ],
+      "marks": [
+        {
+          "key": "cannon-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-gunner",
+          "label": "Spamming",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-stack-1",
+          "label": "Spamming",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "cannon-stack-2",
+          "label": "Spamming",
+          "color": "#FFEBE1C8",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "cannon-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_QUEEN",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Collector: done",
+      "body": "That's the Collector. Click Healer > to continue with the Healer tutorial.",
+      "props": [
+        "col-collector",
+        "col-attacker",
+        "col-egg-red",
+        "col-egg-green",
+        "col-egg-blue"
+      ],
+      "marks": [
+        {
+          "key": "col-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "col-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    }
+  ],
+  "HEALER": [
+    {
+      "title": "The Healer",
+      "body": "As the Healer, you poison the Penance Healers with the food the Defender calls, and you heal your teammates with the vial. You also tell the Defender which bait the Runners want.\n\nBA Autopilot shows you one step at a time: which food to use and on which Penance Healer, when to restock, and who to heal. It colours the right call green in your horn's menu.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The BA Autopilot overlay",
+      "body": "This is the BA Autopilot overlay. It shows the one thing to do now. You can move it by holding Alt and dragging it.\n\nThe coloured tag shows what kind of step it is. Under it are your call, the call you heard, and the time left before the next call.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": true,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Your call",
+      "body": "Every 30 seconds, the Defender needs a new call from you: which bait the Runners want. When it's time, your game view turns red. That's your signal.\n\n*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot colours green. The red goes away once you've called.",
+      "props": [
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "heal-healer",
+          "to": "heal-defender",
+          "color": "#FFFFC400"
+        }
+      ],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {
+        "heal-healer": "Defender: Drop Tofu!"
+      },
+      "action": "HORNS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "HEALER",
+        "call": "Drop Tofu",
+        "heard": "Poison worms"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10526,
+        "options": [
+          "Tell-tofu",
+          "Tell-crackers",
+          "Tell-worms"
+        ],
+        "pick": 0
+      },
+      "tint": true
+    },
+    {
+      "title": "Opening: Stock-Up",
+      "body": "Start every wave at your dispenser. Click it once: its left-click is Stock-Up, which gives you all three kinds of poisoned food in one go.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-healer"
+      ],
+      "marks": [
+        {
+          "key": "machine-healer",
+          "label": "Stock-Up",
+          "color": "#FF5AAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-healer",
+          "to": "machine-healer"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Opening: the healer spawn",
+      "body": "Then walk to where the Penance Healers come out, and wait there for the Defender's call.\n\nThe call tells you which food the Penance Healers want. Don't feed them before it comes.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "heal-spawn",
+          "label": "Healers",
+          "color": "#FF46D7E6"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Poison outlines",
+      "body": "Each Penance Healer is outlined by its poison: green while it's fresh, then light green, yellow and orange as it fades, and red when it has none, because it was never fed or the poison wore off. Feed the red ones first.\n\nBA Autopilot marks the one to feed next: it gets a thicker outline and a FEED badge above its head, with the food to use. The overlay names it too, so you can simply follow it.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "heal-pen",
+          "color": "#FF28C846",
+          "style": "THIN"
+        },
+        {
+          "key": "heal-pen-2",
+          "color": "#FFE63232",
+          "style": "THIN"
+        },
+        {
+          "key": "heal-pen-2",
+          "label": "FEED",
+          "color": "#FF50E178",
+          "style": "NPC_TARGET"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Feeding",
+      "body": "To feed a Penance Healer, click the called food in your inventory (it's outlined), then click the Penance Healer.\n\nThe overlay may ask you to feed the same Penance Healer again: that brings it down quicker.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "heal-pen",
+          "color": "#FF96E65A",
+          "style": "THIN"
+        },
+        {
+          "key": "heal-pen-2",
+          "color": "#FF28C846",
+          "style": "THIN"
+        },
+        {
+          "key": "heal-pen",
+          "label": "FEED",
+          "color": "#FF50E178",
+          "style": "NPC_TARGET"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {
+        "heal-defender": "Healer: Poison worms!"
+      },
+      "action": "POISON_HEALER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10540,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "The healer table",
+      "body": "At the bottom of the overlay, you can see each Penance Healer's food and poison, how full your vial is, and your two most hurt teammates.\n\nYou don't need to act on this: the overlay already tells you what to do next.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": true,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Keeping food",
+      "body": "You need food for the Penance Healers that haven't come out yet.\n\nWhen you're running low, the overlay sends you back to your dispenser for more. Right-click the dispenser and pick the Take- option for the food it names. Its left-click, Stock-Up, takes all three.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Healing teammates",
+      "body": "To fill your vial, click the vial in your inventory, then click the Healer spring.\n\nTo heal a teammate, click the vial, then click the teammate that the overlay names.",
+      "props": [
+        "spring",
+        "spr-healer",
+        "spr-attacker",
+        "spr-vial"
+      ],
+      "marks": [
+        {
+          "key": "spr-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spr-attacker",
+          "label": "Teammate 42%",
+          "color": "#FFF0A03C",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spring",
+          "label": "Healer spring",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "spr-spot",
+      "tour": [],
+      "speech": {},
+      "action": "SPRING",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10542,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Staying alive",
+      "body": "Only you, the Healer, can drink from the spring. When your own health is low, the overlay sends you there first.\n\nClick the spring to drink from it, then go back to what the overlay tells you.",
+      "props": [
+        "spring",
+        "spr-healer",
+        "spr-attacker",
+        "spr-vial"
+      ],
+      "marks": [
+        {
+          "key": "spr-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spring",
+          "label": "Healer spring",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "spr-spot",
+      "tour": [],
+      "speech": {},
+      "action": "SPRING",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: poisoning eggs",
+      "body": "In wave 10, the Collector passes you yellow eggs. To poison one, click the yellow egg in your inventory, then click a poison crater. *Don't click the crater on its own.*\n\nThen pass the poisoned egg to the Attacker: click it in your inventory, then click the Attacker.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-poisoned",
+        "chain-crater"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-poisoned",
+          "label": "Poisoned egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-crater",
+          "label": "Poison crater",
+          "color": "#FF78DC5A",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-crater-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 1,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10534,
+        "options": [
+          "Use",
+          "Destroy",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Wave 10: by the spring",
+      "body": "Between eggs, stay by the Healer spring. Hurt teammates can come to you there, and you can refill your vial right away.",
+      "props": [
+        "spring",
+        "spr-healer",
+        "spr-attacker",
+        "spr-vial"
+      ],
+      "marks": [
+        {
+          "key": "spr-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spring",
+          "label": "Healer spring",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "spr-spot",
+      "tour": [],
+      "speech": {},
+      "action": "SPRING",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Healer: done",
+      "body": "That's the Healer. Click Attacker > to continue with the Attacker tutorial.",
+      "props": [
+        "heal-pen",
+        "heal-pen-2",
+        "heal-healer",
+        "heal-defender"
+      ],
+      "marks": [
+        {
+          "key": "heal-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "heal-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    }
+  ],
+  "ATTACKER": [
+    {
+      "title": "The Attacker",
+      "body": "As the Attacker, you kill the Penance Fighters and Rangers, using the style the Collector calls. You also tell the Collector which eggs to pick up.\n\nBA Autopilot shows you one step at a time: which arrows to wield, who to attack, and when to stop. It colours the right call green in your horn's menu.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The BA Autopilot overlay",
+      "body": "This is the BA Autopilot overlay. It shows the one thing to do now. You can move it by holding Alt and dragging it.\n\nThe coloured tag shows what kind of step it is. Under it are your call, the call you heard, and the time left before the next call.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": true,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Your call",
+      "body": "Every 30 seconds, the Collector needs a new call from you: which eggs to pick up. When it's time, your game view turns red. That's your signal.\n\n*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot colours green. The red goes away once you've called.",
+      "props": [
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "atk-attacker",
+          "to": "atk-collector",
+          "color": "#FFFFC400"
+        }
+      ],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-attacker": "Collector: Red eggs!"
+      },
+      "action": "HORNS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "ATTACKER",
+        "call": "Red eggs",
+        "heard": "Accurate/Field/Water"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10516,
+        "options": [
+          "Tell-red",
+          "Tell-green",
+          "Tell-blue"
+        ],
+        "pick": 0
+      },
+      "tint": true
+    },
+    {
+      "title": "Opening: arrows",
+      "body": "Start at your dispenser and take all four types of arrows. Right-click the dispenser to see each type, and take every one.\n\nWith all four in your inventory, you can switch as soon as the Collector calls.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-attacker"
+      ],
+      "marks": [
+        {
+          "key": "machine-attacker",
+          "label": "TAKE",
+          "color": "#FF5AAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-attacker",
+          "to": "machine-attacker"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Opening: route and wait tile",
+      "body": "Walk around the west cannon hill to reach the caves. The route is drawn on the floor for you.\n\nThen stand on the marked tile by the caves and wait for the first Fighter or Ranger.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "atk-west-route",
+          "label": "West route",
+          "color": "#FF46D7E6"
+        },
+        {
+          "key": "atk-wait",
+          "label": "Wait here",
+          "color": "#FFAFAFAF"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The called arrows",
+      "body": "When the Collector calls, wield the arrows the call names. They're outlined in green in your inventory.\n\nTo wield them, click the outlined arrows.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector",
+        "atk-bullet",
+        "atk-field",
+        "atk-blunt",
+        "atk-barbed"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "atk-field",
+          "label": "Field arrows",
+          "color": "#FF50E178",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-collector": "Attacker: Accurate/Field/Water!"
+      },
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "ATTACKER",
+        "call": "Red eggs",
+        "heard": "Accurate/Field/Water"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 22228,
+        "options": [
+          "Wield",
+          "Use",
+          "Drop",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Attacking",
+      "body": "Click the outlined Penance to attack it. The overlay keeps you on the same one until it dies, so you don't have to choose.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "atk-fighter",
+          "label": "ATTACK",
+          "color": "#FFFF7D37",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {
+        "atk-collector": "Attacker: Accurate/Field/Water!"
+      },
+      "action": "SHOOT_FIGHTER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Hold as the call changes",
+      "body": "Stop attacking just before the call changes: a hit with the wrong style hurts you.\n\nThe overlay tells you when to stop. To stop, click an empty tile on the ground.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "atk-fighter",
+          "label": "DON'T ATTACK",
+          "color": "#FFA0A0A0",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Nothing to attack",
+      "body": "Once the Fighters and Rangers are all dead, help at the egg launcher.\n\nClick the launcher when the overlay asks, then click the button that BA Autopilot outlines in its window.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-collector",
+        "can-gunner",
+        "can-runner"
+      ],
+      "marks": [
+        {
+          "key": "can-gunner",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "can-launcher",
+          "label": "Egg launcher",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_PENANCE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Low HP: the hill",
+      "body": "When your health is low, the overlay sends you onto a launcher hill. Penance can't follow you up there.\n\nWalk up the hill and ask your Healer for the vial. Go back once you're healed.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-gunner"
+      ],
+      "marks": [
+        {
+          "key": "can-gunner",
+          "label": "Attacker 24%",
+          "color": "#FFF05A46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "can-launcher",
+          "label": "Launcher hill",
+          "color": "#FFFF4646",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: spikes",
+      "body": "In wave 10, take spikes from a petrified mushroom: click the mushroom. The overlay asks you to do this before the Queen appears.\n\nWhen the Healer passes you a poisoned egg, click the spikes in your inventory, then click the poisoned egg. Then pass the spiked egg to the Defender: click it, then click the Defender.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-spiked",
+        "chain-mushroom",
+        "chain-spikes"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-spiked",
+          "label": "Spiked egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-mushroom",
+          "label": "Petrified mushroom",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-spikes",
+          "label": "Spikes",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-mushroom-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 2,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10561,
+        "options": [
+          "Use",
+          "Drop",
+          "Examine"
+        ],
+        "pick": 0
+      },
+      "tint": false
+    },
+    {
+      "title": "Wave 10: waiting",
+      "body": "Leave the Queen alone: weapons can't hurt her. Wait by the Healer spring for the next poisoned egg.",
+      "props": [
+        "spring",
+        "spr-healer",
+        "spr-attacker"
+      ],
+      "marks": [
+        {
+          "key": "spr-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spring",
+          "label": "Healer spring",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "spr-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Attacker: done",
+      "body": "That's the Attacker. Click Defender > to continue with the Defender tutorial.",
+      "props": [
+        "atk-fighter",
+        "atk-ranger",
+        "atk-attacker",
+        "atk-collector"
+      ],
+      "marks": [
+        {
+          "key": "atk-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "atk-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    }
+  ],
+  "DEFENDER": [
+    {
+      "title": "Before you start",
+      "body": "The Defender is probably the hardest role to get started with. Try to get a good idea of the minigame first, for example by playing the other roles.\n\nThe Defender also benefits a lot from acting quickly at the start of each wave: the faster you drop the bait pattern, the better the Runners are led to the trap.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The Defender",
+      "body": "As the Defender, you lure the Penance Runners onto the trap with the bait the Healer calls, and you repair the trap when it breaks. You also tell the Healer which poisoned food to use.\n\nBA Autopilot shows you one step at a time: where to drop bait, when to repair the trap, and when a Runner is escaping. It colours the right call green in your horn's menu.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The BA Autopilot overlay",
+      "body": "This is the BA Autopilot overlay. It shows the one thing to do now. You can move it by holding Alt and dragging it.\n\nThe coloured tag shows what kind of step it is. Under it are your call, the call you heard, and the time left before the next call.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": true,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Your call",
+      "body": "Every 30 seconds, the Healer needs a new call from you: which poisoned food to use. When it's time, your game view turns red. That's your signal.\n\n*Stop whatever you're doing.* Right-click your horn and pick the Tell- option that BA Autopilot colours green. The red goes away once you've called.",
+      "props": [
+        "def-defender",
+        "def-healer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [
+        {
+          "from": "def-defender",
+          "to": "def-healer",
+          "color": "#FFFFC400"
+        }
+      ],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {
+        "def-defender": "Healer: Poison worms!"
+      },
+      "action": "HORNS",
+      "autoNext": false,
+      "tourMs": 6000,
+      "hud": {
+        "role": "DEFENDER",
+        "call": "Pois. Worms",
+        "heard": "Drop Crackers"
+      },
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "menu": {
+        "itemId": 10538,
+        "options": [
+          "Tell-tofu",
+          "Tell-worms",
+          "Tell-meat"
+        ],
+        "pick": 1
+      },
+      "tint": true
+    },
+    {
+      "title": "Opening: Stock-Up",
+      "body": "Start at your dispenser. Click it once: its left-click is Stock-Up, which gives you all three kinds of bait in one go.",
+      "props": [
+        "machine-attacker",
+        "machine-defender",
+        "machine-healer",
+        "machine-collector",
+        "dsp-defender"
+      ],
+      "marks": [
+        {
+          "key": "machine-defender",
+          "label": "Stock-Up",
+          "color": "#FF5AAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "dsp-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "dsp-spot",
+      "tour": [],
+      "speech": {},
+      "action": "USE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [
+        {
+          "from": "dsp-defender",
+          "to": "machine-defender"
+        }
+      ],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Good bait and its range",
+      "body": "Runners only notice bait that is close to them: within 4 tiles, or 5 tiles from Defender level 2. On the ground, BA Autopilot outlines the tiles around each bait where a Runner notices it.\n\nGood bait is the bait the Healer called. A Runner that notices good bait walks to it and eats it. If the bait is on the trap's food tile, the trap kills the Runner while it eats.\n\nA bait counts as good or bad by the call at the moment it hits the ground, so wait for the Healer's call before you drop it.",
+      "props": [
+        "def-runner",
+        "def-trap",
+        "def-trap-broken",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-bait",
+          "label": "Good bait",
+          "color": "#FF5ADC78",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-runner",
+          "label": "Penance Runner",
+          "color": "#FFF0C846",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "TRAP_RUNNER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Bad bait",
+      "body": "Bad bait is any bait the Healer didn't call. A Runner that notices bad bait walks to it, eats it, and then runs several tiles north.\n\nThat makes bad bait useful too: drop it in a Runner's way to send it north, back towards the trap. The bait pattern uses a few bad baits for this.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer",
+        "def-runner-esc"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-runner-esc",
+          "label": "Penance Runner",
+          "color": "#FFF0C846",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "pat-safety",
+          "label": "Bad bait",
+          "color": "#FFBE78FF"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Good and bad bait",
+      "body": "Your inventory marks each bait as GOOD or BAD for the current call. Good bait is the one the Healer called.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-bait",
+          "label": "4 good",
+          "color": "#FF5ADC78",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "pat-safety",
+          "label": "1 bad",
+          "color": "#FFBE78FF"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "The bait pattern",
+      "body": "In the first call, drop bait on the marked tiles. Each tile shows how much good or bad bait it needs.\n\nTo drop bait, stand on the tile, then click the bait in your inventory: its left-click is Drop. Good bait pulls Runners to the trap, and bad bait sends them north. *Drop it early.*",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "pat-trap",
+          "label": "Trap 0/4 good",
+          "color": "#FFFFC400"
+        },
+        {
+          "key": "pat-trail",
+          "label": "Trail 0/1 bad",
+          "color": "#FFBE78FF"
+        },
+        {
+          "key": "pat-main",
+          "label": "Mainstack 0/4 good",
+          "color": "#FFFFC400"
+        },
+        {
+          "key": "pat-west",
+          "label": "West relure 0/1 bad",
+          "color": "#FFBE78FF"
+        },
+        {
+          "key": "pat-safety",
+          "label": "Safety 0/1 bad",
+          "color": "#FFBE78FF"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Logs and hammer",
+      "body": "Then pick up the hammer and the logs in one trip: click each of them on the ground. You need them to repair the trap.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-hammer",
+          "label": "HAMMER",
+          "color": "#FF5AAAFF",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-logs",
+          "label": "Logs",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Runner outlines",
+      "body": "Runners are outlined by how well your bait holds them: green when they're stacked on the trap, light green when lured to good bait, yellow near bad bait only, orange when loose, and red when escaping.\n\nDon't stand on the trap's food tile: Runners can't eat it while you're on it. The overlay marks the tile to step onto.",
+      "props": [
+        "def-runner",
+        "def-trap",
+        "def-trap-broken",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-runner",
+          "label": "Lured",
+          "color": "#FF96E65A",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "def-trap",
+          "label": "Trap",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "def-clear",
+          "label": "Stand clear",
+          "color": "#FF46D7E6"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {
+        "def-healer": "Defender: Drop Crackers!"
+      },
+      "action": "TRAP_RUNNER",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Repairing the trap",
+      "body": "After two kills, the trap breaks. You need logs and the hammer in your inventory to fix it.\n\nStand on the food tile and click the trap. With logs and the hammer, its left-click is Fix.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer",
+        "def-trap-broken"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-trap-broken",
+          "label": "REPAIR",
+          "color": "#FF50E178",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "TRAP_REPAIR",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Escaping runners",
+      "body": "A Runner that gets past the trap is escaping, and an escape costs your team points.\n\n*Get ahead of it:* walk to the marked tile. Then click a bad bait in your inventory to drop it: the Runner eats it and runs north, back towards the trap.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer",
+        "def-runner-esc"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "def-runner-esc",
+          "label": "Escaping",
+          "color": "#FFE63232",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "def-ahead",
+          "label": "Get here",
+          "color": "#FF46D7E6"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Restocking",
+      "body": "Runners eat the bait. When a tile runs out, the overlay sends you to drop more there, the same way as before.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [
+        {
+          "key": "pat-main",
+          "label": "Mainstack",
+          "color": "#FFFFC400"
+        }
+      ],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "All Runners dead",
+      "body": "Once every Runner is dead, the overlay asks you to hide behind the corner east of the trap, so the Penance Healers stay by the wall. Then help at the egg launcher: click it, then click the button BA Autopilot outlines in its window.",
+      "props": [
+        "can-launcher",
+        "can-turret",
+        "can-hopper",
+        "can-collector",
+        "can-gunner",
+        "can-runner"
+      ],
+      "marks": [
+        {
+          "key": "can-gunner",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "can-launcher",
+          "label": "Egg launcher",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "can-spot",
+      "tour": [],
+      "speech": {},
+      "action": "CANNON_PENANCE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: lava crater",
+      "body": "In wave 10, the Attacker passes you spiked eggs. With a spiked egg in your inventory, click a lava crater: the egg becomes an omega egg.\n\nThen pass the omega egg to the Collector: click it in your inventory, then click the Collector.",
+      "props": [
+        "chain-collector",
+        "chain-healer",
+        "chain-attacker",
+        "chain-defender",
+        "chain-omega",
+        "chain-lava"
+      ],
+      "marks": [
+        {
+          "key": "chain-collector",
+          "label": "Collector",
+          "color": "#FFF0CD46",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-healer",
+          "label": "Healer",
+          "color": "#FF5FD77D",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-attacker",
+          "label": "Attacker",
+          "color": "#FFEB5F55",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "chain-omega",
+          "label": "Omega egg",
+          "color": "#FFF0D23C",
+          "style": "OUTLINE"
+        },
+        {
+          "key": "chain-lava",
+          "label": "Lava crater",
+          "color": "#FFFF7828",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "chain-lava-spot",
+      "tour": [],
+      "speech": {},
+      "action": "EGG_CHAIN",
+      "chainStep": 3,
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Wave 10: waiting",
+      "body": "Leave the Queen alone: weapons can't hurt her. Wait by the Healer spring for the next spiked egg.",
+      "props": [
+        "spring",
+        "spr-healer",
+        "spr-attacker"
+      ],
+      "marks": [
+        {
+          "key": "spr-attacker",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        },
+        {
+          "key": "spring",
+          "label": "Healer spring",
+          "color": "#FFEBE1C8",
+          "style": "OUTLINE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "spr-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    },
+    {
+      "title": "Defender: done",
+      "body": "That's the Defender, and all four roles. You're ready for a run: BA Autopilot will guide you through each wave.",
+      "props": [
+        "def-trap",
+        "def-bait",
+        "def-defender",
+        "def-healer",
+        "def-logs",
+        "def-hammer"
+      ],
+      "marks": [
+        {
+          "key": "def-defender",
+          "label": "Defender",
+          "color": "#FF5F9BFF",
+          "style": "CIRCLE"
+        }
+      ],
+      "tiles": [],
+      "objects": [],
+      "arrows": [],
+      "camera": "def-spot",
+      "tour": [],
+      "speech": {},
+      "action": "NONE",
+      "autoNext": false,
+      "tourMs": 6000,
+      "uses": [],
+      "highlightBox": false,
+      "items": {},
+      "tint": false
+    }
+  ]
+}

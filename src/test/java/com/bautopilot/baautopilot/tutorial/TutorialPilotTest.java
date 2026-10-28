@@ -25,7 +25,7 @@ public class TutorialPilotTest
 		StringBuilder report = new StringBuilder();
 		for (Tutorial tutorial : Tutorial.values())
 		{
-			for (TutorialSteps.Page page : tutorial.getPages())
+			for (TutorialSteps.Page page : TutorialTestPages.of(tutorial))
 			{
 				TutorialSteps.Pilot pilot = page.getPilot();
 				if (pilot == null)

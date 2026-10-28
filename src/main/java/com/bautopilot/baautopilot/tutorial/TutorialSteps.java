@@ -3,6 +3,7 @@ package com.bautopilot.baautopilot.tutorial;
 import java.awt.Color;
 import java.util.List;
 import java.util.Map;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.Builder;
 import lombok.Singular;
@@ -148,7 +149,7 @@ public class TutorialSteps
 	}
 
 	@Value
-	@Builder
+	@Builder(toBuilder = true)
 	public static class Page
 	{
 		String title;
@@ -211,6 +212,14 @@ public class TutorialSteps
 	/** A finished tour holds on its last stop this long before an auto-next page moves on. */
 	private static final long TOUR_HOLD_MS = 700;
 
+	private final TutorialLibrary library;
+
+	@Inject
+	public TutorialSteps(TutorialLibrary library)
+	{
+		this.library = library;
+	}
+
 	/** Tour pages already played through in this run of the tutorial. */
 	private final java.util.Set<Page> toured = java.util.concurrent.ConcurrentHashMap.newKeySet();
 
@@ -236,7 +245,7 @@ public class TutorialSteps
 
 	public List<Page> pages()
 	{
-		return tutorial.getPages();
+		return library.pages(tutorial);
 	}
 
 	public Page current()
@@ -328,7 +337,7 @@ public class TutorialSteps
 		if (index == 0 && before != null)
 		{
 			select(before);
-			go(before.getPages().size() - 1);
+			go(library.pages(before).size() - 1);
 			return;
 		}
 		go(Math.max(0, index - 1));
